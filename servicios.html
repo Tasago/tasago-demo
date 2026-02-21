@@ -1,1 +1,162 @@
-Forbidden. Calls to this URL via the terminal are not allowed. To save the url contents to the container, open the url in the computer tool, right click anywhere, and click "Save As...".
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Servicios disponibles | Tasago</title>
+  <!-- PWA manifest and icons -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icon-180x180.png" />
+  <meta name="theme-color" content="#295c99" />
+  <style>
+    :root {
+      --primary-color: #295c99;
+      --secondary-color: #0c365a;
+      --accent-color: #f57c00;
+      --card-bg: #ffffff;
+      --text-color: #333333;
+      --light-gray: #f5f5f5;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: var(--light-gray);
+      color: var(--text-color);
+      padding: 20px;
+    }
+    h1 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    p.subtitle {
+      text-align: center;
+      margin-bottom: 30px;
+      color: var(--secondary-color);
+    }
+    .cards-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .card {
+      background: var(--card-bg);
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .card.highlight {
+      border: 2px solid var(--primary-color);
+    }
+    .card h2 {
+      color: var(--primary-color);
+      margin-bottom: 8px;
+    }
+    .card .price {
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: var(--accent-color);
+    }
+    .card ul {
+      list-style: none;
+      margin-bottom: 15px;
+    }
+    .card ul li {
+      margin-bottom: 6px;
+      padding-left: 18px;
+      position: relative;
+    }
+    .card ul li::before {
+      content: "\u2713";
+      color: var(--primary-color);
+      position: absolute;
+      left: 0;
+    }
+    .card .btn {
+      display: inline-block;
+      text-align: center;
+      padding: 10px 15px;
+      background: var(--primary-color);
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .card .btn:hover {
+      background: var(--secondary-color);
+    }
+    .note {
+      margin-top: 25px;
+      font-size: 14px;
+      color: #555;
+      text-align: center;
+    }
+    .back-link {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+    .back-link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      .cards-container {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Servicios disponibles</h1>
+  <p class="subtitle">Selecciona el plan de tasación que más se ajuste a tus necesidades.</p>
+  <div class="cards-container">
+    <!-- Express service -->
+    <div class="card">
+      <h2>Express 24h</h2>
+      <div class="price">24 horas • desde 60 UF</div>
+      <ul>
+        <li>Tasación en 24 horas</li>
+        <li>Informe en PDF con firma simple</li>
+        <li>Entrega digital</li>
+      </ul>
+      <a href="subir_antecedentes.html" class="btn">Solicitar Express</a>
+    </div>
+    <!-- Pro PDF service -->
+    <div class="card highlight">
+      <h2>Pro PDF (3‑4 días)</h2>
+      <div class="price">3‑4 días • desde 70 UF</div>
+      <ul>
+        <li>Tasación detallada</li>
+        <li>Informe PDF profesional</li>
+        <li>Asesoría personalizada</li>
+      </ul>
+      <a href="pagar.html" class="btn">Elegir Pro PDF</a>
+    </div>
+    <!-- On-site service -->
+    <div class="card">
+      <h2>Visita + Informe</h2>
+      <div class="price">4‑5 días • desde 80 UF</div>
+      <ul>
+        <li>Visita presencial al inmueble</li>
+        <li>Informe completo con firma simple</li>
+        <li>Entrega digital e impresa</li>
+      </ul>
+      <a href="https://wa.me/56912345678" class="btn">Coordinar visita</a>
+    </div>
+  </div>
+  <p class="note">* Valores de referencia sujetos a ajuste según zona (A, B o C). Selecciona una zona en la home para ver el recargo correspondiente.</p>
+  <a href="index.html" class="back-link">Volver al inicio</a>
+</body>
+</html>
