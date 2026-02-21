@@ -3,165 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Preguntas Frecuentes – Tasago</title>
+  <title>Preguntas Frecuentes - Tasago</title>
+  <!-- PWA manifest and icons -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" sizes="180x180" href="icon-180x180.png">
+  <meta name="theme-color" content="#295c99">
   <style>
-    /* Reset y tipografía */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
     body {
-      background: linear-gradient(135deg, #213b63, #295c99);
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #295c99, #5b8ec4);
       color: #fff;
       min-height: 100vh;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
       align-items: center;
-      padding: 20px;
+      justify-content: flex-start;
+      padding: 40px 20px;
     }
-    .faq-wrapper {
-      background: #fff;
-      color: #213b63;
-      border-radius: 12px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-      max-width: 900px;
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2em;
+      text-align: center;
+    }
+    .faq-container {
       width: 100%;
-      display: flex;
-      flex-wrap: wrap;
-      overflow: hidden;
-    }
-    .faq-left {
-      flex: 1 1 40%;
-      background: linear-gradient(135deg, #f5f9fd, #ecf3fa);
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-    /* Eliminamos la imagen de referencia en la sección izquierda del FAQ. Ajustamos la sección para centrar el título y la descripción. */
-    .faq-left img {
-      display: none;
-    }
-    .faq-left h2 {
-      font-size: 1.6rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-    .faq-left p {
-      font-size: 1rem;
-      color: #556b89;
-    }
-    .faq-right {
-      flex: 1 1 60%;
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .faq-item {
-      border: 1px solid #ccd9e6;
+      max-width: 800px;
+      background: rgba(255,255,255,0.9);
+      color: #333;
       border-radius: 8px;
-      background: #f5f9fd;
-      padding: 12px 16px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    .faq-item summary {
-      list-style: none;
+    details {
+      margin-bottom: 15px;
+    }
+    summary {
+      font-weight: bold;
       cursor: pointer;
-      font-weight: 600;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      padding: 8px;
+      background: #eaf0f7;
+      border-radius: 4px;
     }
-    .faq-item summary::marker {
-      display: none;
+    summary:hover {
+      background: #d8e4f2;
     }
-    .faq-item summary span {
-      font-size: 1.1rem;
+    details[open] summary {
+      background: #c5d8ed;
     }
-    .faq-item summary .icon {
-      font-size: 1.2rem;
-      transition: transform 0.2s ease;
+    details p {
+      margin: 10px 0 0 0;
+      padding: 10px;
+      background: #f4f7fb;
+      border-left: 3px solid #295c99;
+      border-radius: 0 0 4px 4px;
     }
-    .faq-item[open] summary .icon {
-      transform: rotate(45deg);
-    }
-    .faq-item p {
-      margin-top: 8px;
-      font-size: 0.95rem;
-      color: #556b89;
-    }
-    .contact-note {
-      margin-top: 24px;
+    .contact {
+      margin-top: 20px;
       text-align: center;
-      font-size: 0.9rem;
-      color: #213b63;
     }
-    .contact-note a {
-      display: inline-block;
-      margin-top: 8px;
-      padding: 10px 16px;
-      border-radius: 8px;
-      background: #295c99;
-      color: #fff;
+    .contact a {
+      color: #295c99;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: bold;
     }
     .back-link {
-      position: absolute;
-      top: 16px;
-      left: 16px;
+      display: block;
+      margin-top: 20px;
+      text-align: center;
       color: #fff;
-      text-decoration: none;
-      font-size: 0.9rem;
-      border-bottom: 1px dotted #fff;
-    }
-    @media (max-width: 700px) {
-      .faq-wrapper {
-        flex-direction: column;
-      }
-      .faq-left, .faq-right {
-        flex: 1 1 100%;
-      }
+      text-decoration: underline;
     }
   </style>
 </head>
 <body>
-  <!-- Enlace para volver al inicio -->
-  <a href="index.html" class="back-link">← Volver al inicio</a>
-  <div class="faq-wrapper">
-    <div class="faq-left">
-      <!-- Eliminamos la imagen de encabezado; mantenemos únicamente el título y la descripción -->
-      <h2>Preguntas frecuentes</h2>
-      <p>Respondemos las dudas más comunes sobre tu tasación digital en la RM.</p>
-    </div>
-    <div class="faq-right">
-      <!-- Elementos FAQ con collapsible -->
-      <details class="faq-item">
-        <summary><span>¿Qué documentos necesito para la tasación?</span><span class="icon">+</span></summary>
-        <p>Para tasar tu propiedad necesitarás la escritura, el rol de avalúo, los planos y al menos 6–10 fotografías que muestren todas las áreas relevantes. También es útil tener el metraje exacto y la comuna o barrio.</p>
-      </details>
-      <details class="faq-item">
-        <summary><span>¿Cuánto demora en entregarse el informe?</span><span class="icon">+</span></summary>
-        <p>El tiempo de entrega depende del servicio escogido. Para el servicio Express tendrás un informe resumido en 24 horas. El servicio Pro PDF se entrega en 48 horas (o en 24 horas con recargo). Las visitas en terreno requieren coordinación y el informe se entrega pocos días después de la inspección.</p>
-      </details>
-      <details class="faq-item">
-        <summary><span>¿Cómo se calcula el valor de mi propiedad?</span><span class="icon">+</span></summary>
-        <p>Nuestro modelo se basa en comparables recientes, promedios UF/m² por comuna, ajustes por zona, superficie, estacionamiento y bodega, así como factores de mercado actuales. El resultado es un rango de valor en UF y su equivalente en pesos.</p>
-      </details>
-      <details class="faq-item">
-        <summary><span>¿Qué pasa si faltan antecedentes?</span><span class="icon">+</span></summary>
-        <p>Si notamos que falta algún documento, te contactaremos por correo o WhatsApp con una lista de faltantes y recomendaciones para completarlos. Nuestro objetivo es reducir al mínimo los faltantes para agilizar tu tasación.</p>
-      </details>
-      <div class="contact-note">
-        ¿Tienes otra pregunta?
-        <br>
-        <a href="https://wa.me/56992724280" target="_blank">Contáctanos</a>
-      </div>
+  <h1>Preguntas Frecuentes</h1>
+  <div class="faq-container">
+    <details>
+      <summary>¿Qué incluye la tasación Express?</summary>
+      <p>Incluye un análisis comparativo de mercado, valor comercial estimado y precio sugerido de publicación. Ideal para conocer rápidamente el valor aproximado.</p>
+    </details>
+    <details>
+      <summary>¿Cómo se entrega la tasación Pro PDF?</summary>
+      <p>Recibirás un informe detallado en formato PDF con folio único y firma digital. El informe incluye análisis de mercado, cálculo de valor, supuestos y recomendaciones.</p>
+    </details>
+    <details>
+      <summary>¿Qué ocurre en la modalidad Visita + Informe?</summary>
+      <p>Un tasador visitará el inmueble para levantar información precisa y validar las superficies. Posteriormente se enviará un informe detallado con respaldo fotográfico.</p>
+    </details>
+    <details>
+      <summary>¿Cuáles son las formas de pago disponibles?</summary>
+      <p>Actualmente aceptamos pagos en línea mediante Mercado Pago, que permite usar tarjetas de crédito o débito. Para la opción Visita + Informe se coordina el pago antes de la visita.</p>
+    </details>
+    <div class="contact">
+      ¿Tienes más preguntas? <a href="https://wa.me/56912345678">Contáctanos por WhatsApp</a>.
     </div>
   </div>
+  <a class="back-link" href="index.html">Volver al inicio</a>
 </body>
 </html>
