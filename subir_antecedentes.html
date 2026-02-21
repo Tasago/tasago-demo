@@ -59,13 +59,14 @@
     <!-- Formulario simple de carga de antecedentes -->
     <form id="antecedentes-form" style="display:flex;flex-direction:column;gap:16px;margin-bottom:16px;">
       <label>Escritura (PDF):
-        <input type="file" name="escritura" accept="application/pdf" required />
+        <!-- Los atributos "required" se eliminaron para permitir demostrar el flujo sin cargar archivos -->
+        <input type="file" name="escritura" accept="application/pdf" />
       </label>
       <label>Rol de avalúo (PDF):
-        <input type="file" name="rol" accept="application/pdf" required />
+        <input type="file" name="rol" accept="application/pdf" />
       </label>
       <label>Planos (PDF/Imagen):
-        <input type="file" name="planos" accept="application/pdf,image/*" required />
+        <input type="file" name="planos" accept="application/pdf,image/*" />
       </label>
       <button type="submit" style="padding:12px 16px;border-radius:8px;background:#ff7a00;color:#fff;font-weight:600;border:none;cursor:pointer;">Enviar y obtener tasación</button>
     </form>
