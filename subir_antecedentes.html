@@ -55,8 +55,31 @@
 <body>
   <div class="page">
     <h1>Subir antecedentes</h1>
-    <p>En este paso se solicitarán y cargarán los antecedentes necesarios para la tasación (escritura, rol de avalúo, planos, etc.). Esta página es un ejemplo; en la versión final se incluirá un formulario para subir documentos.</p>
+    <p>En este paso se solicitarán y cargarán los antecedentes necesarios para la tasación (escritura, rol de avalúo, planos, etc.). Completa el siguiente formulario para continuar.</p>
+    <!-- Formulario simple de carga de antecedentes -->
+    <form id="antecedentes-form" style="display:flex;flex-direction:column;gap:16px;margin-bottom:16px;">
+      <label>Escritura (PDF):
+        <input type="file" name="escritura" accept="application/pdf" required />
+      </label>
+      <label>Rol de avalúo (PDF):
+        <input type="file" name="rol" accept="application/pdf" required />
+      </label>
+      <label>Planos (PDF/Imagen):
+        <input type="file" name="planos" accept="application/pdf,image/*" required />
+      </label>
+      <button type="submit" style="padding:12px 16px;border-radius:8px;background:#ff7a00;color:#fff;font-weight:600;border:none;cursor:pointer;">Enviar y obtener tasación</button>
+    </form>
     <a href="index.html" class="back-link">← Volver al inicio</a>
+    <script>
+      // Maneja el envío del formulario de manera simulada
+      document.getElementById('antecedentes-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        // Podrías hacer validaciones aquí
+        alert('¡Antecedentes cargados correctamente!');
+        // Redirige al informe final de la tasación
+        window.location.href = 'ejemplo_tasacion.html';
+      });
+    </script>
   </div>
 </body>
 </html>

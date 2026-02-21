@@ -55,8 +55,18 @@
 <body>
   <div class="page">
     <h1>Pagar</h1>
-    <p>Esta página es un ejemplo para mostrar el paso de pago. Aquí se integrará Mercado Pago en la versión final. Por ahora, utilízala para mostrar cómo avanzaría el cliente al pagar.</p>
+    <p>Esta página es un ejemplo para mostrar el paso de pago. Aquí se integrará Mercado Pago en la versión final. Por ahora, simula el pago para continuar con el proceso.</p>
+    <!-- Botón de pago simulado -->
+    <button id="pagar-btn" style="display:block;padding:12px 16px;border-radius:8px;background:#ff7a00;color:#fff;font-weight:600;border:none;margin-bottom:16px;cursor:pointer;">Pagar con Mercado Pago (Simulación)</button>
+    <!-- Enlace para volver al inicio -->
     <a href="index.html" class="back-link">← Volver al inicio</a>
+    <script>
+      // Función para simular el pago: muestra una alerta y redirige a la siguiente página
+      document.getElementById('pagar-btn').addEventListener('click', function() {
+        alert('¡Pago exitoso! Ahora podrás subir tus antecedentes.');
+        window.location.href = 'subir_antecedentes.html';
+      });
+    </script>
   </div>
 </body>
 </html>
