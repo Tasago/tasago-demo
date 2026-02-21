@@ -43,8 +43,9 @@
     }
 
     .logo-img {
-      height: 42px;
-      /* Maintain aspect ratio */
+      /* Aumentamos el tamaño del logo un 25 % adicional para que destaque más */
+      height: 65px;
+      /* Mantiene la relación de aspecto original */
       width: auto;
     }
     .help-link {
@@ -98,6 +99,17 @@
     .chip .extra {
       font-size: 0.75rem;
       color: #556b89;
+    }
+
+    /* Información de la zona seleccionada */
+    .zone-info {
+      margin-bottom: 24px;
+      padding: 12px;
+      border-radius: 8px;
+      background: #f5f9fd;
+      border: 1px solid #ccd9e6;
+      color: #213b63;
+      font-size: 0.85rem;
     }
     /* Action buttons */
     .actions {
@@ -276,10 +288,13 @@
     <p class="subtitle">Pagas online. Subes antecedentes. Recibes PDF con folio y firma simple.</p>
     <!-- Zone chips -->
     <div class="zones">
-      <div class="chip selected">Zona A<span class="extra"> Base</span></div>
-      <div class="chip">Zona B<span class="extra"> +0,3 UF</span></div>
-      <div class="chip">Zona C<span class="extra"> +0,5 UF</span></div>
+      <!-- Se añaden atributos data-zone para capturar la zona en el script -->
+      <div class="chip selected" data-zone="Zona A">Zona A<span class="extra"> Base</span></div>
+      <div class="chip" data-zone="Zona B">Zona B<span class="extra"> +0,3 UF</span></div>
+      <div class="chip" data-zone="Zona C">Zona C<span class="extra"> +0,5 UF</span></div>
     </div>
+    <!-- Contenedor para la descripción de la zona -->
+    <div id="zone-info" class="zone-info"></div>
     <!-- Action buttons -->
     <div class="actions">
       <!-- Use anchor elements instead of buttons to navigate to demo pages -->
@@ -327,5 +342,34 @@
     <!-- WhatsApp button -->
     <a href="https://wa.me/56992724280" class="whatsapp-button" target="_blank">Hablar con tasador</a>
   </div>
+  <!-- Script para manejar la selección de zonas y mostrar descripciones -->
+  <script>
+    (function() {
+      const zoneDescriptions = {
+        'Zona A': 'Zona A comprende sectores consolidados con alta plusvalía y excelente conectividad (Providencia, Las Condes, Ñuñoa, Santiago Centro, etc.).',
+        'Zona B': 'Zona B incluye sectores en crecimiento con buena conectividad y potencial de valorización (La Florida, San Miguel, Macul, etc.).',
+        'Zona C': 'Zona C corresponde a zonas periféricas o emergentes con menor densidad y accesibilidad (La Cisterna, San Bernardo, etc.).'
+      };
+      const zoneInfoEl = document.getElementById('zone-info');
+      const chips = document.querySelectorAll('.chip');
+      // Función para actualizar la descripción y el estado seleccionado
+      function setActiveChip(chip) {
+        chips.forEach(c => c.classList.remove('selected'));
+        chip.classList.add('selected');
+        const zone = chip.dataset.zone;
+        zoneInfoEl.textContent = zoneDescriptions[zone] || '';
+      }
+      chips.forEach(chip => {
+        chip.addEventListener('click', function() {
+          setActiveChip(this);
+        });
+      });
+      // Inicializar con la zona seleccionada por defecto
+      const initial = document.querySelector('.chip.selected');
+      if (initial) {
+        zoneInfoEl.textContent = zoneDescriptions[initial.dataset.zone] || '';
+      }
+    })();
+  </script>
 </body>
 </html>

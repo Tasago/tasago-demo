@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultado de Tasación – Tasago</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      background: #f4f7fb;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      color: #333;
+    }
+    .page {
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+      max-width: 700px;
+      width: 90%;
+      padding: 32px;
+    }
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      color: #213b63;
+    }
+    p {
+      font-size: 1rem;
+      color: #556b89;
+      margin-bottom: 16px;
+    }
+    ul {
+      margin-bottom: 16px;
+      padding-left: 20px;
+    }
+    ul li {
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+    .highlight {
+      font-weight: 700;
+      color: #213b63;
+    }
+    .back-link {
+      display: inline-block;
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: #295c99;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      margin-top: 16px;
+    }
+    .back-link:hover {
+      background: #1e497a;
+    }
+    /* Progress bar */
+    .progress {
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+    .progress-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #213b63;
+      margin-bottom: 8px;
+    }
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 14px;
+      right: -50%;
+      width: 100%;
+      height: 2px;
+      background: #ccd9e6;
+      z-index: 0;
+    }
+    .step-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f5f9fd;
+      border: 2px solid #ccd9e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #213b63;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 1;
+    }
+    .step.active .step-circle {
+      background: #295c99;
+      border-color: #295c99;
+      color: #fff;
+    }
+    .step-label {
+      margin-top: 4px;
+      font-size: 0.75rem;
+      color: #556b89;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <h1>Resultado de la Tasación</h1>
+    <!-- Progress bar: paso 4 activo -->
+    <div class="progress">
+      <div class="progress-title">Estado del proceso</div>
+      <div class="progress-steps">
+        <div class="step">
+          <div class="step-circle">1</div>
+          <div class="step-label">Cotiza</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">2</div>
+          <div class="step-label">Paga</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">3</div>
+          <div class="step-label">Sube</div>
+        </div>
+        <div class="step active">
+          <div class="step-circle">4</div>
+          <div class="step-label">Recibe PDF</div>
+        </div>
+      </div>
+    </div>
+    <p>A continuación se muestra un resumen del cálculo realizado a partir de la información ingresada:</p>
+    <ul>
+      <li>Comuna: <span class="highlight" id="res-comuna"></span></li>
+      <li>Tipo de inmueble: <span class="highlight" id="res-tipo"></span></li>
+      <li>Superficie: <span class="highlight" id="res-area"></span> m²</li>
+      <li>Estacionamiento: <span class="highlight" id="res-estacionamiento"></span></li>
+      <li>Bodega: <span class="highlight" id="res-bodega"></span></li>
+      <li>Zona: <span class="highlight" id="res-zona"></span></li>
+      <li>Promedio UF/m²: <span class="highlight" id="res-avgUF"></span> UF</li>
+    </ul>
+    <p>Valor estimado:</p>
+    <ul>
+      <li><strong><span id="res-valorUF"></span> UF</strong></li>
+      <li><strong>$ <span id="res-valorCLP"></span> CLP</strong> (aproximado)</li>
+      <li>Rango sugerido de publicación: <strong><span id="res-rangoUF"></span> UF</strong></li>
+    </ul>
+    <p>Decisión recomendada: Se sugiere publicar la propiedad en el rango indicado para maximizar la probabilidad de venta/alquiler dentro del plazo deseado.</p>
+    <p>Riesgos y supuestos:</p>
+    <ul>
+      <li>La superficie ingresada se asume correcta y acorde a la documentación legal.</li>
+      <li>No se consideran remodelaciones recientes no declaradas ni deudas asociadas al inmueble.</li>
+      <li>El valor de la UF se mantiene estable para efectos de este cálculo preliminar.</li>
+    </ul>
+    <p>Siguiente paso: Paga y coordina la emisión del informe PDF con firma simple para formalizar la tasación. Podrás subir documentos adicionales y recibirás un informe detallado con folio.</p>
+    <a href="index.html" class="back-link">← Volver al inicio</a>
+  </div>
+  <script>
+    (function() {
+      const params = new URLSearchParams(window.location.search);
+      function getParam(name) {
+        return params.get(name) || '';
+      }
+      const comuna = getParam('comuna');
+      const tipo = getParam('tipo');
+      const area = getParam('area');
+      const estacionamiento = getParam('estacionamiento');
+      const bodega = getParam('bodega');
+      const zona = getParam('zona');
+      const avgUF = getParam('avgUF');
+      const valorUF = getParam('valorUF');
+      const valorCLP = getParam('valorCLP');
+      // Rango sugerido ±5 % del valor UF
+      const valorUFNum = parseFloat(valorUF);
+      const rangoMin = (valorUFNum * 0.95).toFixed(2);
+      const rangoMax = (valorUFNum * 1.05).toFixed(2);
+      document.getElementById('res-comuna').textContent = comuna;
+      document.getElementById('res-tipo').textContent = tipo;
+      document.getElementById('res-area').textContent = area;
+      document.getElementById('res-estacionamiento').textContent = estacionamiento;
+      document.getElementById('res-bodega').textContent = bodega;
+      document.getElementById('res-zona').textContent = zona;
+      document.getElementById('res-avgUF').textContent = avgUF;
+      document.getElementById('res-valorUF').textContent = valorUF;
+      document.getElementById('res-valorCLP').textContent = Number(valorCLP).toLocaleString('es-CL');
+      document.getElementById('res-rangoUF').textContent = `${rangoMin} – ${rangoMax}`;
+    })();
+  </script>
+</body>
+</html>

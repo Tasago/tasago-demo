@@ -50,16 +50,136 @@
     .back-link:hover {
       background: #1e497a;
     }
+
+    /* Barra de progreso reutilizada para indicar el estado del proceso */
+    .progress {
+      margin-top: 24px;
+      margin-bottom: 24px;
+    }
+    .progress-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #213b63;
+      margin-bottom: 8px;
+    }
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      position: relative;
+    }
+    .step:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 14px;
+      right: -50%;
+      width: 100%;
+      height: 2px;
+      background: #ccd9e6;
+      z-index: 0;
+    }
+    .step-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #f5f9fd;
+      border: 2px solid #ccd9e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #213b63;
+      font-size: 0.85rem;
+      font-weight: 600;
+      z-index: 1;
+    }
+    .step.active .step-circle {
+      background: #295c99;
+      border-color: #295c99;
+      color: #fff;
+    }
+    .step-label {
+      margin-top: 4px;
+      font-size: 0.75rem;
+      color: #556b89;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
   <div class="page">
     <h1>Subir antecedentes</h1>
     <p>En este paso se solicitarán y cargarán los antecedentes necesarios para la tasación (escritura, rol de avalúo, planos, etc.). Completa el siguiente formulario para continuar.</p>
-    <!-- Formulario simple de carga de antecedentes -->
+    <!-- Barra de progreso: paso 3 activo -->
+    <div class="progress">
+      <div class="progress-title">Estado del proceso</div>
+      <div class="progress-steps">
+        <div class="step">
+          <div class="step-circle">1</div>
+          <div class="step-label">Cotiza</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">2</div>
+          <div class="step-label">Paga</div>
+        </div>
+        <div class="step active">
+          <div class="step-circle">3</div>
+          <div class="step-label">Sube</div>
+        </div>
+        <div class="step">
+          <div class="step-circle">4</div>
+          <div class="step-label">Recibe PDF</div>
+        </div>
+      </div>
+    </div>
+    <!-- Formulario ampliado de antecedentes y datos del inmueble -->
     <form id="antecedentes-form" style="display:flex;flex-direction:column;gap:16px;margin-bottom:16px;">
+      <label>Comuna:
+        <select id="comuna" name="comuna" required>
+          <option value="Ñuñoa">Ñuñoa</option>
+          <option value="Santiago Centro">Santiago Centro</option>
+          <option value="Providencia">Providencia</option>
+          <option value="Las Condes">Las Condes</option>
+          <option value="Lo Barnechea">Lo Barnechea</option>
+          <option value="Macul">Macul</option>
+          <option value="La Florida">La Florida</option>
+          <option value="San Miguel">San Miguel</option>
+          <option value="La Cisterna">La Cisterna</option>
+        </select>
+      </label>
+      <label>Tipo de inmueble:
+        <select id="tipo_inmueble" name="tipo_inmueble">
+          <option value="Departamento">Departamento</option>
+          <option value="Casa">Casa</option>
+          <option value="Oficina">Oficina</option>
+          <option value="Terreno">Terreno</option>
+        </select>
+      </label>
+      <label>Tipo de tasación:
+        <select id="tipo_tasacion" name="tipo_tasacion">
+          <option value="Venta">Venta</option>
+          <option value="Arriendo">Arriendo</option>
+          <option value="Garantía">Garantía</option>
+        </select>
+      </label>
+      <label>Modalidad:
+        <select id="modalidad" name="modalidad">
+          <option value="Express 24h">Express 24h</option>
+          <option value="Online 48h">Online 48h</option>
+          <option value="Coordinar visita">Coordinar visita</option>
+        </select>
+      </label>
+      <label>Superficie (m²):
+        <input id="area" type="number" name="area" min="1" step="0.1" placeholder="Ej. 60" required />
+      </label>
+      <label><input type="checkbox" id="estacionamiento" /> Incluye estacionamiento</label>
+      <label><input type="checkbox" id="bodega" /> Incluye bodega</label>
       <label>Escritura (PDF):
-        <!-- Los atributos "required" se eliminaron para permitir demostrar el flujo sin cargar archivos -->
         <input type="file" name="escritura" accept="application/pdf" />
       </label>
       <label>Rol de avalúo (PDF):
@@ -68,18 +188,60 @@
       <label>Planos (PDF/Imagen):
         <input type="file" name="planos" accept="application/pdf,image/*" />
       </label>
-      <button type="submit" style="padding:12px 16px;border-radius:8px;background:#ff7a00;color:#fff;font-weight:600;border:none;cursor:pointer;">Enviar y obtener tasación</button>
+      <button type="submit" style="padding:12px 16px;border-radius:8px;background:#ff7a00;color:#fff;font-weight:600;border:none;cursor:pointer;">Calcular y generar informe</button>
     </form>
     <a href="index.html" class="back-link">← Volver al inicio</a>
     <script>
-      // Maneja el envío del formulario de manera simulada
-      document.getElementById('antecedentes-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        // Podrías hacer validaciones aquí
-        alert('¡Antecedentes cargados correctamente!');
-        // Redirige al informe final de la tasación
-        window.location.href = 'ejemplo_tasacion.html';
-      });
+      // Calcula el valor estimado de la tasación según la comuna y superficie y redirige al resultado
+      (function() {
+        const UF_VALUE = 39745.27; // Valor de la UF en CLP (21-ene-2026)
+        const communes = {
+          'Las Condes': { avg: 124, zone: 'Zona A' },
+          'Providencia': { avg: 117, zone: 'Zona A' },
+          'Lo Barnechea': { avg: 100, zone: 'Zona A' },
+          'Ñuñoa': { avg: 98, zone: 'Zona A' },
+          'Santiago Centro': { avg: 77, zone: 'Zona A' },
+          'Macul': { avg: 75, zone: 'Zona B' },
+          'La Cisterna': { avg: 62, zone: 'Zona C' },
+          'La Florida': { avg: 72, zone: 'Zona B' },
+          'San Miguel': { avg: 71, zone: 'Zona B' }
+        };
+        const zoneAdjust = { 'Zona A': 0, 'Zona B': 0.3, 'Zona C': 0.5 };
+        document.getElementById('antecedentes-form').addEventListener('submit', function(event) {
+          event.preventDefault();
+          const comuna = document.getElementById('comuna').value;
+          const tipoInmueble = document.getElementById('tipo_inmueble').value;
+          const tipoTasacion = document.getElementById('tipo_tasacion').value;
+          const modalidad = document.getElementById('modalidad').value;
+          const area = parseFloat(document.getElementById('area').value) || 0;
+          const estacionamiento = document.getElementById('estacionamiento').checked;
+          const bodega = document.getElementById('bodega').checked;
+          const info = communes[comuna] || { avg: 80, zone: 'Zona B' };
+          // Cálculo del valor en UF
+          let valorUF = area * info.avg;
+          // Ajuste por zona (por m²)
+          valorUF += area * (zoneAdjust[info.zone] || 0);
+          // Sumas por estacionamiento y bodega
+          if (estacionamiento) valorUF += 10;
+          if (bodega) valorUF += 4;
+          const valorCLP = valorUF * UF_VALUE;
+          const params = new URLSearchParams({
+            comuna: comuna,
+            tipo: tipoInmueble,
+            tipoTasacion: tipoTasacion,
+            modalidad: modalidad,
+            area: area.toString(),
+            estacionamiento: estacionamiento ? 'sí' : 'no',
+            bodega: bodega ? 'sí' : 'no',
+            zona: info.zone,
+            avgUF: info.avg.toFixed(2),
+            valorUF: valorUF.toFixed(2),
+            valorCLP: valorCLP.toFixed(0)
+          });
+          // Redirige al informe final con los parámetros calculados
+          window.location.href = 'tasacion_result.html?' + params.toString();
+        });
+      })();
     </script>
   </div>
 </body>
