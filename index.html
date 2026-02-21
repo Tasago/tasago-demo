@@ -105,6 +105,14 @@
       font-size: 0.75rem;
       color: #556b89;
     }
+
+    /* Zone description text */
+    .zone-description {
+      font-size: 0.85rem;
+      color: #556b89;
+      margin-bottom: 24px;
+      line-height: 1.4;
+    }
     /* Action buttons */
     .actions {
       display: flex;
@@ -288,6 +296,8 @@
       <div class="chip">Zona B<span class="extra"> +0,3 UF</span></div>
       <div class="chip">Zona C<span class="extra"> +0,5 UF</span></div>
     </div>
+    <!-- Zone description -->
+    <div id="zone-description" class="zone-description">Seleccione una zona para ver detalles.</div>
     <!-- Action buttons -->
     <div class="actions">
       <a href="servicios.html" class="action-button btn-cotizar">Cotizar</a>
@@ -334,5 +344,31 @@
     <!-- WhatsApp button -->
     <a href="https://wa.me/56992724280" class="whatsapp-button" target="_blank">Hablar con tasador</a>
   </div>
+
+  <!-- Zone selection script -->
+  <script>
+    // Interactive zone description functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const zoneDescriptions = {
+        'A': 'Zona A corresponde a comunas de alto valor (Las Condes, Vitacura, Lo Barnechea, Providencia). Ajuste base 0 UF/m².',
+        'B': 'Zona B incluye comunas como Ñuñoa, Santiago Centro, Macul, La Cisterna y La Florida. Ajuste +0,3 UF/m² sobre la base de zona A.',
+        'C': 'Zona C abarca comunas en crecimiento como San Miguel y otras zonas emergentes con plusvalía al alza. Ajuste +0,5 UF/m² sobre la base de zona A.'
+      };
+      const chips = document.querySelectorAll('.zones .chip');
+      const descEl = document.getElementById('zone-description');
+      chips.forEach((chip) => {
+        chip.addEventListener('click', function() {
+          // Remove selected class from all chips
+          chips.forEach(c => c.classList.remove('selected'));
+          // Add selected class to clicked chip
+          chip.classList.add('selected');
+          // Extract zone letter from chip text
+          const text = chip.textContent.trim();
+          const zoneLetter = text.replace(/Zona\s*/i, '').trim().charAt(0);
+          descEl.textContent = zoneDescriptions[zoneLetter] || '';
+        });
+      });
+    });
+  </script>
 </body>
 </html>
