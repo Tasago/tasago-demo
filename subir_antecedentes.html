@@ -196,7 +196,15 @@
       let totalUF = superficie * ufPorM2;
       if (estacionamiento) totalUF += 10;
       if (bodega) totalUF += 4;
-      const zona = 'A';
+      // Determinar zona en función del valor UF/m² de la comuna.
+      let zona;
+      if (ufPorM2 >= 100) {
+        zona = 'A';
+      } else if (ufPorM2 >= 80) {
+        zona = 'B';
+      } else {
+        zona = 'C';
+      }
       const valorUF = 39745;
       const totalCLP = totalUF * valorUF;
       const minUF = totalUF * 0.95;
