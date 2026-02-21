@@ -66,21 +66,21 @@
       margin-bottom: 12px;
       color: var(--accent-color);
     }
+    .    /*
+      Use normal list bullets for service features. A simple disc bullet avoids
+      encoding issues with special characters that may not render correctly across browsers.
+      Set padding on the list and remove the custom ::before pseudo-element to prevent
+      overlapping characters.
+    */
     .card ul {
-      list-style: none;
+      list-style: disc;
       margin-bottom: 15px;
+      padding-left: 20px;
     }
     .card ul li {
       margin-bottom: 6px;
-      padding-left: 18px;
-      position: relative;
     }
-    .card ul li::before {
-      content: "\u2713";
-      color: var(--primary-color);
-      position: absolute;
-      left: 0;
-    }
+
     .card .btn {
       display: inline-block;
       text-align: center;
