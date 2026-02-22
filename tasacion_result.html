@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TasaGo — Resultado</title>
   <meta name="theme-color" content="#295c99">
+
   <style>
     :root{--primary:#295c99;--accent:#1d4e89;--bg:#f4f7fb;--text:#1c2a3a;--muted:#5b6b7b;--border:rgba(0,0,0,.10);--shadow:0 8px 24px rgba(15,35,60,.08);--radius:16px;}
     *{box-sizing:border-box;}
@@ -12,7 +13,7 @@
     .topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--border);}
     .topbar-inner{max-width:920px;margin:0 auto;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
     .logo-box{background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px 12px;box-shadow:0 6px 18px rgba(15,35,60,.06);display:flex;align-items:center;justify-content:center;}
-    .logo-box img{height:44px;width:auto;display:block;}
+    .logo-box img{height:48px;width:auto;display:block;}
     .nav{display:flex;gap:10px;flex-wrap:wrap;}
     .nav a{text-decoration:none;font-weight:900;color:var(--primary);padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:#fff;}
     .wrap{max-width:920px;margin:0 auto;padding:18px 14px 40px;}
@@ -21,16 +22,18 @@
     p{margin:0 0 10px 0;color:var(--muted);line-height:1.55;}
     .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px;}
     .box{border:1px solid rgba(0,0,0,.10);border-radius:14px;padding:12px;background:#fff;}
-    .k{color:var(--muted);font-weight:800;font-size:13px;margin-bottom:6px;}
+    .k{color:var(--muted);font-weight:900;font-size:13px;margin-bottom:6px;}
     .v{font-weight:900;font-size:16px;}
-    .btn{display:block;width:100%;text-align:center;text-decoration:none;font-weight:900;border-radius:14px;padding:16px 14px;border:1px solid transparent;font-size:18px;margin-top:12px;}
-    .btn-primary{background:var(--primary);color:#fff;}
-    .btn-primary:hover{background:var(--accent);}
+    .btn{display:block;width:100%;text-align:center;text-decoration:none;font-weight:900;border-radius:14px;padding:16px 14px;border:1px solid transparent;font-size:18px;margin-top:12px;background:var(--primary);color:#fff;}
+    .btn:hover{background:var(--accent);}
+    .btn-success{background:#3a9b4a;}
+    .btn-success:hover{filter:brightness(.95);}
     .note{margin-top:12px;background:#f6fbff;border:1px dashed rgba(41,92,153,.30);border-radius:14px;padding:12px 14px;color:#26435f;line-height:1.45;}
     .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;}
-    @media(max-width:640px){.row{grid-template-columns:1fr;}.logo-box img{height:42px;}}
+    @media(max-width:640px){.row{grid-template-columns:1fr;}.logo-box img{height:46px;}}
   </style>
 </head>
+
 <body>
   <div class="topbar">
     <div class="topbar-inner">
@@ -38,7 +41,7 @@
       <div class="nav">
         <a href="index.html">Inicio</a>
         <a href="servicios.html">Planes</a>
-        <a href="preguntas frecuentes.html">Ayuda</a>
+        <a href="faq.html">Ayuda</a>
       </div>
     </div>
   </div>
@@ -46,7 +49,7 @@
   <div class="wrap">
     <div class="card">
       <h1>Resultado</h1>
-      <p>Este es un resultado de ejemplo. El PDF final se entrega con folio y firma simple.</p>
+      <p>Ejemplo de resultado. El PDF final se entrega con folio y firma simple.</p>
 
       <div class="row">
         <div class="box"><div class="k">Plan</div><div class="v" id="vPlan">—</div></div>
@@ -56,11 +59,11 @@
       </div>
 
       <div class="note">
-        Próximo paso: <b>generar/descargar PDF</b> (MVP). Luego lo automatizamos por plantillas Express/Pro/Visita.
+        Próximo paso: automatizar PDF por plantillas (Express/Pro/Visita). Por ahora puedes ver un PDF de ejemplo.
       </div>
 
-      <a class="btn btn-primary" href="ejemplo_tasacion.html">Ver PDF de ejemplo</a>
-      <a class="btn btn-primary" style="background:#3a9b4a" href="index.html">Volver al inicio</a>
+      <a class="btn" href="ejemplo_tasacion.html">Ver PDF de ejemplo</a>
+      <a class="btn btn-success" href="index.html">Volver al inicio</a>
     </div>
 
     <div class="footer">© Tasago · Resultado</div>
@@ -69,7 +72,7 @@
   <script>
     const data = JSON.parse(localStorage.getItem("tasago_case") || "{}");
     document.getElementById("vPlan").textContent = (data.plan || "—").toString().toUpperCase();
-    document.getElementById("vUbic").textContent = (data.comuna ? (data.comuna + (data.direccion ? " · " + data.direccion : "")) : "—");
+    document.getElementById("vUbic").textContent = data.comuna ? (data.comuna + (data.direccion ? " · " + data.direccion : "")) : "—";
     document.getElementById("vTipo").textContent = data.tipo || "—";
     document.getElementById("vSup").textContent = data.superficie ? (data.superficie + " m²") : "—";
   </script>
