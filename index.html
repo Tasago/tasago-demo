@@ -1,538 +1,423 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tasago – Tasación digital en RM</title>
-  <!-- PWA manifest and icons -->
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" sizes="180x180" href="icon-180x180.png">
-    <!-- Favicon for browser tab and PWA add-to-home-screen -->
-    <link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
-    <meta name="theme-color" content="#295c99">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TasaGo – Tasación digital en RM</title>
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icon-180x180.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png" />
+  <meta name="theme-color" content="#295c99" />
+
   <style>
-    /* Reset some basic tags */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
+    :root{
+      --primary:#295c99;
+      --accent:#1d4e89;
+      --text:#213b63;
+      --muted:#556b89;
+      --bg:#f4f7fb;
+      --card:#ffffff;
+      --border:rgba(0,0,0,.10);
     }
-    body {
-      background: #f4f7fb;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      color: #333;
+    *{ margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
+    html, body{ width:100%; max-width:100%; overflow-x:hidden; background:var(--bg); color:#333; }
+
+    /* Layout */
+    .wrap{
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      padding:16px;
     }
-    .home {
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
-      max-width: 700px;
-      width: 90%;
-      padding: 32px;
-      position: relative;
-      overflow: hidden;
+    .home{
+      width:100%;
+      max-width:760px;
+      background:var(--card);
+      border-radius:16px;
+      box-shadow:0 12px 30px rgba(0,0,0,.06);
+      padding:22px;
+      overflow:hidden;
     }
+
     /* Header */
-    .home-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 24px;
+    .home-header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-bottom:16px;
     }
-    .logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo-img {
-      height: 42px;
-      /* Maintain aspect ratio */
-      width: auto;
-    }
-    .help-link {
-      font-size: 0.9rem;
-      color: #295c99;
-      text-decoration: none;
-      border-bottom: 1px dotted #295c99;
-    }
-    /* Title & subtitle */
-    .title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: #213b63;
-    }
-    .title span {
-      display: inline-block;
-      font-size: 0.9rem;
-      color: #ff7a00;
-      background: rgba(255,122,0,0.1);
-      padding: 2px 6px;
-      border-radius: 4px;
-      margin-left: 8px;
-    }
-    .subtitle {
-      font-size: 1rem;
-      color: #666;
-      margin-bottom: 24px;
-    }
-    /* Zone chips */
-    .zones {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-    .chip {
-      padding: 6px 12px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      border: 1px solid #ccd9e6;
-      cursor: pointer;
-      background: #f5f9fd;
-      color: #213b63;
-      transition: all 0.2s ease;
-    }
-    .chip.selected {
-      background: #295c99;
-      color: #fff;
-      border-color: #295c99;
-    }
-    .chip .extra {
-      font-size: 0.75rem;
-      color: #556b89;
+    .logo-img{ height:42px; width:auto; display:block; }
+    .help-link{
+      font-size:.95rem;
+      color:var(--primary);
+      text-decoration:none;
+      border-bottom:1px dotted var(--primary);
+      font-weight:700;
     }
 
-    /* Zone description text */
-    .zone-description {
-      font-size: 0.85rem;
-      color: #556b89;
-      margin-bottom: 24px;
-      line-height: 1.4;
+    /* Title */
+    .title{
+      font-size:1.7rem;
+      font-weight:900;
+      color:var(--text);
+      line-height:1.15;
     }
-    /* Action buttons */
-    .actions {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 32px;
+    .badge{
+      display:inline-block;
+      font-size:.9rem;
+      font-weight:900;
+      color:#ff7a00;
+      background:rgba(255,122,0,.12);
+      padding:4px 8px;
+      border-radius:8px;
+      margin-top:10px;
     }
-    .action-button {
-      padding: 12px;
-      border-radius: 8px;
-      color: #fff;
-      font-size: 1rem;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      transition: transform 0.1s ease;
-    }
-    .action-button:active {
-      transform: scale(0.98);
-    }
-    .btn-cotizar {
-      background: linear-gradient(135deg, #344e96, #508acb);
-    }
-    .btn-pagar {
-      background: linear-gradient(135deg, #3a8a3b, #5bbf6e);
-    }
-    .btn-antecedentes {
-      background: linear-gradient(135deg, #e4eef8, #e1ecf7);
-      color: #213b63;
-    }
-    /* Progress bar */
-    .progress {
-      margin-bottom: 32px;
-    }
-    .progress-title {
-      font-size: 1rem;
-      font-weight: 600;
-      color: #213b63;
-      margin-bottom: 8px;
-    }
-    .progress-steps {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex: 1;
-      position: relative;
-    }
-    .step:not(:last-child)::after {
-      content: '';
-      position: absolute;
-      top: 14px;
-      right: -50%;
-      width: 100%;
-      height: 2px;
-      background: #ccd9e6;
-      z-index: 0;
-    }
-    .step-circle {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #f5f9fd;
-      border: 2px solid #ccd9e6;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #213b63;
-      font-size: 0.85rem;
-      font-weight: 600;
-      z-index: 1;
-    }
-    .step.active .step-circle {
-      background: #295c99;
-      border-color: #295c99;
-      color: #fff;
-    }
-    .step-label {
-      margin-top: 4px;
-      font-size: 0.75rem;
-      color: #556b89;
-      text-align: center;
-    }
-    /* Contact card */
-    .contact-card {
-      background: #ffffff;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
-    .contact-name {
-      font-weight: 700;
-      color: #213b63;
-    }
-    .contact-info {
-      font-size: 0.85rem;
-      color: #556b89;
-    }
-    .contact-info span {
-      display: block;
-      margin-bottom: 2px;
-    }
-    .contact-highlights {
-      margin-top: 4px;
-      font-size: 0.8rem;
-      color: #556b89;
-    }
-    .contact-highlights li {
-      margin-left: 16px;
-      list-style-type: disc;
-    }
-    .whatsapp-button {
-      display: inline-block;
-      text-decoration: none;
-      background: #25d366;
-      color: #fff;
-      padding: 10px 16px;
-      border-radius: 8px;
-      font-weight: 600;
-      text-align: center;
-    }
-    .whatsapp-button:hover {
-      background: #1ebd5d;
+    .subtitle{
+      margin-top:10px;
+      font-size:1rem;
+      color:#666;
+      line-height:1.45;
     }
 
-  /* Más servicios section */
-  .more-services {
-    /* CTA (Asesoría adicional) */
-.cta-extra{
-  margin-top: 18px;
-  padding: 16px;
-  border: 1px solid rgba(0,0,0,.10);
-  border-radius: 14px;
-  background: #fff;
-}
-.cta-extra h3{ margin: 0 0 6px 0; }
-.cta-extra p{ margin: 0 0 12px 0; opacity: .9; line-height: 1.5; }
+    /* Zones */
+    .zones{
+      margin-top:18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+    .chip{
+      flex:1 1 auto;
+      min-width:120px;
+      text-align:center;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid #ccd9e6;
+      background:#f5f9fd;
+      color:var(--text);
+      font-weight:800;
+      cursor:pointer;
+      transition:.15s ease;
+      user-select:none;
+    }
+    .chip small{ font-weight:800; opacity:.8; }
+    .chip.selected{
+      background:var(--primary);
+      border-color:var(--primary);
+      color:#fff;
+    }
+    .zone-description{
+      margin-top:12px;
+      font-size:.95rem;
+      color:var(--muted);
+      line-height:1.4;
+      padding:12px 14px;
+      border:1px solid var(--border);
+      border-radius:14px;
+      background:#fff;
+    }
 
-/* Botón del CTA */
-.cta-extra .btn{
-  display: inline-block;
-  padding: 10px 16px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: 700;
-}
-.cta-extra .btn-secondary{
-  background-color: var(--primary);
-  color: #fff;
-}
-.cta-extra .btn-secondary:hover{
-  background-color: var(--accent);
-}
-    margin-top: 32px;
-    text-align: center;
-  }
-  .more-services p {
-    margin-bottom: 8px;
-    font-weight: 600;
-    color: var(--primary);
-  }
-  .more-services a {
-    display: inline-block;
-    background-color: var(--primary);
-    color: #fff;
-    padding: 8px 16px;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: background-color 0.2s;
-  }
-  .more-services a:hover {
-    background-color: var(--accent);
-  }
-    @media (max-width: 600px) {
-      .home {
-        padding: 24px;
-      }
-      .title {
-        font-size: 1.5rem;
-      }
-      .subtitle {
-        font-size: 0.9rem;
-      }
-      .actions {
-        flex-direction: column;
-      }
-/* CTA Asesoría adicional */
-.cta-extra{
-  margin-top:16px;
-  padding:16px;
-  border:1px solid rgba(0,0,0,.10);
-  border-radius:14px;
-  background:#fff;
-}
-.cta-extra h3{ margin:0 0 6px 0; }
-.cta-extra p{ margin:0 0 12px 0; opacity:.9; line-height:1.5; }
+    /* Actions */
+    .actions{
+      margin-top:16px;
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+    .action{
+      display:block;
+      width:100%;
+      text-align:center;
+      text-decoration:none;
+      padding:14px 16px;
+      border-radius:14px;
+      font-weight:900;
+      font-size:1.05rem;
+    }
+    .action.primary{
+      color:#fff;
+      background:linear-gradient(135deg, #344e96, #508acb);
+    }
+    .action.pay{
+      color:#fff;
+      background:linear-gradient(135deg, #3a8a3b, #5bbf6e);
+    }
+    .action.secondary{
+      color:var(--text);
+      background:linear-gradient(135deg, #e4eef8, #e1ecf7);
+    }
 
-/* Botones */
-.btn{
-  display:inline-block;
-  padding:12px 14px;
-  border-radius:12px;
-  text-decoration:none;
-  font-weight:800;
-}
-.btn-secondary{
-  border:1px solid #111;
-  color:#111;
-  background:transparent;
-}
-.btn-secondary:hover{
-  transform:translateY(-1px);
-}    
-      .zones-info{
-  margin: 16px 0;
-  padding: 14px 16px;
-  border: 1px solid rgba(0,0,0,.10);
-  border-radius: 14px;
-  background: #fff;
-}
-.zones-info h3{ margin:0 0 8px 0; }
-.zones-info p{ margin:6px 0; opacity:.92; }
-.zones-note{ margin-top:10px; font-weight:700; }
-      /* --- FIX RESPONSIVE MOBILE (Tasago) --- */
-*{ box-sizing:border-box; }
+    /* Progress */
+    .progress{
+      margin-top:18px;
+      padding-top:8px;
+    }
+    .progress-title{
+      font-size:1.05rem;
+      font-weight:900;
+      color:var(--text);
+      margin-bottom:10px;
+    }
+    .progress-steps{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+    }
+    .step{
+      flex:1 1 0;
+      min-width:0;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      position:relative;
+    }
+    .step:not(:last-child)::after{
+      content:'';
+      position:absolute;
+      top:14px;
+      right:-50%;
+      width:100%;
+      height:2px;
+      background:#ccd9e6;
+      z-index:0;
+    }
+    .step-circle{
+      width:28px; height:28px;
+      border-radius:50%;
+      background:#f5f9fd;
+      border:2px solid #ccd9e6;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+      color:var(--text);
+      z-index:1;
+    }
+    .step.active .step-circle{
+      background:var(--primary);
+      border-color:var(--primary);
+      color:#fff;
+    }
+    .step-label{
+      margin-top:6px;
+      font-size:.72rem;
+      color:var(--muted);
+      text-align:center;
+      line-height:1.1;
+      word-break:break-word;
+    }
 
-html, body{
-  width:100%;
-  max-width:100%;
-  overflow-x:hidden;
-}
+    /* Zones info (Visita) */
+    .zones-info{
+      margin-top:16px;
+      padding:14px 16px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+    }
+    .zones-info h3{
+      margin-bottom:8px;
+      color:var(--text);
+      font-size:1rem;
+      font-weight:900;
+    }
+    .zones-info p{
+      margin:6px 0;
+      color:var(--muted);
+      line-height:1.35;
+    }
+    .zones-note{
+      margin-top:10px;
+      font-weight:900;
+      color:var(--text);
+    }
+    .zones-hint{
+      margin-top:8px;
+      font-size:.9rem;
+      color:var(--muted);
+      font-weight:700;
+    }
 
-.home{
-  width:100%;
-  max-width:720px;
-  margin:0 auto;
-  padding:16px;
-}
+    /* Contact (sin nombre personal) */
+    .contact-card{
+      margin-top:16px;
+      padding:14px 16px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+    }
+    .contact-name{
+      font-weight:900;
+      color:var(--text);
+      margin-bottom:6px;
+    }
+    .contact-info{
+      color:var(--muted);
+      font-size:.95rem;
+      line-height:1.35;
+    }
+    .contact-highlights{
+      margin-top:10px;
+      color:var(--muted);
+    }
+    .contact-highlights li{
+      margin-left:16px;
+      list-style:disc;
+      margin-top:4px;
+    }
 
-/* Header / layout */
-.home-header{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  flex-wrap:wrap;
-}
+    /* WhatsApp */
+    .whatsapp{
+      margin-top:12px;
+      display:block;
+      width:100%;
+      text-align:center;
+      text-decoration:none;
+      background:#25d366;
+      color:#fff;
+      padding:14px 16px;
+      border-radius:16px;
+      font-weight:900;
+    }
 
-.title{ word-break:break-word; }
-.subtitle{ word-break:break-word; }
+    /* CTA Asesoría */
+    .cta-extra{
+      margin-top:14px;
+      padding:16px;
+      border:1px solid var(--border);
+      border-radius:16px;
+      background:#fff;
+    }
+    .cta-extra h3{
+      color:var(--text);
+      font-weight:900;
+      margin-bottom:6px;
+    }
+    .cta-extra p{
+      color:var(--muted);
+      line-height:1.45;
+      margin-bottom:12px;
+    }
+    .btn{
+      display:inline-block;
+      padding:12px 16px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:900;
+      background:var(--primary);
+      color:#fff;
+    }
+    .btn:hover{ background:var(--accent); }
 
-/* Zonas */
-.zones{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-.zones .chip{
-  flex:1 1 auto;
-  min-width:120px;
-  text-align:center;
-}
-
-/* Botones principales */
-.actions{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-.actions a,
-.actions button{
-  width:100%;
-  display:block;
-  text-align:center;
-}
-
-/* Stepper */
-.progress{
-  width:100%;
-  overflow:hidden;
-}
-.steps{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-}
-.step{
-  flex:1 1 0;
-  min-width:0;
-}
-.step-label{
-  font-size:0.72rem;
-  line-height:1.1;
-  text-align:center;
-  word-break:break-word;
-}
-
-/* CTA asesoría */
-.cta-extra{
-  width:100%;
-}
+    /* Mobile tweak */
+    @media (max-width:600px){
+      .home{ padding:18px; border-radius:18px; }
+      .title{ font-size:1.55rem; }
+      .subtitle{ font-size:.98rem; }
+    }
   </style>
 </head>
+
 <body>
-  <div class="home">
-    <!-- Header -->
-    <div class="home-header">
-      <!-- Logo image -->
-      <div class="logo">
-        <img
-          alt="TasaGo logo"
-          class="logo-img"
-          src="TasaGo_logo_horizontal.png"/>
-      </div>
+  <div class="wrap">
+    <div class="home">
+      <!-- Header -->
+      <div class="home-header">
+        <img alt="TasaGo logo" class="logo-img" src="TasaGo_logo_horizontal.png" />
         <a href="faq.html" class="help-link">Ayuda</a>
-    </div>
-    <!-- Title and subtitle -->
-    <h1 class="title">Tasación en RM en 48h <span>Urgente 24h</span></h1>
-    <p class="subtitle">Pagas online. Subes antecedentes. Recibes PDF con folio y firma simple.</p>
-    <!-- Zone chips -->
-    <div class="zones">
-      <div class="chip selected">Zona A<span class="extra"> Base</span></div>
-      <div class="chip">Zona B<span class="extra"> +0,3 UF</span></div>
-      <div class="chip">Zona C<span class="extra"> +0,5 UF</span></div>
-    </div>
-    <!-- Zone description -->
-    <div id="zone-description" class="zone-description">Seleccione una zona para ver detalles.</div>
-    <!-- Action buttons -->
-    <div class="actions">
-      <a href="servicios.html" class="action-button btn-cotizar">Cotizar</a>
-      <a href="pagar.html" class="action-button btn-pagar">Pagar</a>
-      <a href="subir_antecedentes.html" class="action-button btn-antecedentes">Subir antecedentes</a>
-    </div>
-    <!-- Progress bar -->
-    <div class="progress">
-      <div class="progress-title">Estado del proceso</div>
-      <div class="progress-steps">
-        <div class="step active">
-          <div class="step-circle">1</div>
-          <div class="step-label">Cotiza</div>
-        </div>
-        <div class="step">
-          <div class="step-circle">2</div>
-          <div class="step-label">Paga</div>
-        </div>
-        <div class="step">
-          <div class="step-circle">3</div>
-          <div class="step-label">Sube</div>
-        </div>
-        <div class="step">
-          <div class="step-circle">4</div>
-          <div class="step-label">Recibe PDF</div>
+      </div>
+
+      <!-- Title -->
+      <div>
+        <div class="title">Tasación en RM en 48h</div>
+        <div class="badge">Urgente 24h</div>
+        <div class="subtitle">Pagas online. Subes antecedentes. Recibes PDF con folio y firma simple.</div>
+      </div>
+
+      <!-- Zones -->
+      <div class="zones" aria-label="Zonas">
+        <div class="chip selected" data-zone="A">Zona A <small>Base</small></div>
+        <div class="chip" data-zone="B">Zona B <small>+0,3 UF</small></div>
+        <div class="chip" data-zone="C">Zona C <small>+0,5 UF</small></div>
+      </div>
+
+      <div id="zone-description" class="zone-description">
+        Zonas aplican solo para <b>Visita + Informe</b> (traslado). Express y Pro no cambian por zona.
+      </div>
+
+      <!-- Actions -->
+      <div class="actions">
+        <a href="servicios.html" class="action primary">Cotizar</a>
+        <a href="pagar.html" class="action pay">Pagar</a>
+        <a href="subir_antecedentes.html" class="action secondary">Subir antecedentes</a>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress">
+        <div class="progress-title">Estado del proceso</div>
+        <div class="progress-steps">
+          <div class="step active"><div class="step-circle">1</div><div class="step-label">Cotiza</div></div>
+          <div class="step"><div class="step-circle">2</div><div class="step-label">Paga</div></div>
+          <div class="step"><div class="step-circle">3</div><div class="step-label">Sube</div></div>
+          <div class="step"><div class="step-circle">4</div><div class="step-label">Recibe PDF</div></div>
         </div>
       </div>
+
+      <!-- Zones info -->
+      <section class="zones-info">
+        <h3>Zonas de visita (solo aplica a “Visita + Informe”)</h3>
+        <p><b>Zona A:</b> Las Condes, Vitacura, Lo Barnechea, Providencia</p>
+        <p><b>Zona B:</b> Ñuñoa, Santiago Centro, Macul, La Cisterna, La Florida</p>
+        <p><b>Zona C:</b> San Miguel y comunas periféricas (según distancia)</p>
+        <p class="zones-note">Recargos: Zona B +0.3 UF · Zona C +0.5 UF</p>
+        <div class="zones-hint">Express 24h y Pro PDF no cambian por zona.</div>
+      </section>
+
+      <!-- Contact -->
+      <div class="contact-card">
+        <div class="contact-name">TasaGo — Tasaciones Región Metropolitana</div>
+        <div class="contact-info">
+          Atención por WhatsApp · Respuesta en menos de 1 hora
+        </div>
+        <ul class="contact-highlights">
+          <li>Checklist inteligente de faltantes</li>
+          <li>PDF con folio y firma simple</li>
+        </ul>
+      </div>
+
+      <a class="whatsapp" href="https://wa.me/56992724280" target="_blank" rel="noopener">Hablar con tasador</a>
+
+      <!-- CTA Asesoría -->
+      <section class="cta-extra">
+        <h3>¿Buscas asesoría adicional?</h3>
+        <p>Corretaje, regularización DOM, recepción final, estudio de cabida (PRC/OGUC), arriendo, subdivisión y más.</p>
+        <a class="btn" href="mas_servicios.html">Ver más servicios</a>
+      </section>
+
     </div>
-  <section class="zones-info">
-  <h3>Zonas de visita (solo aplica a “Visita + Informe”)</h3>
-  <p><b>Zona A:</b> Las Condes, Vitacura, Lo Barnechea, Providencia</p>
-  <p><b>Zona B:</b> Ñuñoa, Santiago Centro, Macul, La Cisterna, La Florida</p>
-  <p><b>Zona C:</b> San Miguel y comunas periféricas (según distancia)</p>
-  <p class="zones-note">Recargos: Zona B +0.3 UF · Zona C +0.5 UF</p>
-</section>
-    <!-- Contact card -->
-  <div class="contact-card">
-  <div class="contact-name">Tasago — Tasaciones RM</div>
-  <div class="contact-info">
-    <span>Región Metropolitana, Santiago</span>
-    <span>Atención por WhatsApp</span>
   </div>
-  <ul class="contact-highlights">
-    <li>Checklist inteligente de faltantes</li>
-    <li>Atención en menos de 1 hora</li>
-  </ul>
-</div>
-      <ul class="contact-highlights">
-        <li>Checklist inteligente de faltantes</li>
-        <li>Atención en menos de 1 hora</li>
-      </ul>
-    </div>
-    <!-- WhatsApp button -->
-    <a href="https://wa.me/56992724280" class="whatsapp-button" target="_blank">Hablar con tasador</a>
 
-  <!-- Asesoría adicional CTA -->
-<section class="cta-extra">
-  <h3>¿Buscas asesoría adicional?</h3>
-  <p>Corretaje, regularización DOM, recepción final, estudio de cabida (PRC/OGUC), arriendo, subdivisión y más.</p>
-  <a class="btn btn-secondary" href="mas_servicios.html">Ver más servicios</a>
-</section>
-
-  <!-- Zone selection script -->
   <script>
-    // Interactive zone description functionality
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', () => {
+      const desc = document.getElementById('zone-description');
+      const chips = document.querySelectorAll('.chip');
+
       const zoneDescriptions = {
-        'A': 'Zona A corresponde a comunas de alto valor (Las Condes, Vitacura, Lo Barnechea, Providencia). Ajuste base 0 UF/m².',
-        'B': 'Zona B incluye comunas como Ñuñoa, Santiago Centro, Macul, La Cisterna y La Florida. Ajuste +0,3 UF/m² sobre la base de zona A.',
-        'C': 'Zona C abarca comunas en crecimiento como San Miguel y otras zonas emergentes con plusvalía al alza. Ajuste +0,5 UF/m² sobre la base de zona A.'
+        A: 'Zona A: comunas premium (Las Condes, Vitacura, Lo Barnechea, Providencia). Recargo: 0 UF (solo Visita + Informe).',
+        B: 'Zona B: comunas intermedias (Ñuñoa, Santiago Centro, Macul, La Cisterna, La Florida). Recargo: +0,3 UF (solo Visita + Informe).',
+        C: 'Zona C: comunas periféricas / traslado mayor (según distancia). Recargo: +0,5 UF (solo Visita + Informe).'
       };
-      const chips = document.querySelectorAll('.zones .chip');
-      const descEl = document.getElementById('zone-description');
-      chips.forEach((chip) => {
-        chip.addEventListener('click', function() {
-          // Remove selected class from all chips
+
+      chips.forEach(chip => {
+        chip.addEventListener('click', () => {
           chips.forEach(c => c.classList.remove('selected'));
-          // Add selected class to clicked chip
           chip.classList.add('selected');
-          // Extract zone letter from chip text
-          const text = chip.textContent.trim();
-          const zoneLetter = text.replace(/Zona\s*/i, '').trim().charAt(0);
-          descEl.textContent = zoneDescriptions[zoneLetter] || '';
+          const z = chip.getAttribute('data-zone');
+          desc.innerHTML = zoneDescriptions[z];
         });
       });
     });
