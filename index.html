@@ -346,6 +346,84 @@
 .zones-info h3{ margin:0 0 8px 0; }
 .zones-info p{ margin:6px 0; opacity:.92; }
 .zones-note{ margin-top:10px; font-weight:700; }
+      /* --- FIX RESPONSIVE MOBILE (Tasago) --- */
+*{ box-sizing:border-box; }
+
+html, body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
+}
+
+.home{
+  width:100%;
+  max-width:720px;
+  margin:0 auto;
+  padding:16px;
+}
+
+/* Header / layout */
+.home-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.title{ word-break:break-word; }
+.subtitle{ word-break:break-word; }
+
+/* Zonas */
+.zones{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+}
+.zones .chip{
+  flex:1 1 auto;
+  min-width:120px;
+  text-align:center;
+}
+
+/* Botones principales */
+.actions{
+  display:flex;
+  flex-direction:column;
+  gap:12px;
+}
+.actions a,
+.actions button{
+  width:100%;
+  display:block;
+  text-align:center;
+}
+
+/* Stepper */
+.progress{
+  width:100%;
+  overflow:hidden;
+}
+.steps{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+.step{
+  flex:1 1 0;
+  min-width:0;
+}
+.step-label{
+  font-size:0.72rem;
+  line-height:1.1;
+  text-align:center;
+  word-break:break-word;
+}
+
+/* CTA asesoría */
+.cta-extra{
+  width:100%;
+}
   </style>
 </head>
 <body>
