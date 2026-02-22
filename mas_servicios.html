@@ -20,23 +20,13 @@
     .nav a:hover{border-color:rgba(41,92,153,.35);}
 
     .wrap{max-width:920px;margin:0 auto;padding:18px 14px 40px;}
-    .hero{
-      background:#fff;border:1px solid var(--border);border-radius:var(--radius);
-      box-shadow:var(--shadow);padding:16px;
-    }
+
+    .hero{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;}
     h1{margin:0 0 6px 0;font-size:28px;}
     .sub{margin:0;color:var(--muted);line-height:1.55;}
 
-    .grid{
-      margin-top:14px;
-      display:grid;
-      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      gap:14px;
-    }
-    .card{
-      background:#fff;border:1px solid var(--border);border-radius:var(--radius);
-      box-shadow:var(--shadow);padding:16px;
-    }
+    .grid{margin-top:14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;}
+    .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;}
     .card h2{margin:0 0 8px 0;font-size:18px;}
     .card p{margin:0 0 10px 0;color:var(--muted);line-height:1.55;}
     ul{margin:0 0 14px 18px;color:var(--muted);}
@@ -45,30 +35,24 @@
     .btn{
       display:block;width:100%;text-align:center;text-decoration:none;
       font-weight:900;border-radius:14px;padding:14px 12px;border:1px solid transparent;
-      background:var(--primary);color:#fff;
+      background:var(--primary);color:#fff; cursor:pointer;
     }
     .btn:hover{background:var(--accent);}
     .btn-outline{
       display:block;width:100%;text-align:center;text-decoration:none;
       font-weight:900;border-radius:14px;padding:14px 12px;border:1px solid rgba(0,0,0,.16);
-      background:#fff;color:var(--primary);
-      margin-top:10px;
+      background:#fff;color:var(--primary); margin-top:10px;
     }
+    .btn-whatsapp{background:#22c55e !important;}
+    .btn-whatsapp:hover{filter:brightness(.95); background:#22c55e !important;}
 
-    .form{
-      margin-top:14px;
-      background:#fff;border:1px solid var(--border);border-radius:var(--radius);
-      box-shadow:var(--shadow);padding:16px;
-    }
+    .form{margin-top:14px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;}
     label{display:block;font-weight:900;margin:10px 0 6px;}
-    input,select,textarea{
-      width:100%;padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,.14);
-      background:#fff;font-size:15px;outline:none;
-    }
+    input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,.14);background:#fff;font-size:15px;outline:none;}
     textarea{min-height:90px;resize:vertical;}
     .hint{margin-top:10px;background:#f6fbff;border:1px dashed rgba(41,92,153,.30);border-radius:14px;padding:12px 14px;color:#26435f;line-height:1.45;}
-
     .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;}
+
     @media(max-width:520px){.logo-box img{height:46px;}}
   </style>
 </head>
@@ -76,7 +60,9 @@
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="logo-box"><img src="logo-tasago.png" alt="TasaGo"></div>
+      <div class="logo-box">
+        <img src="logo-tasago.png" alt="TasaGo">
+      </div>
       <div class="nav">
         <a href="index.html">Inicio</a>
         <a href="servicios.html">Planes</a>
@@ -89,6 +75,16 @@
     <div class="hero">
       <h1>Más servicios</h1>
       <p class="sub">Complementa tu tasación con apoyo profesional: corretaje, DOM, regularización, cabida y más.</p>
+
+      <div style="margin-top:12px;">
+        <a class="btn btn-whatsapp" href="https://wa.me/569XXXXXXXX?text=Hola%20Tasago%2C%20quiero%20asesor%C3%ADa%20adicional.%20Mi%20comuna%20es%20____%20y%20necesito%20____." target="_blank" rel="noopener">
+          Comunícate por WhatsApp
+        </a>
+      </div>
+
+      <div class="hint">
+        Tip: si primero necesitas el valor, parte por <b>Planes</b> y luego subes antecedentes.
+      </div>
     </div>
 
     <div class="grid">
@@ -106,10 +102,10 @@
 
       <div class="card">
         <h2>Regularización DOM</h2>
-        <p>Tramitación y expediente para recepción final / regularización.</p>
+        <p>Expediente y seguimiento para regularización/recepción final.</p>
         <ul>
           <li>Levantamiento y planos</li>
-          <li>Coordinación profesionales (si aplica)</li>
+          <li>Coordinación de profesionales (si aplica)</li>
           <li>Ingreso y seguimiento</li>
         </ul>
         <a class="btn" href="#form">Cotizar regularización</a>
@@ -123,13 +119,13 @@
           <li>Potencial constructivo y riesgos</li>
           <li>Resumen defendible en PDF</li>
         </ul>
-        <a class="btn" href="#form">Cotizar estudio de cabida</a>
+        <a class="btn" href="#form">Cotizar cabida</a>
       </div>
     </div>
 
     <div class="form" id="form">
       <h2 style="margin:0 0 6px 0;">Solicitar asesoría</h2>
-      <p class="sub" style="margin-bottom:10px;">Deja tu solicitud. En el MVP se guarda localmente (luego lo conectamos a envío real).</p>
+      <p class="sub" style="margin-bottom:10px;">Completa este formulario (MVP). También puedes escribir por WhatsApp.</p>
 
       <label for="tipo">Tipo de asesoría</label>
       <select id="tipo">
@@ -148,8 +144,15 @@
 
       <button class="btn" id="guardar">Guardar solicitud</button>
 
+      <a class="btn btn-whatsapp" style="margin-top:10px;"
+         id="btnWapp"
+         href="https://wa.me/569XXXXXXXX?text=Hola%20Tasago%2C%20quiero%20asesor%C3%ADa%20adicional.%20Tipo%3A%20__TIPO__%20%7C%20Comuna%3A%20__COMUNA__%20%7C%20Mensaje%3A%20__MSG__"
+         target="_blank" rel="noopener">
+        Enviar por WhatsApp
+      </a>
+
       <div class="hint" id="ok" style="display:none;">
-        Solicitud guardada ✅. Siguiente paso: conectamos esto a WhatsApp o Email cuando me des el dato de contacto oficial.
+        Solicitud guardada ✅ (local). Cuando quieras, la conectamos a email/CRM.
       </div>
     </div>
 
@@ -157,6 +160,26 @@
   </div>
 
   <script>
+    const btnWapp = document.getElementById("btnWapp");
+
+    function encode(s){
+      return encodeURIComponent((s||"").toString().trim());
+    }
+
+    function buildWapp(){
+      const tipo = document.getElementById("tipo").value;
+      const comuna = document.getElementById("comuna").value;
+      const msg = document.getElementById("mensaje").value;
+
+      const text = `Hola Tasago, quiero asesoría adicional.\nTipo: ${tipo}\nComuna: ${comuna}\nMensaje: ${msg}`;
+      btnWapp.href = `https://wa.me/569XXXXXXXX?text=${encode(text)}`;
+    }
+
+    ["tipo","comuna","mensaje"].forEach(id=>{
+      document.getElementById(id).addEventListener("input", buildWapp);
+    });
+    buildWapp();
+
     document.getElementById("guardar").addEventListener("click", () => {
       const payload = {
         tipo: document.getElementById("tipo").value,
@@ -166,7 +189,7 @@
       };
       localStorage.setItem("tasago_asesoria", JSON.stringify(payload));
       document.getElementById("ok").style.display = "block";
-      setTimeout(()=>document.getElementById("ok").style.display="none", 5000);
+      setTimeout(()=>document.getElementById("ok").style.display="none", 4500);
     });
   </script>
 </body>
