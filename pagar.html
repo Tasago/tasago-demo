@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TasaGo — Pagar</title>
   <meta name="theme-color" content="#295c99">
+
   <style>
     :root{--primary:#295c99;--accent:#1d4e89;--bg:#f4f7fb;--text:#1c2a3a;--muted:#5b6b7b;--border:rgba(0,0,0,.10);--shadow:0 8px 24px rgba(15,35,60,.08);--radius:16px;}
     *{box-sizing:border-box;}
@@ -12,21 +13,24 @@
     .topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--border);}
     .topbar-inner{max-width:920px;margin:0 auto;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
     .logo-box{background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px 12px;box-shadow:0 6px 18px rgba(15,35,60,.06);display:flex;align-items:center;justify-content:center;}
-    .logo-box img{height:44px;width:auto;display:block;}
+    .logo-box img{height:48px;width:auto;display:block;}
     .nav{display:flex;gap:10px;flex-wrap:wrap;}
     .nav a{text-decoration:none;font-weight:900;color:var(--primary);padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:#fff;}
     .wrap{max-width:920px;margin:0 auto;padding:18px 14px 40px;}
     .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;}
     h1{margin:0 0 8px 0;font-size:28px;}
     p{margin:0 0 10px 0;color:var(--muted);line-height:1.55;}
+    .box{margin-top:12px;border:1px dashed rgba(41,92,153,.30);border-radius:14px;padding:12px 14px;background:#f6fbff;color:#26435f;line-height:1.45;}
     .btn{display:block;width:100%;text-align:center;text-decoration:none;font-weight:900;border-radius:14px;padding:16px 14px;border:1px solid transparent;font-size:18px;margin-top:12px;cursor:pointer;}
     .btn-primary{background:var(--primary);color:#fff;}
     .btn-primary:hover{background:var(--accent);}
-    .note{margin-top:12px;background:#f6fbff;border:1px dashed rgba(41,92,153,.30);border-radius:14px;padding:12px 14px;color:#26435f;line-height:1.45;}
+    .btn-success{background:#3a9b4a;color:#fff;}
+    .btn-success:hover{filter:brightness(.95);}
     .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;}
-    @media(max-width:520px){.logo-box img{height:42px;}}
+    @media(max-width:520px){.logo-box img{height:46px;}}
   </style>
 </head>
+
 <body>
   <div class="topbar">
     <div class="topbar-inner">
@@ -34,7 +38,7 @@
       <div class="nav">
         <a href="index.html">Inicio</a>
         <a href="servicios.html">Planes</a>
-        <a href="preguntas frecuentes.html">Ayuda</a>
+        <a href="faq.html">Ayuda</a>
       </div>
     </div>
   </div>
@@ -42,14 +46,15 @@
   <div class="wrap">
     <div class="card">
       <h1>Pagar</h1>
-      <p>Pago seguro con Mercado Pago (en esta demo el pago es simulado).</p>
+      <p>En esta demo el pago es simulado. En producción se conecta a Mercado Pago.</p>
 
-      <div class="note">
-        Luego del pago, continúa a <b>Subir antecedentes</b>.
+      <div class="box">
+        <b>Después del pago:</b> vas directo a <b>subir antecedentes</b> o a ver el <b>resultado</b>.
       </div>
 
       <button class="btn btn-primary" id="btnPagar">Simular pago</button>
-      <a class="btn btn-primary" style="background:#3a9b4a" href="subir_antecedentes.html">Continuar a subir antecedentes</a>
+      <a class="btn btn-success" href="subir_antecedentes.html">Volver a subir antecedentes</a>
+      <a class="btn btn-primary" href="tasacion_result.html">Ver resultado</a>
     </div>
 
     <div class="footer">© Tasago · Pago</div>
@@ -58,8 +63,8 @@
   <script>
     document.getElementById("btnPagar").addEventListener("click", () => {
       localStorage.setItem("tasago_paid", "true");
-      alert("Pago simulado OK. Ahora sube antecedentes.");
-      location.href = "subir_antecedentes.html";
+      alert("Pago simulado OK ✅");
+      location.href = "tasacion_result.html";
     });
   </script>
 </body>
