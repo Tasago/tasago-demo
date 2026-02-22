@@ -3,156 +3,124 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TasaGo — Más servicios</title>
+  <title>TasaGo — Planes</title>
   <meta name="theme-color" content="#295c99">
 
   <style>
     :root{
-      --primary:#295c99;
-      --accent:#1d4e89;
-      --bg:#f4f7fb;
-      --text:#1c2a3a;
-      --muted:#5b6b7b;
-      --border:rgba(0,0,0,.10);
-      --shadow: 0 8px 24px rgba(15, 35, 60, .08);
-      --radius:16px;
+      --primary:#295c99; --accent:#1d4e89; --bg:#f4f7fb; --text:#1c2a3a; --muted:#5b6b7b;
+      --border:rgba(0,0,0,.10); --shadow: 0 8px 24px rgba(15, 35, 60, .08); --radius:16px;
     }
     *{ box-sizing:border-box; }
     html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
 
-    .topbar{
-      position: sticky;
-      top:0;
-      z-index:10;
-      background:#fff;
-      border-bottom: 1px solid var(--border);
-    }
+    .topbar{ position: sticky; top:0; z-index:10; background:#fff; border-bottom: 1px solid var(--border); }
     .topbar-inner{
-      width:100%;
-      max-width:920px;
-      margin:0 auto;
-      padding:12px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
+      width:100%; max-width:920px; margin:0 auto; padding:12px 14px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
     }
     .logo-box{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:10px 12px;
-      box-shadow: 0 6px 18px rgba(15, 35, 60, .06);
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      background:#fff; border:1px solid var(--border); border-radius:14px;
+      padding:10px 12px; box-shadow: 0 6px 18px rgba(15,35,60,.06);
+      display:flex; align-items:center; justify-content:center;
     }
-    .logo-box img{ height:44px; width:auto; display:block; }
+    .logo-box img{ height:48px; width:auto; display:block; }
+    .nav{ display:flex; gap:10px; flex-wrap:wrap; }
     .nav a{
-      text-decoration:none;
-      font-weight:900;
-      color:var(--primary);
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      background:#fff;
+      text-decoration:none; font-weight:900; color:var(--primary);
+      padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#fff;
     }
+    .nav a:hover{ border-color: rgba(41,92,153,.35); }
 
     .wrap{ width:100%; max-width:920px; margin:0 auto; padding:18px 14px 40px; }
     h1{ margin:0 0 6px 0; font-size: 28px; }
     .sub{ margin:0 0 14px 0; color:var(--muted); line-height:1.5; }
 
+    .note{
+      background:#fff; border:1px dashed rgba(41,92,153,.30); border-radius:14px;
+      padding:12px 14px; color:#26435f; line-height:1.45; margin: 12px 0 16px;
+    }
+
     .grid{
       display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap:14px;
     }
     .card{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:16px;
+      background:#fff; border:1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding:16px;
     }
-    .card h2{ margin:0 0 8px 0; }
-    .card p{ margin:0 0 10px 0; color:var(--muted); line-height:1.5; }
-    ul{ margin:0 0 14px 18px; color:var(--muted); }
-    li{ margin:7px 0; }
+    .price{ font-size: 22px; font-weight: 900; margin: 8px 0 10px; }
+    ul{ margin: 0 0 14px 18px; color: var(--muted); }
+    li{ margin: 7px 0; }
 
     .btn{
-      display:block;
-      width:100%;
-      text-align:center;
-      text-decoration:none;
-      font-weight:900;
-      border-radius: 14px;
-      padding: 14px 12px;
-      border:1px solid transparent;
-      background: var(--primary);
-      color:#fff;
+      display:block; width:100%; text-align:center; text-decoration:none;
+      font-weight:900; border-radius: 14px; padding: 14px 12px;
+      border:1px solid transparent; background: var(--primary); color:#fff;
     }
     .btn:hover{ background: var(--accent); }
 
     .footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:13px; }
-    @media (max-width:520px){
-      .logo-box img{ height:42px; }
-    }
   </style>
 </head>
 
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="logo-box">
-        <img src="Logotipo de TasaGo horizontal.png" alt="TasaGo">
-      </div>
+      <div class="logo-box"><img src="logo-tasago.png" alt="TasaGo"></div>
       <div class="nav">
         <a href="index.html">Inicio</a>
-        <a href="preguntas frecuentes.html">Ayuda</a>
+        <a href="faq.html">Ayuda</a>
+        <a href="mas_servicios.html">Más servicios</a>
       </div>
     </div>
   </div>
 
   <div class="wrap">
-    <h1>Más servicios</h1>
-    <p class="sub">Complementa tu tasación con servicios profesionales. Un solo estilo, una sola marca.</p>
+    <h1>Planes y precios</h1>
+    <p class="sub">Elige tu nivel de detalle. Pro se recomienda cuando necesitas un informe defendible.</p>
+
+    <div class="note">
+      <b>Zonas aplican solo para Visita + Informe</b> (traslado). <b>Express</b> y <b>Pro</b> no cambian por zona.
+    </div>
 
     <div class="grid">
       <div class="card">
-        <h2>Corretaje — Venta & Arriendo</h2>
-        <p>Gestión comercial completa, desde publicación hasta cierre.</p>
+        <h2 style="margin:0;">Express 24h</h2>
+        <div class="price">$900</div>
         <ul>
-          <li>Promoción en portales y redes</li>
-          <li>Filtrado y visitas de potenciales clientes</li>
-          <li>Negociación y acompañamiento en cierre</li>
+          <li>Entrega en 24h hábiles</li>
+          <li>3 comparables + rango de valor</li>
+          <li>Informe breve (2–3 páginas)</li>
         </ul>
-        <a class="btn" href="index.html">Quiero vender/arrendar</a>
+        <a class="btn" href="subir_antecedentes.html?plan=express">Elegir Express</a>
       </div>
 
       <div class="card">
-        <h2>Arquitectura — Diseño & Regularizaciones</h2>
-        <p>Planos, tramitación y apoyo técnico para DOM.</p>
+        <h2 style="margin:0;">Pro PDF</h2>
+        <div class="price">1.5 UF <span style="font-size:14px; font-weight:700; opacity:.8;">(3–4 días)</span></div>
         <ul>
-          <li>Diseño de planos y remodelaciones</li>
-          <li>Regularización ante Dirección de Obras</li>
-          <li>Recepción final y expedientes</li>
+          <li>6–10 comparables + ajustes explicados</li>
+          <li>PDF profesional con anexos (fotos/plano)</li>
+          <li><b>1 ronda de revisión incluida</b></li>
         </ul>
-        <a class="btn" href="index.html">Quiero regularizar</a>
+        <a class="btn" href="subir_antecedentes.html?plan=pro">Elegir Pro</a>
       </div>
 
       <div class="card">
-        <h2>Estudio de cabida (PRC/OGUC)</h2>
-        <p>Para decisiones de compra, proyecto o inversión.</p>
+        <h2 style="margin:0;">Visita + Informe</h2>
+        <div class="price">Desde 2.5 UF <span style="font-size:14px; font-weight:700; opacity:.8;">(4–5 días)</span></div>
         <ul>
-          <li>Normativa y restricciones</li>
-          <li>Potencial constructivo y riesgos</li>
-          <li>Resumen defendible en PDF</li>
+          <li>Visita técnica + fotos propias</li>
+          <li>Informe tipo Pro + capítulo inspección</li>
+          <li>Tarifa varía por zona / traslado</li>
         </ul>
-        <a class="btn" href="index.html">Quiero estudio de cabida</a>
+        <a class="btn" href="subir_antecedentes.html?plan=visita">Agendar Visita</a>
       </div>
     </div>
 
-    <div class="footer">© Tasago · Servicios complementarios</div>
+    <div class="footer">© Tasago · Tasación digital RM</div>
   </div>
 </body>
 </html>
