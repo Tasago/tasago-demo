@@ -7,152 +7,167 @@
   <meta name="theme-color" content="#295c99">
 
   <style>
-    :root{
-      --primary:#295c99;
-      --accent:#1d4e89;
-      --bg:#f4f7fb;
-      --text:#1c2a3a;
-      --muted:#5b6b7b;
-      --border:rgba(0,0,0,.10);
-      --shadow: 0 8px 24px rgba(15, 35, 60, .08);
-      --radius:16px;
-    }
-    *{ box-sizing:border-box; }
-    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
+    :root{--primary:#295c99;--accent:#1d4e89;--bg:#f4f7fb;--text:#1c2a3a;--muted:#5b6b7b;--border:rgba(0,0,0,.10);--shadow:0 8px 24px rgba(15,35,60,.08);--radius:16px;}
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;}
 
-    .topbar{
-      position: sticky;
-      top:0;
-      z-index:10;
-      background:#fff;
-      border-bottom: 1px solid var(--border);
-    }
-    .topbar-inner{
-      width:100%;
-      max-width:920px;
-      margin:0 auto;
-      padding:12px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .logo-box{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:10px 12px;
-      box-shadow: 0 6px 18px rgba(15, 35, 60, .06);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .logo-box img{ height:44px; width:auto; display:block; }
-    .nav a{
-      text-decoration:none;
-      font-weight:900;
-      color:var(--primary);
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      background:#fff;
-    }
+    .topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--border);}
+    .topbar-inner{max-width:920px;margin:0 auto;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .logo-box{background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px 12px;box-shadow:0 6px 18px rgba(15,35,60,.06);display:flex;align-items:center;justify-content:center;}
+    .logo-box img{height:48px;width:auto;display:block;}
+    .nav{display:flex;gap:10px;flex-wrap:wrap;}
+    .nav a{text-decoration:none;font-weight:900;color:var(--primary);padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:#fff;}
+    .nav a:hover{border-color:rgba(41,92,153,.35);}
 
-    .wrap{ width:100%; max-width:920px; margin:0 auto; padding:18px 14px 40px; }
-    h1{ margin:0 0 6px 0; font-size: 28px; }
-    .sub{ margin:0 0 14px 0; color:var(--muted); line-height:1.5; }
+    .wrap{max-width:920px;margin:0 auto;padding:18px 14px 40px;}
+    .hero{
+      background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+      box-shadow:var(--shadow);padding:16px;
+    }
+    h1{margin:0 0 6px 0;font-size:28px;}
+    .sub{margin:0;color:var(--muted);line-height:1.55;}
 
     .grid{
+      margin-top:14px;
       display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
       gap:14px;
     }
     .card{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:16px;
+      background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+      box-shadow:var(--shadow);padding:16px;
     }
-    .card h2{ margin:0 0 8px 0; }
-    .card p{ margin:0 0 10px 0; color:var(--muted); line-height:1.5; }
-    ul{ margin:0 0 14px 18px; color:var(--muted); }
-    li{ margin:7px 0; }
+    .card h2{margin:0 0 8px 0;font-size:18px;}
+    .card p{margin:0 0 10px 0;color:var(--muted);line-height:1.55;}
+    ul{margin:0 0 14px 18px;color:var(--muted);}
+    li{margin:7px 0;}
 
     .btn{
-      display:block;
-      width:100%;
-      text-align:center;
-      text-decoration:none;
-      font-weight:900;
-      border-radius: 14px;
-      padding: 14px 12px;
-      border:1px solid transparent;
-      background: var(--primary);
-      color:#fff;
+      display:block;width:100%;text-align:center;text-decoration:none;
+      font-weight:900;border-radius:14px;padding:14px 12px;border:1px solid transparent;
+      background:var(--primary);color:#fff;
     }
-    .btn:hover{ background: var(--accent); }
+    .btn:hover{background:var(--accent);}
+    .btn-outline{
+      display:block;width:100%;text-align:center;text-decoration:none;
+      font-weight:900;border-radius:14px;padding:14px 12px;border:1px solid rgba(0,0,0,.16);
+      background:#fff;color:var(--primary);
+      margin-top:10px;
+    }
 
-    .footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:13px; }
-    @media (max-width:520px){
-      .logo-box img{ height:42px; }
+    .form{
+      margin-top:14px;
+      background:#fff;border:1px solid var(--border);border-radius:var(--radius);
+      box-shadow:var(--shadow);padding:16px;
     }
+    label{display:block;font-weight:900;margin:10px 0 6px;}
+    input,select,textarea{
+      width:100%;padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,.14);
+      background:#fff;font-size:15px;outline:none;
+    }
+    textarea{min-height:90px;resize:vertical;}
+    .hint{margin-top:10px;background:#f6fbff;border:1px dashed rgba(41,92,153,.30);border-radius:14px;padding:12px 14px;color:#26435f;line-height:1.45;}
+
+    .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;}
+    @media(max-width:520px){.logo-box img{height:46px;}}
   </style>
 </head>
 
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="logo-box">
-        <img src="Logotipo de TasaGo horizontal.png" alt="TasaGo">
-      </div>
+      <div class="logo-box"><img src="logo-tasago.png" alt="TasaGo"></div>
       <div class="nav">
         <a href="index.html">Inicio</a>
-        <a href="preguntas frecuentes.html">Ayuda</a>
+        <a href="servicios.html">Planes</a>
+        <a href="faq.html">Ayuda</a>
       </div>
     </div>
   </div>
 
   <div class="wrap">
-    <h1>Más servicios</h1>
-    <p class="sub">Complementa tu tasación con servicios profesionales. Un solo estilo, una sola marca.</p>
+    <div class="hero">
+      <h1>Más servicios</h1>
+      <p class="sub">Complementa tu tasación con apoyo profesional: corretaje, DOM, regularización, cabida y más.</p>
+    </div>
 
     <div class="grid">
       <div class="card">
         <h2>Corretaje — Venta & Arriendo</h2>
         <p>Gestión comercial completa, desde publicación hasta cierre.</p>
         <ul>
-          <li>Promoción en portales y redes</li>
-          <li>Filtrado y visitas de potenciales clientes</li>
-          <li>Negociación y acompañamiento en cierre</li>
+          <li>Publicación y difusión</li>
+          <li>Filtrado de interesados y visitas</li>
+          <li>Negociación y acompañamiento</li>
         </ul>
-        <a class="btn" href="index.html">Quiero vender/arrendar</a>
+        <a class="btn" href="servicios.html">Quiero tasar primero</a>
+        <a class="btn-outline" href="#form">Cotizar corretaje</a>
       </div>
 
       <div class="card">
-        <h2>Arquitectura — Diseño & Regularizaciones</h2>
-        <p>Planos, tramitación y apoyo técnico para DOM.</p>
+        <h2>Regularización DOM</h2>
+        <p>Tramitación y expediente para recepción final / regularización.</p>
         <ul>
-          <li>Diseño de planos y remodelaciones</li>
-          <li>Regularización ante Dirección de Obras</li>
-          <li>Recepción final y expedientes</li>
+          <li>Levantamiento y planos</li>
+          <li>Coordinación profesionales (si aplica)</li>
+          <li>Ingreso y seguimiento</li>
         </ul>
-        <a class="btn" href="index.html">Quiero regularizar</a>
+        <a class="btn" href="#form">Cotizar regularización</a>
       </div>
 
       <div class="card">
         <h2>Estudio de cabida (PRC/OGUC)</h2>
-        <p>Para decisiones de compra, proyecto o inversión.</p>
+        <p>Para decisiones de compra, inversión o proyecto.</p>
         <ul>
           <li>Normativa y restricciones</li>
           <li>Potencial constructivo y riesgos</li>
           <li>Resumen defendible en PDF</li>
         </ul>
-        <a class="btn" href="index.html">Quiero estudio de cabida</a>
+        <a class="btn" href="#form">Cotizar estudio de cabida</a>
       </div>
     </div>
 
-    <div class="footer">© Tasago · Servicios complementarios</div>
+    <div class="form" id="form">
+      <h2 style="margin:0 0 6px 0;">Solicitar asesoría</h2>
+      <p class="sub" style="margin-bottom:10px;">Deja tu solicitud. En el MVP se guarda localmente (luego lo conectamos a envío real).</p>
+
+      <label for="tipo">Tipo de asesoría</label>
+      <select id="tipo">
+        <option>Corretaje (venta/arriendo)</option>
+        <option>Regularización DOM / Recepción final</option>
+        <option>Estudio de cabida (PRC/OGUC)</option>
+        <option>Administración de arriendo</option>
+        <option>Otro</option>
+      </select>
+
+      <label for="comuna">Comuna</label>
+      <input id="comuna" placeholder="Ej: Ñuñoa" />
+
+      <label for="mensaje">Mensaje</label>
+      <textarea id="mensaje" placeholder="Cuéntame en 3 líneas qué necesitas y el estado del caso."></textarea>
+
+      <button class="btn" id="guardar">Guardar solicitud</button>
+
+      <div class="hint" id="ok" style="display:none;">
+        Solicitud guardada ✅. Siguiente paso: conectamos esto a WhatsApp o Email cuando me des el dato de contacto oficial.
+      </div>
+    </div>
+
+    <div class="footer">© Tasago · Más servicios</div>
   </div>
+
+  <script>
+    document.getElementById("guardar").addEventListener("click", () => {
+      const payload = {
+        tipo: document.getElementById("tipo").value,
+        comuna: document.getElementById("comuna").value.trim(),
+        mensaje: document.getElementById("mensaje").value.trim(),
+        ts: new Date().toISOString()
+      };
+      localStorage.setItem("tasago_asesoria", JSON.stringify(payload));
+      document.getElementById("ok").style.display = "block";
+      setTimeout(()=>document.getElementById("ok").style.display="none", 5000);
+    });
+  </script>
 </body>
 </html>
