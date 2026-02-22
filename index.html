@@ -307,7 +307,33 @@
       .actions {
         flex-direction: column;
       }
-    }
+/* CTA Asesoría adicional */
+.cta-extra{
+  margin-top:16px;
+  padding:16px;
+  border:1px solid rgba(0,0,0,.10);
+  border-radius:14px;
+  background:#fff;
+}
+.cta-extra h3{ margin:0 0 6px 0; }
+.cta-extra p{ margin:0 0 12px 0; opacity:.9; line-height:1.5; }
+
+/* Botones */
+.btn{
+  display:inline-block;
+  padding:12px 14px;
+  border-radius:12px;
+  text-decoration:none;
+  font-weight:800;
+}
+.btn-secondary{
+  border:1px solid #111;
+  color:#111;
+  background:transparent;
+}
+.btn-secondary:hover{
+  transform:translateY(-1px);
+}    
   </style>
 </head>
 <body>
@@ -382,12 +408,12 @@
     <!-- WhatsApp button -->
     <a href="https://wa.me/56992724280" class="whatsapp-button" target="_blank">Hablar con tasador</a>
 
-    <!-- Más servicios link -->
-    <div class="more-services">
-      <p>¿Buscas asesoría adicional?</p>
-      <a href="mas_servicios.html">Ver más servicios</a>
-    </div>
-  </div>
+  <!-- Asesoría adicional CTA -->
+<section class="cta-extra">
+  <h3>¿Buscas asesoría adicional?</h3>
+  <p>Corretaje, regularización DOM, recepción final, estudio de cabida (PRC/OGUC), arriendo, subdivisión y más.</p>
+  <a class="btn btn-secondary" href="mas_servicios.html">Ver más servicios</a>
+</section>
 
   <!-- Zone selection script -->
   <script>
