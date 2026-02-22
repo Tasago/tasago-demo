@@ -1,106 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Preguntas Frecuentes - Tasago</title>
-  <!-- PWA manifest and icons -->
-       <link rel="manifest" href="manifest.json">
-       <!-- Favicon for browser tab and PWA add-to-home-screen -->
-       <link rel="icon" type="image/png" sizes="192x192" href="icon-192x192.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="icon-180x180.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TasaGo — Ayuda</title>
   <meta name="theme-color" content="#295c99">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #295c99, #5b8ec4);
-      color: #fff;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
-      padding: 40px 20px;
-    }
-    h1 {
-      margin-bottom: 20px;
-      font-size: 2em;
-      text-align: center;
-    }
-    .faq-container {
-      width: 100%;
-      max-width: 800px;
-      background: rgba(255,255,255,0.9);
-      color: #333;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-    }
-    details {
-      margin-bottom: 15px;
-    }
-    summary {
-      font-weight: bold;
-      cursor: pointer;
-      padding: 8px;
-      background: #eaf0f7;
-      border-radius: 4px;
-    }
-    summary:hover {
-      background: #d8e4f2;
-    }
-    details[open] summary {
-      background: #c5d8ed;
-    }
-    details p {
-      margin: 10px 0 0 0;
-      padding: 10px;
-      background: #f4f7fb;
-      border-left: 3px solid #295c99;
-      border-radius: 0 0 4px 4px;
-    }
-    .contact {
-      margin-top: 20px;
-      text-align: center;
-    }
-    .contact a {
-      color: #295c99;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .back-link {
-      display: block;
-      margin-top: 20px;
-      text-align: center;
-      color: #fff;
-      text-decoration: underline;
-    }
+    :root{--primary:#295c99;--accent:#1d4e89;--bg:#f4f7fb;--text:#1c2a3a;--muted:#5b6b7b;--border:rgba(0,0,0,.10);--shadow:0 8px 24px rgba(15,35,60,.08);--radius:16px;}
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;}
+    .topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--border);}
+    .topbar-inner{max-width:920px;margin:0 auto;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .logo-box{background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px 12px;box-shadow:0 6px 18px rgba(15,35,60,.06);display:flex;align-items:center;justify-content:center;}
+    .logo-box img{height:44px;width:auto;display:block;}
+    .nav{display:flex;gap:10px;flex-wrap:wrap;}
+    .nav a{text-decoration:none;font-weight:900;color:var(--primary);padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:#fff;}
+    .wrap{max-width:920px;margin:0 auto;padding:18px 14px 40px;}
+    .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;}
+    h1{margin:0 0 8px 0;font-size:28px;}
+    h2{margin:18px 0 8px 0;}
+    p{margin:0 0 10px 0;color:var(--muted);line-height:1.55;}
+    ul{margin:0 0 10px 18px;color:var(--muted);}
+    li{margin:6px 0;}
+    .note{margin-top:12px;background:#f6fbff;border:1px dashed rgba(41,92,153,.30);border-radius:14px;padding:12px 14px;color:#26435f;line-height:1.45;}
+    .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;}
+    @media(max-width:520px){.logo-box img{height:42px;}}
   </style>
 </head>
 <body>
-  <h1>Preguntas Frecuentes</h1>
-  <div class="faq-container">
-    <details>
-      <summary>¿Qué incluye la tasación Express?</summary>
-      <p>Incluye un análisis comparativo de mercado, valor comercial estimado y precio sugerido de publicación. Ideal para conocer rápidamente el valor aproximado.</p>
-    </details>
-    <details>
-      <summary>¿Cómo se entrega la tasación Pro PDF?</summary>
-      <p>Recibirás un informe detallado en formato PDF con folio único y firma digital. El informe incluye análisis de mercado, cálculo de valor, supuestos y recomendaciones.</p>
-    </details>
-    <details>
-      <summary>¿Qué ocurre en la modalidad Visita + Informe?</summary>
-      <p>Un tasador visitará el inmueble para levantar información precisa y validar las superficies. Posteriormente se enviará un informe detallado con respaldo fotográfico.</p>
-    </details>
-    <details>
-      <summary>¿Cuáles son las formas de pago disponibles?</summary>
-      <p>Actualmente aceptamos pagos en línea mediante Mercado Pago, que permite usar tarjetas de crédito o débito. Para la opción Visita + Informe se coordina el pago antes de la visita.</p>
-    </details>
-    <div class="contact">
-      ¿Tienes más preguntas? <a href="https://wa.me/56912345678">Contáctanos por WhatsApp</a>.
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="logo-box"><img src="logo-tasago.png" alt="TasaGo"></div>
+      <div class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Planes</a>
+      </div>
     </div>
   </div>
-  <a class="back-link" href="index.html">Volver al inicio</a>
+
+  <div class="wrap">
+    <div class="card">
+      <h1>Ayuda y preguntas frecuentes</h1>
+      <p>Respuestas claras. Sin letra chica.</p>
+
+      <h2>¿Qué incluye cada plan?</h2>
+      <ul>
+        <li><b>Express 24h ($900):</b> 3 comparables + rango de valor. Informe breve (2–3 páginas).</li>
+        <li><b>Pro PDF (1.5 UF, 3–4 días):</b> 6–10 comparables + ajustes explicados + anexos. <b>1 revisión incluida</b>.</li>
+        <li><b>Visita + Informe (desde 2.5 UF, 4–5 días):</b> visita técnica, fotos propias y capítulo de inspección. Tarifa varía por zona/traslado.</li>
+      </ul>
+
+      <h2>¿La zona afecta el precio?</h2>
+      <p><b>Solo</b> para <b>Visita + Informe</b> (traslado). Express y Pro no cambian por zona.</p>
+
+      <h2>¿Qué necesito para empezar?</h2>
+      <ul>
+        <li>Comuna + dirección</li>
+        <li>Tipo de propiedad, m² aprox., dormitorios/baños</li>
+        <li>Fotos (si tienes) y plano (ideal)</li>
+      </ul>
+
+      <h2>¿Qué es “firma simple”?</h2>
+      <p>Es una forma de identificación del firmante (nombre/RUT/fecha y evidencia de aceptación). Para este servicio funciona como respaldo práctico del encargo y del informe.</p>
+
+      <div class="note">
+        Si necesitas informe para banco/escritura u otro trámite formal, avísanos y evaluamos exigencias específicas.
+      </div>
+    </div>
+
+    <div class="footer">© Tasago · Ayuda</div>
+  </div>
 </body>
 </html>
