@@ -201,30 +201,6 @@
       color: #556b89;
       text-align: center;
     }
-    /* Map / illustration section */
-    .map-placeholder {
-      background: linear-gradient(135deg, #f5f9fd, #ecf3fa);
-      border-radius: 8px;
-      height: 120px;
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #9ab0ca;
-      font-size: 0.9rem;
-    }
-    /* Embedded map container */
-    .map-container {
-      border-radius: 8px;
-      overflow: hidden;
-      height: 280px;
-      margin-bottom: 24px;
-    }
-    .map-container iframe {
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
     /* Contact card */
     .contact-card {
       background: #ffffff;
@@ -360,6 +336,16 @@
 .btn-secondary:hover{
   transform:translateY(-1px);
 }    
+      .zones-info{
+  margin: 16px 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(0,0,0,.10);
+  border-radius: 14px;
+  background: #fff;
+}
+.zones-info h3{ margin:0 0 8px 0; }
+.zones-info p{ margin:6px 0; opacity:.92; }
+.zones-note{ margin-top:10px; font-weight:700; }
   </style>
 </head>
 <body>
@@ -414,10 +400,13 @@
         </div>
       </div>
     </div>
-    <!-- Embedded map -->
-    <div class="map-container">
-      <iframe src="https://www.openstreetmap.org/export/embed.html?bbox=-70.95%2C-33.7%2C-70.3%2C-33.3&amp;layer=mapnik" allowfullscreen="" loading="lazy"></iframe>
-    </div>
+  <section class="zones-info">
+  <h3>Zonas de visita (solo aplica a “Visita + Informe”)</h3>
+  <p><b>Zona A:</b> Las Condes, Vitacura, Lo Barnechea, Providencia</p>
+  <p><b>Zona B:</b> Ñuñoa, Santiago Centro, Macul, La Cisterna, La Florida</p>
+  <p><b>Zona C:</b> San Miguel y comunas periféricas (según distancia)</p>
+  <p class="zones-note">Recargos: Zona B +0.3 UF · Zona C +0.5 UF</p>
+</section>
     <!-- Contact card -->
     <div class="contact-card">
       <div class="contact-name">Javier Castro Riquelme</div>
