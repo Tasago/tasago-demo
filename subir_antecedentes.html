@@ -1,234 +1,294 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Subir antecedentes - Tasago</title>
-  <!-- PWA manifest and icons -->
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" sizes="180x180" href="icon-180x180.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TasaGo — Subir antecedentes</title>
   <meta name="theme-color" content="#295c99">
+
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+    :root{
+      --primary:#295c99;
+      --accent:#1d4e89;
+      --bg:#f4f7fb;
+      --text:#1c2a3a;
+      --muted:#5b6b7b;
+      --border:rgba(0,0,0,.10);
+      --shadow: 0 8px 24px rgba(15, 35, 60, .08);
+      --radius:16px;
     }
-    .header {
-      background: #295c99;
-      color: #fff;
-      padding: 15px;
-      width: 100%;
-      text-align: center;
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
+
+    .topbar{
+      position: sticky;
+      top:0;
+      z-index:10;
+      background:#fff;
+      border-bottom: 1px solid var(--border);
     }
-    .progress {
-      display: flex;
-      justify-content: space-between;
-      width: 90%;
-      max-width: 600px;
-      margin: 20px auto;
-      position: relative;
+    .topbar-inner{
+      width:100%;
+      max-width:920px;
+      margin:0 auto;
+      padding:12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
     }
-    .progress::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: #e0e7f1;
-      z-index: 0;
+    .logo-box{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      box-shadow: 0 6px 18px rgba(15, 35, 60, .06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
-    .progress-step {
-      position: relative;
-      z-index: 1;
-      background: #e0e7f1;
-      color: #295c99;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9em;
+    .logo-box img{ height:44px; width:auto; display:block; }
+    .nav a{
+      text-decoration:none;
+      font-weight:900;
+      color:var(--primary);
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#fff;
     }
-    .progress-step.active {
-      background: #295c99;
-      color: #fff;
+
+    .wrap{ width:100%; max-width:920px; margin:0 auto; padding:18px 14px 40px; }
+
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px;
     }
-    .container {
-      background: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      max-width: 600px;
-      width: 90%;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
+    h1{ margin:0 0 6px 0; font-size: 26px; }
+    .sub{ margin:0 0 14px 0; color:var(--muted); line-height:1.5; }
+
+    .steps{
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      margin: 12px 0 0;
     }
-    h1 {
-      margin-top: 0;
-      color: #295c99;
+    .step{
+      flex:1 1 0;
+      min-width:0;
+      text-align:center;
+      color: var(--muted);
+      font-size: 13px;
     }
-    label {
-      display: block;
-      margin: 12px 0 4px;
-      font-weight: bold;
+    .dot{
+      width:34px;height:34px;border-radius:999px;
+      margin:0 auto 8px; display:flex; align-items:center; justify-content:center;
+      font-weight:900; border:2px solid rgba(41,92,153,.20); background:#fff; color:var(--primary);
     }
-    select, input[type="number"], input[type="file"] {
-      width: 100%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+    .step.active .dot{ background:var(--primary); color:#fff; border-color: var(--primary); }
+
+    form{ margin-top:14px; }
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:12px;
     }
-    .checkboxes {
-      display: flex;
-      gap: 15px;
-      margin: 10px 0;
+    label{ display:block; font-weight:800; margin-bottom:6px; }
+    input, select, textarea{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,.14);
+      background:#fff;
+      outline:none;
+      font-size: 15px;
     }
-    .checkboxes label {
-      font-weight: normal;
-      display: flex;
-      align-items: center;
+    textarea{ min-height: 90px; resize:vertical; }
+
+    .full{ grid-column: 1 / -1; }
+
+    .hint{
+      margin-top:10px;
+      background:#f6fbff;
+      border:1px dashed rgba(41,92,153,.30);
+      border-radius:14px;
+      padding:12px 14px;
+      color:#26435f;
+      line-height:1.45;
     }
-    button {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: #295c99;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      font-size: 1em;
-      cursor: pointer;
-      margin-top: 20px;
+
+    .btn{
+      display:block;
+      width:100%;
+      text-align:center;
+      text-decoration:none;
+      font-weight:900;
+      border-radius: 14px;
+      padding: 16px 14px;
+      border:1px solid transparent;
+      font-size:18px;
+      margin-top: 12px;
+      cursor:pointer;
     }
-    button:hover {
-      background: #1e4a7a;
-    }
-    .back-link {
-      margin-top: 15px;
-      display: inline-block;
-      color: #295c99;
-      text-decoration: underline;
+    .btn-primary{ background:var(--primary); color:#fff; }
+    .btn-primary:hover{ background:var(--accent); }
+
+    @media (max-width:640px){
+      .grid{ grid-template-columns: 1fr; }
+      .logo-box img{ height:42px; }
     }
   </style>
 </head>
-<body>
-  <div class="header"><strong>Tasago</strong></div>
-  <div class="progress">
-    <div class="progress-step">1</div>
-    <div class="progress-step">2</div>
-    <div class="progress-step active">3</div>
-    <div class="progress-step">4</div>
-  </div>
-  <div class="container">
-    <h1>Subir antecedentes y datos de la propiedad</h1>
-    <form id="dataForm" onsubmit="event.preventDefault(); calcularTasacion();">
-      <label for="comuna">Comuna</label>
-      <select id="comuna" required>
-        <option value="">Selecciona</option>
-        <option value="Las Condes">Las Condes</option>
-        <option value="Providencia">Providencia</option>
-        <option value="Lo Barnechea">Lo Barnechea</option>
-        <option value="Ñuñoa">Ñuñoa</option>
-        <option value="Santiago Centro">Santiago Centro</option>
-        <option value="Macul">Macul</option>
-        <option value="La Cisterna">La Cisterna</option>
-        <option value="La Florida">La Florida</option>
-        <option value="San Miguel">San Miguel</option>
-      </select>
-      <label for="inmueble">Tipo de inmueble</label>
-      <select id="inmueble" required>
-        <option value="Departamento">Departamento</option>
-        <option value="Casa">Casa</option>
-        <option value="Parcela">Parcela</option>
-      </select>
-      <label for="tasacion">Tipo de tasación</label>
-      <select id="tasacion" required>
-        <option value="Express">Express</option>
-        <option value="Pro PDF">Pro PDF</option>
-        <option value="Visita + Informe">Visita + Informe</option>
-      </select>
-      <label for="modalidad">Modalidad</label>
-      <select id="modalidad" required>
-        <option value="Express">Express</option>
-        <option value="Online">Online</option>
-        <option value="Coordinar visita">Coordinar visita</option>
-      </select>
-      <label for="superficie">Superficie construida (m²)</label>
-      <input type="number" id="superficie" required>
-      <div class="checkboxes">
-        <label><input type="checkbox" id="estacionamiento"> Estacionamiento</label>
-        <label><input type="checkbox" id="bodega"> Bodega</label>
-      </div>
-      <label for="escritura">Escritura (PDF)</label>
-      <input type="file" id="escritura" accept=".pdf">
-      <label for="rol">Rol de avalúo (PDF)</label>
-      <input type="file" id="rol" accept=".pdf">
-      <label for="planos">Planos del inmueble (PDF)</label>
-      <input type="file" id="planos" accept=".pdf">
 
-      <label for="fotos">Fotografías (JPG o PNG)</label>
-      <input type="file" id="fotos" accept=".jpg,.jpeg,.png" multiple>
-      <button type="submit">Calcular Tasación</button>
-    </form>
-    <a href="index.html" class="back-link">Volver al inicio</a>
+<body>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="logo-box">
+        <img src="Logotipo de TasaGo horizontal.png" alt="TasaGo">
+      </div>
+      <div class="nav">
+        <a href="preguntas frecuentes.html">Ayuda</a>
+      </div>
+    </div>
   </div>
+
+  <div class="wrap">
+    <div class="card">
+      <h1>Subir antecedentes</h1>
+      <p class="sub">Completa lo esencial. Te pediremos faltantes si corresponde. (Sin mapa, sin datos personales.)</p>
+
+      <div class="steps">
+        <div class="step"><div class="dot">1</div>Cotiza</div>
+        <div class="step"><div class="dot">2</div>Paga</div>
+        <div class="step active"><div class="dot">3</div>Sube</div>
+        <div class="step"><div class="dot">4</div>Recibe PDF</div>
+      </div>
+
+      <form id="form">
+        <div class="grid">
+          <div>
+            <label for="plan">Plan</label>
+            <select id="plan" name="plan">
+              <option value="express">Express 24h ($900)</option>
+              <option value="pro">Pro PDF (1.5 UF)</option>
+              <option value="visita">Visita + Informe (desde 2.5 UF)</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="comuna">Comuna</label>
+            <input id="comuna" name="comuna" type="text" placeholder="Ej: Ñuñoa, Las Condes, Providencia" required>
+          </div>
+
+          <div class="full">
+            <label for="direccion">Dirección</label>
+            <input id="direccion" name="direccion" type="text" placeholder="Ej: Av. Ejemplo 1234, depto 56" required>
+          </div>
+
+          <div>
+            <label for="tipo">Tipo de propiedad</label>
+            <select id="tipo" name="tipo">
+              <option>Departamento</option>
+              <option>Casa</option>
+              <option>Terreno</option>
+              <option>Local/Oficina</option>
+              <option>Bodega/Estacionamiento</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="anio">Año construcción</label>
+            <input id="anio" name="anio" type="number" placeholder="Ej: 2008" min="1800" max="2100">
+          </div>
+
+          <div>
+            <label for="estado">Estado</label>
+            <select id="estado" name="estado">
+              <option>Original</option>
+              <option>Remodelado</option>
+              <option>Nuevo</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="superficie">Superficie aprox. (m²)</label>
+            <input id="superficie" name="superficie" type="number" placeholder="Ej: 74" min="0">
+          </div>
+
+          <div>
+            <label for="dorms">Dormitorios</label>
+            <input id="dorms" name="dorms" type="number" placeholder="Ej: 3" min="0">
+          </div>
+
+          <div>
+            <label for="banos">Baños</label>
+            <input id="banos" name="banos" type="number" placeholder="Ej: 2" min="0">
+          </div>
+
+          <div class="full">
+            <label for="comentarios">Comentarios</label>
+            <textarea id="comentarios" name="comentarios" placeholder="Ej: incluye bodega, estacionamiento, remodelación, vista, piso, etc."></textarea>
+          </div>
+
+          <div class="full">
+            <label for="fotos">Fotos (fachada / interior)</label>
+            <input id="fotos" name="fotos" type="file" accept="image/*" multiple>
+          </div>
+
+          <div class="full">
+            <label for="plano">Plano (PDF/JPG)</label>
+            <input id="plano" name="plano" type="file" accept="application/pdf,image/*">
+          </div>
+
+          <div class="full">
+            <label for="docs">Documentos (opcional)</label>
+            <input id="docs" name="docs" type="file" accept="application/pdf,image/*" multiple>
+            <div class="hint">
+              Ideal: escritura/rol, contribuciones, certificados relevantes. Si no los tienes, igual podemos avanzar (dependiendo del plan).
+            </div>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" type="submit">Guardar y continuar</button>
+        <div class="hint" id="nextHint">
+          Próximo paso: si ya pagaste, continuamos a “Recibe PDF”. Si no, te redirigimos a “Pagar”.
+        </div>
+      </form>
+    </div>
+  </div>
+
   <script>
-    function calcularTasacion() {
-      const comuna = document.getElementById('comuna').value;
-      const superficie = parseFloat(document.getElementById('superficie').value);
-      const estacionamiento = document.getElementById('estacionamiento').checked;
-      const bodega = document.getElementById('bodega').checked;
-      const valores = {
-        'Las Condes': 124,
-        'Providencia': 117,
-        'Lo Barnechea': 100,
-        'Ñuñoa': 98,
-        'Santiago Centro': 77,
-        'Macul': 75,
-        'La Cisterna': 62,
-        'La Florida': 72,
-        'San Miguel': 71
+    // Preselección de plan desde querystring ?plan=express|pro|visita
+    const params = new URLSearchParams(location.search);
+    const qp = (params.get("plan") || "").toLowerCase();
+    const planSelect = document.getElementById("plan");
+    if (["express","pro","visita"].includes(qp)) planSelect.value = qp;
+
+    document.getElementById("form").addEventListener("submit", (e) => {
+      e.preventDefault();
+      // MVP: guardar en localStorage (luego se conecta a backend)
+      const data = {
+        plan: planSelect.value,
+        comuna: document.getElementById("comuna").value.trim(),
+        direccion: document.getElementById("direccion").value.trim(),
+        tipo: document.getElementById("tipo").value,
+        anio: document.getElementById("anio").value,
+        estado: document.getElementById("estado").value,
+        superficie: document.getElementById("superficie").value,
+        dorms: document.getElementById("dorms").value,
+        banos: document.getElementById("banos").value,
+        comentarios: document.getElementById("comentarios").value.trim(),
+        ts: new Date().toISOString()
       };
-      let ufPorM2 = valores[comuna] || 80;
-      let totalUF = superficie * ufPorM2;
-      if (estacionamiento) totalUF += 10;
-      if (bodega) totalUF += 4;
-      // Determinar zona en función del valor UF/m² de la comuna.
-      let zona;
-      if (ufPorM2 >= 100) {
-        zona = 'A';
-      } else if (ufPorM2 >= 80) {
-        zona = 'B';
-      } else {
-        zona = 'C';
-      }
-      const valorUF = 39745;
-      const totalCLP = totalUF * valorUF;
-      const minUF = totalUF * 0.95;
-      const maxUF = totalUF * 1.05;
-      const minCLP = minUF * valorUF;
-      const maxCLP = maxUF * valorUF;
-      const params = new URLSearchParams({
-        comuna,
-        superficie,
-        zona,
-        estacionamiento: estacionamiento ? '1' : '0',
-        bodega: bodega ? '1' : '0',
-        totalUF: totalUF.toFixed(0),
-        totalCLP: Math.round(totalCLP),
-        minUF: minUF.toFixed(0),
-        maxUF: maxUF.toFixed(0),
-        minCLP: Math.round(minCLP),
-        maxCLP: Math.round(maxCLP)
-      });
-      window.location.href = 'tasacion_result.html?' + params.toString();
-    }
+      localStorage.setItem("tasago_case", JSON.stringify(data));
+
+      // MVP: si no hay pago real aún, enviar a pagar.
+      // Puedes cambiar lógica después (ej. si localStorage tiene 'paid=true')
+      location.href = "pagar.html";
+    });
   </script>
 </body>
 </html>
