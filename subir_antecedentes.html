@@ -7,150 +7,44 @@
   <meta name="theme-color" content="#295c99">
 
   <style>
-    :root{
-      --primary:#295c99;
-      --accent:#1d4e89;
-      --bg:#f4f7fb;
-      --text:#1c2a3a;
-      --muted:#5b6b7b;
-      --border:rgba(0,0,0,.10);
-      --shadow: 0 8px 24px rgba(15, 35, 60, .08);
-      --radius:16px;
-    }
-    *{ box-sizing:border-box; }
-    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
+    :root{--primary:#295c99;--accent:#1d4e89;--bg:#f4f7fb;--text:#1c2a3a;--muted:#5b6b7b;--border:rgba(0,0,0,.10);--shadow:0 8px 24px rgba(15,35,60,.08);--radius:16px;}
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;}
 
-    .topbar{
-      position: sticky;
-      top:0;
-      z-index:10;
-      background:#fff;
-      border-bottom: 1px solid var(--border);
-    }
-    .topbar-inner{
-      width:100%;
-      max-width:920px;
-      margin:0 auto;
-      padding:12px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .logo-box{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:10px 12px;
-      box-shadow: 0 6px 18px rgba(15, 35, 60, .06);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-    }
-    .logo-box img{ height:44px; width:auto; display:block; }
-    .nav a{
-      text-decoration:none;
-      font-weight:900;
-      color:var(--primary);
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      background:#fff;
-    }
+    .topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--border);}
+    .topbar-inner{max-width:920px;margin:0 auto;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .logo-box{background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px 12px;box-shadow:0 6px 18px rgba(15,35,60,.06);display:flex;align-items:center;justify-content:center;}
+    .logo-box img{height:48px;width:auto;display:block;}
+    .nav{display:flex;gap:10px;flex-wrap:wrap;}
+    .nav a{text-decoration:none;font-weight:900;color:var(--primary);padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:#fff;}
+    .wrap{max-width:920px;margin:0 auto;padding:18px 14px 40px;}
+    .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;}
+    h1{margin:0 0 6px 0;font-size:26px;}
+    .sub{margin:0 0 14px 0;color:var(--muted);line-height:1.5;}
 
-    .wrap{ width:100%; max-width:920px; margin:0 auto; padding:18px 14px 40px; }
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px;}
+    label{display:block;font-weight:900;margin-bottom:6px;}
+    input,select,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,.14);background:#fff;font-size:15px;outline:none;}
+    textarea{min-height:90px;resize:vertical;}
+    .full{grid-column:1/-1;}
 
-    .card{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding:16px;
-    }
-    h1{ margin:0 0 6px 0; font-size: 26px; }
-    .sub{ margin:0 0 14px 0; color:var(--muted); line-height:1.5; }
+    .hint{margin-top:10px;background:#f6fbff;border:1px dashed rgba(41,92,153,.30);border-radius:14px;padding:12px 14px;color:#26435f;line-height:1.45;}
 
-    .steps{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      margin: 12px 0 0;
-    }
-    .step{
-      flex:1 1 0;
-      min-width:0;
-      text-align:center;
-      color: var(--muted);
-      font-size: 13px;
-    }
-    .dot{
-      width:34px;height:34px;border-radius:999px;
-      margin:0 auto 8px; display:flex; align-items:center; justify-content:center;
-      font-weight:900; border:2px solid rgba(41,92,153,.20); background:#fff; color:var(--primary);
-    }
-    .step.active .dot{ background:var(--primary); color:#fff; border-color: var(--primary); }
+    .btn{display:block;width:100%;text-align:center;text-decoration:none;font-weight:900;border-radius:14px;padding:16px 14px;border:1px solid transparent;font-size:18px;margin-top:12px;cursor:pointer;background:var(--primary);color:#fff;}
+    .btn:hover{background:var(--accent);}
 
-    form{ margin-top:14px; }
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap:12px;
-    }
-    label{ display:block; font-weight:800; margin-bottom:6px; }
-    input, select, textarea{
-      width:100%;
-      padding:12px;
-      border-radius:12px;
-      border:1px solid rgba(0,0,0,.14);
-      background:#fff;
-      outline:none;
-      font-size: 15px;
-    }
-    textarea{ min-height: 90px; resize:vertical; }
-
-    .full{ grid-column: 1 / -1; }
-
-    .hint{
-      margin-top:10px;
-      background:#f6fbff;
-      border:1px dashed rgba(41,92,153,.30);
-      border-radius:14px;
-      padding:12px 14px;
-      color:#26435f;
-      line-height:1.45;
-    }
-
-    .btn{
-      display:block;
-      width:100%;
-      text-align:center;
-      text-decoration:none;
-      font-weight:900;
-      border-radius: 14px;
-      padding: 16px 14px;
-      border:1px solid transparent;
-      font-size:18px;
-      margin-top: 12px;
-      cursor:pointer;
-    }
-    .btn-primary{ background:var(--primary); color:#fff; }
-    .btn-primary:hover{ background:var(--accent); }
-
-    @media (max-width:640px){
-      .grid{ grid-template-columns: 1fr; }
-      .logo-box img{ height:42px; }
-    }
+    @media(max-width:640px){.grid{grid-template-columns:1fr;}.logo-box img{height:46px;}}
   </style>
 </head>
 
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="logo-box">
-        <img src="Logotipo de TasaGo horizontal.png" alt="TasaGo">
-      </div>
+      <div class="logo-box"><img src="logo-tasago.png" alt="TasaGo"></div>
       <div class="nav">
-        <a href="preguntas frecuentes.html">Ayuda</a>
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Planes</a>
+        <a href="faq.html">Ayuda</a>
       </div>
     </div>
   </div>
@@ -158,14 +52,7 @@
   <div class="wrap">
     <div class="card">
       <h1>Subir antecedentes</h1>
-      <p class="sub">Completa lo esencial. Te pediremos faltantes si corresponde. (Sin mapa, sin datos personales.)</p>
-
-      <div class="steps">
-        <div class="step"><div class="dot">1</div>Cotiza</div>
-        <div class="step"><div class="dot">2</div>Paga</div>
-        <div class="step active"><div class="dot">3</div>Sube</div>
-        <div class="step"><div class="dot">4</div>Recibe PDF</div>
-      </div>
+      <p class="sub">Completa lo esencial. Guardamos tu solicitud y luego pasas a pago/confirmación.</p>
 
       <form id="form">
         <div class="grid">
@@ -180,7 +67,7 @@
 
           <div>
             <label for="comuna">Comuna</label>
-            <input id="comuna" name="comuna" type="text" placeholder="Ej: Ñuñoa, Las Condes, Providencia" required>
+            <input id="comuna" name="comuna" type="text" placeholder="Ej: Ñuñoa" required>
           </div>
 
           <div class="full">
@@ -195,7 +82,6 @@
               <option>Casa</option>
               <option>Terreno</option>
               <option>Local/Oficina</option>
-              <option>Bodega/Estacionamiento</option>
             </select>
           </div>
 
@@ -230,7 +116,7 @@
 
           <div class="full">
             <label for="comentarios">Comentarios</label>
-            <textarea id="comentarios" name="comentarios" placeholder="Ej: incluye bodega, estacionamiento, remodelación, vista, piso, etc."></textarea>
+            <textarea id="comentarios" name="comentarios" placeholder="Ej: estacionamiento, bodega, remodelación, piso, vista, etc."></textarea>
           </div>
 
           <div class="full">
@@ -246,22 +132,17 @@
           <div class="full">
             <label for="docs">Documentos (opcional)</label>
             <input id="docs" name="docs" type="file" accept="application/pdf,image/*" multiple>
-            <div class="hint">
-              Ideal: escritura/rol, contribuciones, certificados relevantes. Si no los tienes, igual podemos avanzar (dependiendo del plan).
-            </div>
+            <div class="hint">Ideal: escritura/rol, contribuciones, certificados. Si no los tienes, igual podemos avanzar (según plan).</div>
           </div>
         </div>
 
-        <button class="btn btn-primary" type="submit">Guardar y continuar</button>
-        <div class="hint" id="nextHint">
-          Próximo paso: si ya pagaste, continuamos a “Recibe PDF”. Si no, te redirigimos a “Pagar”.
-        </div>
+        <button class="btn" type="submit">Guardar y continuar</button>
+        <div class="hint">Luego pasas a <b>Pagar</b>. En el MVP el pago puede ser simulado.</div>
       </form>
     </div>
   </div>
 
   <script>
-    // Preselección de plan desde querystring ?plan=express|pro|visita
     const params = new URLSearchParams(location.search);
     const qp = (params.get("plan") || "").toLowerCase();
     const planSelect = document.getElementById("plan");
@@ -269,7 +150,6 @@
 
     document.getElementById("form").addEventListener("submit", (e) => {
       e.preventDefault();
-      // MVP: guardar en localStorage (luego se conecta a backend)
       const data = {
         plan: planSelect.value,
         comuna: document.getElementById("comuna").value.trim(),
@@ -284,9 +164,6 @@
         ts: new Date().toISOString()
       };
       localStorage.setItem("tasago_case", JSON.stringify(data));
-
-      // MVP: si no hay pago real aún, enviar a pagar.
-      // Puedes cambiar lógica después (ej. si localStorage tiene 'paid=true')
       location.href = "pagar.html";
     });
   </script>
