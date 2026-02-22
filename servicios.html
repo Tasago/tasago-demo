@@ -2,161 +2,177 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Servicios disponibles | Tasago</title>
-  <!-- PWA manifest and icons -->
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" sizes="180x180" href="icon-180x180.png" />
-  <meta name="theme-color" content="#295c99" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TasaGo — Planes y precios</title>
+  <meta name="theme-color" content="#295c99">
+
   <style>
-    :root {
-      --primary-color: #295c99;
-      --secondary-color: #0c365a;
-      --accent-color: #f57c00;
-      --card-bg: #ffffff;
-      --text-color: #333333;
-      --light-gray: #f5f5f5;
+    :root{
+      --primary:#295c99;
+      --accent:#1d4e89;
+      --bg:#f4f7fb;
+      --text:#1c2a3a;
+      --muted:#5b6b7b;
+      --border:rgba(0,0,0,.10);
+      --shadow: 0 8px 24px rgba(15, 35, 60, .08);
+      --radius:16px;
     }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
+
+    .topbar{
+      position: sticky;
+      top:0;
+      z-index:10;
+      background:#fff;
+      border-bottom: 1px solid var(--border);
     }
-    body {
-      font-family: Arial, sans-serif;
-      background: var(--light-gray);
-      color: var(--text-color);
-      padding: 20px;
+    .topbar-inner{
+      width:100%;
+      max-width:920px;
+      margin:0 auto;
+      padding:12px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
     }
-    h1 {
-      color: var(--primary-color);
-      margin-bottom: 10px;
-      text-align: center;
+    .logo-box{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      box-shadow: 0 6px 18px rgba(15, 35, 60, .06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
-    p.subtitle {
-      text-align: center;
-      margin-bottom: 30px;
-      color: var(--secondary-color);
+    .logo-box img{ height:44px; width:auto; display:block; }
+    .nav{
+      display:flex; gap:10px; flex-wrap:wrap;
     }
-    .cards-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 20px;
-    }
-    .card {
-      background: var(--card-bg);
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-      width: 300px;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .card.highlight {
-      border: 2px solid var(--primary-color);
-    }
-    .card h2 {
-      color: var(--primary-color);
-      margin-bottom: 8px;
-    }
-    .card .price {
-      font-weight: bold;
-      margin-bottom: 12px;
-      color: var(--accent-color);
-    }
-    .    /*
-      Use normal list bullets for service features. A simple disc bullet avoids
-      encoding issues with special characters that may not render correctly across browsers.
-      Set padding on the list and remove the custom ::before pseudo-element to prevent
-      overlapping characters.
-    */
-    .card ul {
-      list-style: disc;
-      margin-bottom: 15px;
-      padding-left: 20px;
-    }
-    .card ul li {
-      margin-bottom: 6px;
+    .nav a{
+      text-decoration:none;
+      font-weight:900;
+      color:var(--primary);
+      padding:10px 12px;
+      border-radius:12px;
+      border:1px solid var(--border);
+      background:#fff;
     }
 
-    .card .btn {
-      display: inline-block;
-      text-align: center;
-      padding: 10px 15px;
-      background: var(--primary-color);
-      color: #fff;
-      text-decoration: none;
-      border-radius: 4px;
-      transition: background 0.2s;
+    .wrap{ width:100%; max-width:920px; margin:0 auto; padding:18px 14px 40px; }
+
+    h1{ margin:0 0 6px 0; font-size: 28px; }
+    .sub{ margin:0 0 14px 0; color:var(--muted); line-height:1.5; }
+
+    .note{
+      background:#fff;
+      border:1px dashed rgba(41,92,153,.30);
+      border-radius:14px;
+      padding:12px 14px;
+      color:#26435f;
+      line-height:1.45;
+      margin: 12px 0 16px;
     }
-    .card .btn:hover {
-      background: var(--secondary-color);
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap:14px;
     }
-    .note {
-      margin-top: 25px;
-      font-size: 14px;
-      color: #555;
-      text-align: center;
+    .card{
+      background:#fff;
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:16px;
     }
-    .back-link {
-      display: block;
-      margin-top: 20px;
-      text-align: center;
-      color: var(--primary-color);
-      text-decoration: none;
+    .price{
+      font-size: 22px;
+      font-weight: 900;
+      margin: 8px 0 10px;
     }
-    .back-link:hover {
-      text-decoration: underline;
+    ul{ margin: 0 0 14px 18px; color: var(--muted); }
+    li{ margin: 7px 0; }
+
+    .btn{
+      display:block;
+      text-align:center;
+      text-decoration:none;
+      font-weight:900;
+      border-radius: 14px;
+      padding: 14px 12px;
+      border:1px solid transparent;
     }
-    @media (max-width: 768px) {
-      .cards-container {
-        flex-direction: column;
-        align-items: center;
-      }
+    .btn-primary{ background: var(--primary); color:#fff; }
+    .btn-primary:hover{ background: var(--accent); }
+
+    .footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:13px; }
+
+    @media (max-width:520px){
+      .logo-box img{ height:42px; }
     }
   </style>
 </head>
+
 <body>
-  <h1>Servicios disponibles</h1>
-  <p class="subtitle">Selecciona el plan de tasación que más se ajuste a tus necesidades.</p>
-  <div class="cards-container">
-    <!-- Express service -->
-    <div class="card">
-      <h2>Express 24h</h2>
-      <div class="price">24 horas • desde $990</div>
-      <ul>
-        <li>Tasación en 24 horas</li>
-        <li>Informe en PDF con firma simple</li>
-        <li>Entrega digital</li>
-      </ul>
-      <a href="subir_antecedentes.html" class="btn">Solicitar Express</a>
-    </div>
-    <!-- Pro PDF service -->
-    <div class="card highlight">
-      <h2>Pro PDF (3‑4 días)</h2>
-      <div class="price">3‑4 días • desde 1 UF</div>
-      <ul>
-        <li>Tasación detallada</li>
-        <li>Informe PDF profesional</li>
-        <li>Asesoría personalizada</li>
-      </ul>
-      <a href="pagar.html" class="btn">Elegir Pro PDF</a>
-    </div>
-    <!-- On-site service -->
-    <div class="card">
-      <h2>Visita + Informe</h2>
-      <div class="price">4‑5 días • desde 2.5 UF</div>
-      <ul>
-        <li>Visita presencial al inmueble</li>
-        <li>Informe completo con firma simple</li>
-        <li>Entrega digital e impresa</li>
-      </ul>
-      <a href="https://wa.me/56912345678" class="btn">Coordinar visita</a>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="logo-box">
+        <img src="Logotipo de TasaGo horizontal.png" alt="TasaGo">
+      </div>
+      <div class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="preguntas frecuentes.html">Ayuda</a>
+      </div>
     </div>
   </div>
-  <p class="note">* Valores de referencia sujetos a ajuste según zona (A, B o C). Selecciona una zona en la home para ver el recargo correspondiente.</p>
-  <a href="index.html" class="back-link">Volver al inicio</a>
+
+  <div class="wrap">
+    <h1>Planes y precios</h1>
+    <p class="sub">Elige tu nivel de detalle. Pro se recomienda cuando necesitas un informe defendible.</p>
+
+    <div class="note">
+      <b>Zonas aplican solo para Visita + Informe</b> (traslado). <b>Express</b> y <b>Pro</b> no cambian por zona.
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h2 style="margin:0;">Express 24h</h2>
+        <div class="price">$900</div>
+        <ul>
+          <li>Entrega en 24h hábiles</li>
+          <li>3 comparables + rango de valor</li>
+          <li>Informe breve (2–3 páginas)</li>
+        </ul>
+        <a class="btn btn-primary" href="subir_antecedentes.html?plan=express">Elegir Express</a>
+      </div>
+
+      <div class="card">
+        <h2 style="margin:0;">Pro PDF</h2>
+        <div class="price">1.5 UF <span style="font-size:14px; font-weight:700; opacity:.8;">(3–4 días)</span></div>
+        <ul>
+          <li>6–10 comparables + ajustes explicados</li>
+          <li>PDF profesional con anexos (fotos/plano)</li>
+          <li><b>1 ronda de revisión incluida</b></li>
+        </ul>
+        <a class="btn btn-primary" href="subir_antecedentes.html?plan=pro">Elegir Pro</a>
+      </div>
+
+      <div class="card">
+        <h2 style="margin:0;">Visita + Informe</h2>
+        <div class="price">Desde 2.5 UF <span style="font-size:14px; font-weight:700; opacity:.8;">(4–5 días)</span></div>
+        <ul>
+          <li>Visita técnica + fotos propias</li>
+          <li>Informe tipo Pro + capítulo inspección</li>
+          <li>Tarifa varía por zona / traslado</li>
+        </ul>
+        <a class="btn btn-primary" href="subir_antecedentes.html?plan=visita">Agendar Visita</a>
+      </div>
+    </div>
+
+    <div class="footer">© Tasago · Tasación digital RM</div>
+  </div>
 </body>
 </html>
