@@ -2,190 +2,76 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tasago - Resultado de Tasación</title>
-  <!-- PWA manifest and icons -->
-  <link rel="manifest" href="manifest.json" />
-  <link rel="apple-touch-icon" sizes="180x180" href="icon-180x180.png" />
-  <meta name="theme-color" content="#295c99" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TasaGo — Resultado</title>
+  <meta name="theme-color" content="#295c99">
   <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f7faff;
-      color: #2f4668;
-      padding: 20px;
-    }
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-    }
-    .progress {
-      display: flex;
-      align-items: center;
-      margin-bottom: 24px;
-    }
-    .progress .step {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .progress .step-circle {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #e5f0fa;
-      color: #295c99;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 4px;
-      font-size: 0.8rem;
-    }
-    .progress .step.active .step-circle {
-      background: #295c99;
-      color: #fff;
-    }
-    .progress .step-label {
-      font-size: 0.7rem;
-      color: #6b7f9b;
-    }
-    h1 {
-      font-size: 1.4rem;
-      color: #295c99;
-      margin-bottom: 16px;
-    }
-    .summary-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 24px;
-      background: #fff;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-    }
-    .summary-table th,
-    .summary-table td {
-      padding: 12px;
-      border-bottom: 1px solid #e1ecf7;
-      font-size: 0.9rem;
-    }
-    .summary-table th {
-      background: #f0f7fd;
-      color: #295c99;
-      font-weight: 600;
-      width: 40%;
-    }
-    .risks {
-      margin-bottom: 24px;
-    }
-    .risks h2 {
-      font-size: 1rem;
-      color: #295c99;
-      margin-bottom: 8px;
-    }
-    .risks ul {
-      list-style: disc;
-      padding-left: 20px;
-      margin: 0;
-    }
-    .risks li {
-      font-size: 0.85rem;
-      margin-bottom: 6px;
-      color: #4a6a8f;
-    }
-    .actions {
-      margin-top: 16px;
-    }
-    .actions a {
-      display: inline-block;
-      background: #295c99;
-      color: #ffffff;
-      padding: 10px 16px;
-      border-radius: 6px;
-      text-decoration: none;
-      margin-right: 10px;
-      font-size: 0.9rem;
-    }
-    .actions a:hover {
-      opacity: 0.9;
-    }
+    :root{--primary:#295c99;--accent:#1d4e89;--bg:#f4f7fb;--text:#1c2a3a;--muted:#5b6b7b;--border:rgba(0,0,0,.10);--shadow:0 8px 24px rgba(15,35,60,.08);--radius:16px;}
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;}
+    .topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--border);}
+    .topbar-inner{max-width:920px;margin:0 auto;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .logo-box{background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px 12px;box-shadow:0 6px 18px rgba(15,35,60,.06);display:flex;align-items:center;justify-content:center;}
+    .logo-box img{height:44px;width:auto;display:block;}
+    .nav{display:flex;gap:10px;flex-wrap:wrap;}
+    .nav a{text-decoration:none;font-weight:900;color:var(--primary);padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:#fff;}
+    .wrap{max-width:920px;margin:0 auto;padding:18px 14px 40px;}
+    .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;}
+    h1{margin:0 0 8px 0;font-size:28px;}
+    p{margin:0 0 10px 0;color:var(--muted);line-height:1.55;}
+    .row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px;}
+    .box{border:1px solid rgba(0,0,0,.10);border-radius:14px;padding:12px;background:#fff;}
+    .k{color:var(--muted);font-weight:800;font-size:13px;margin-bottom:6px;}
+    .v{font-weight:900;font-size:16px;}
+    .btn{display:block;width:100%;text-align:center;text-decoration:none;font-weight:900;border-radius:14px;padding:16px 14px;border:1px solid transparent;font-size:18px;margin-top:12px;}
+    .btn-primary{background:var(--primary);color:#fff;}
+    .btn-primary:hover{background:var(--accent);}
+    .note{margin-top:12px;background:#f6fbff;border:1px dashed rgba(41,92,153,.30);border-radius:14px;padding:12px 14px;color:#26435f;line-height:1.45;}
+    .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;}
+    @media(max-width:640px){.row{grid-template-columns:1fr;}.logo-box img{height:42px;}}
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="progress">
-      <div class="step">
-        <div class="step-circle">1</div>
-        <div class="step-label">Cotiza</div>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="logo-box"><img src="logo-tasago.png" alt="TasaGo"></div>
+      <div class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Planes</a>
+        <a href="preguntas frecuentes.html">Ayuda</a>
       </div>
-      <div class="step">
-        <div class="step-circle">2</div>
-        <div class="step-label">Paga</div>
-      </div>
-      <div class="step">
-        <div class="step-circle">3</div>
-        <div class="step-label">Sube</div>
-      </div>
-      <div class="step active">
-        <div class="step-circle">4</div>
-        <div class="step-label">Recibe PDF</div>
-      </div>
-    </div>
-    <h1>Resultado de tasación</h1>
-    <table class="summary-table" id="summary">
-      <!-- Resumen dinámico se inserta aquí -->
-    </table>
-    <div class="risks">
-      <h2>Riesgos y supuestos</h2>
-      <ul>
-        <li>El valor es estimado según promedios UF/m² de la comuna seleccionada.</li>
-        <li>No considera estado de mantención ni características específicas del inmueble.</li>
-        <li>Las condiciones de mercado y plusvalía futura pueden afectar el valor real.</li>
-      </ul>
-    </div>
-    <div class="actions">
-      <a href="index.html">Volver al inicio</a>
-      <a href="faq.html">Preguntas frecuentes</a>
     </div>
   </div>
+
+  <div class="wrap">
+    <div class="card">
+      <h1>Resultado</h1>
+      <p>Este es un resultado de ejemplo. El PDF final se entrega con folio y firma simple.</p>
+
+      <div class="row">
+        <div class="box"><div class="k">Plan</div><div class="v" id="vPlan">—</div></div>
+        <div class="box"><div class="k">Ubicación</div><div class="v" id="vUbic">—</div></div>
+        <div class="box"><div class="k">Tipo</div><div class="v" id="vTipo">—</div></div>
+        <div class="box"><div class="k">Superficie</div><div class="v" id="vSup">—</div></div>
+      </div>
+
+      <div class="note">
+        Próximo paso: <b>generar/descargar PDF</b> (MVP). Luego lo automatizamos por plantillas Express/Pro/Visita.
+      </div>
+
+      <a class="btn btn-primary" href="ejemplo_tasacion.html">Ver PDF de ejemplo</a>
+      <a class="btn btn-primary" style="background:#3a9b4a" href="index.html">Volver al inicio</a>
+    </div>
+
+    <div class="footer">© Tasago · Resultado</div>
+  </div>
+
   <script>
-    function parseQuery() {
-      const params = new URLSearchParams(window.location.search);
-      return {
-        comuna: params.get('comuna') || '',
-        superficie: params.get('superficie') || '',
-        zona: params.get('zona') || '',
-        estacionamiento: params.get('estacionamiento') === '1',
-        bodega: params.get('bodega') === '1',
-        totalUF: parseFloat(params.get('totalUF') || '0'),
-        totalCLP: parseFloat(params.get('totalCLP') || '0')
-      };
-    }
-    function formatNumber(num) {
-      return num.toLocaleString('es-CL');
-    }
-    function render() {
-      const data = parseQuery();
-      const table = document.getElementById('summary');
-      const extras = [];
-      if (data.estacionamiento) extras.push('Estacionamiento');
-      if (data.bodega) extras.push('Bodega');
-      const minUF = Math.round(data.totalUF * 0.95);
-      const maxUF = Math.round(data.totalUF * 1.05);
-      const minCLP = Math.round(data.totalCLP * 0.95);
-      const maxCLP = Math.round(data.totalCLP * 1.05);
-      table.innerHTML = `
-        <tr><th>Comuna</th><td>${data.comuna}</td></tr>
-        <tr><th>Zona</th><td>${data.zona}</td></tr>
-        <tr><th>Superficie</th><td>${data.superficie} m²</td></tr>
-        <tr><th>Extras</th><td>${extras.join(', ') || 'Ninguno'}</td></tr>
-        <tr><th>Valor estimado</th><td>${formatNumber(data.totalUF)} UF (${formatNumber(data.totalCLP)} CLP)</td></tr>
-        <tr><th>Precio sugerido (95‑105%)</th><td>${formatNumber(minUF)} – ${formatNumber(maxUF)} UF (${formatNumber(minCLP)} – ${formatNumber(maxCLP)} CLP)</td></tr>
-      `;
-    }
-    document.addEventListener('DOMContentLoaded', render);
+    const data = JSON.parse(localStorage.getItem("tasago_case") || "{}");
+    document.getElementById("vPlan").textContent = (data.plan || "—").toString().toUpperCase();
+    document.getElementById("vUbic").textContent = (data.comuna ? (data.comuna + (data.direccion ? " · " + data.direccion : "")) : "—");
+    document.getElementById("vTipo").textContent = data.tipo || "—";
+    document.getElementById("vSup").textContent = data.superficie ? (data.superficie + " m²") : "—";
   </script>
 </body>
 </html>
