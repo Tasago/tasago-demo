@@ -1,118 +1,66 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pagar - Tasago</title>
-  <!-- PWA manifest and icons -->
-  <link rel="manifest" href="manifest.json">
-  <link rel="apple-touch-icon" sizes="180x180" href="icon-180x180.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TasaGo — Pagar</title>
   <meta name="theme-color" content="#295c99">
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #333;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-      align-items: center;
-    }
-    .header {
-      background: #295c99;
-      color: #fff;
-      padding: 15px;
-      text-align: center;
-      width: 100%;
-    }
-    .progress {
-      display: flex;
-      justify-content: space-between;
-      width: 90%;
-      max-width: 600px;
-      margin: 20px auto;
-      position: relative;
-    }
-    .progress::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: #e0e7f1;
-      z-index: 0;
-    }
-    .progress-step {
-      position: relative;
-      z-index: 1;
-      background: #e0e7f1;
-      color: #295c99;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9em;
-    }
-    .progress-step.active {
-      background: #295c99;
-      color: #fff;
-    }
-    .container {
-      background: #fff;
-      border-radius: 8px;
-      padding: 20px;
-      max-width: 600px;
-      width: 90%;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      margin-bottom: 30px;
-    }
-    .container h1 {
-      margin-top: 0;
-      color: #295c99;
-    }
-    .pay-btn {
-      display: block;
-      width: 100%;
-      padding: 12px;
-      background: #009ee3;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      font-size: 1.1em;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-    .back-link {
-      margin-top: 15px;
-      display: inline-block;
-      color: #295c99;
-      text-decoration: underline;
-    }
+    :root{--primary:#295c99;--accent:#1d4e89;--bg:#f4f7fb;--text:#1c2a3a;--muted:#5b6b7b;--border:rgba(0,0,0,.10);--shadow:0 8px 24px rgba(15,35,60,.08);--radius:16px;}
+    *{box-sizing:border-box;}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;}
+    .topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--border);}
+    .topbar-inner{max-width:920px;margin:0 auto;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .logo-box{background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px 12px;box-shadow:0 6px 18px rgba(15,35,60,.06);display:flex;align-items:center;justify-content:center;}
+    .logo-box img{height:44px;width:auto;display:block;}
+    .nav{display:flex;gap:10px;flex-wrap:wrap;}
+    .nav a{text-decoration:none;font-weight:900;color:var(--primary);padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:#fff;}
+    .wrap{max-width:920px;margin:0 auto;padding:18px 14px 40px;}
+    .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;}
+    h1{margin:0 0 8px 0;font-size:28px;}
+    p{margin:0 0 10px 0;color:var(--muted);line-height:1.55;}
+    .btn{display:block;width:100%;text-align:center;text-decoration:none;font-weight:900;border-radius:14px;padding:16px 14px;border:1px solid transparent;font-size:18px;margin-top:12px;cursor:pointer;}
+    .btn-primary{background:var(--primary);color:#fff;}
+    .btn-primary:hover{background:var(--accent);}
+    .note{margin-top:12px;background:#f6fbff;border:1px dashed rgba(41,92,153,.30);border-radius:14px;padding:12px 14px;color:#26435f;line-height:1.45;}
+    .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;}
+    @media(max-width:520px){.logo-box img{height:42px;}}
   </style>
 </head>
 <body>
-  <div class="header"><strong>Tasago</strong></div>
-  <div class="progress">
-    <div class="progress-step">1</div>
-    <div class="progress-step active">2</div>
-    <div class="progress-step">3</div>
-    <div class="progress-step">4</div>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="logo-box"><img src="logo-tasago.png" alt="TasaGo"></div>
+      <div class="nav">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Planes</a>
+        <a href="preguntas frecuentes.html">Ayuda</a>
+      </div>
+    </div>
   </div>
-  <div class="container">
-    <h1>Pago con Mercado Pago (Simulación)</h1>
-    <p>Para continuar, realiza el pago de tu tasación. Al finalizar, podrás subir los antecedentes de tu propiedad.</p>
-    <button class="pay-btn" onclick="simulatePayment()">Pagar con Mercado Pago</button>
-    <a href="index.html" class="back-link">Volver al inicio</a>
+
+  <div class="wrap">
+    <div class="card">
+      <h1>Pagar</h1>
+      <p>Pago seguro con Mercado Pago (en esta demo el pago es simulado).</p>
+
+      <div class="note">
+        Luego del pago, continúa a <b>Subir antecedentes</b>.
+      </div>
+
+      <button class="btn btn-primary" id="btnPagar">Simular pago</button>
+      <a class="btn btn-primary" style="background:#3a9b4a" href="subir_antecedentes.html">Continuar a subir antecedentes</a>
+    </div>
+
+    <div class="footer">© Tasago · Pago</div>
   </div>
+
   <script>
-    function simulatePayment() {
-      alert('Pago exitoso! Ahora podrás subir tus antecedentes.');
-      window.location.href = 'subir_antecedentes.html';
-    }
+    document.getElementById("btnPagar").addEventListener("click", () => {
+      localStorage.setItem("tasago_paid", "true");
+      alert("Pago simulado OK. Ahora sube antecedentes.");
+      location.href = "subir_antecedentes.html";
+    });
   </script>
 </body>
 </html>
