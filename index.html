@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TasaGo — Tasación digital RM</title>
 
-  <link rel="manifest" href="manifiesto.json">
+  <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#295c99">
 
   <style>
@@ -24,245 +24,109 @@
     html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
     a{ color:inherit; }
 
-    .wrap{
-      width:100%;
-      max-width: 920px;
-      margin: 0 auto;
-      padding: 18px 14px 40px;
-    }
+    .wrap{ width:100%; max-width: 920px; margin: 0 auto; padding: 18px 14px 40px; }
 
     /* Header único */
-    .topbar{
-      position: sticky;
-      top:0;
-      z-index:10;
-      background:#fff;
-      border-bottom: 1px solid var(--border);
-    }
+    .topbar{ position: sticky; top:0; z-index:10; background:#fff; border-bottom: 1px solid var(--border); }
     .topbar-inner{
-      width:100%;
-      max-width:920px;
-      margin:0 auto;
-      padding:12px 14px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-    }
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
+      width:100%; max-width:920px; margin:0 auto; padding:12px 14px;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
     }
     .logo-box{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:10px 12px;
-      box-shadow: 0 6px 18px rgba(15, 35, 60, .06);
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      background:#fff; border:1px solid var(--border); border-radius:14px;
+      padding:10px 12px; box-shadow: 0 6px 18px rgba(15,35,60,.06);
+      display:flex; align-items:center; justify-content:center;
     }
-    /* Logo más grande */
-    .logo-box img{
-      height:44px;
-      width:auto;
-      display:block;
+    .logo-box img{ height:48px; width:auto; display:block; } /* logo grande */
+    .nav{ display:flex; gap:10px; flex-wrap:wrap; }
+    .nav a{
+      text-decoration:none; font-weight:900; color:var(--primary);
+      padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#fff;
     }
-    .help-link{
-      font-weight:800;
-      color:var(--primary);
-      text-decoration:none;
-      padding:10px 12px;
-      border-radius:12px;
-      border:1px solid var(--border);
-      background:#fff;
-    }
-    .help-link:hover{ border-color: rgba(41,92,153,.35); }
+    .nav a:hover{ border-color: rgba(41,92,153,.35); }
 
     .hero{
-      margin-top:18px;
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 18px;
+      margin-top:18px; background:var(--card);
+      border:1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow); padding: 18px;
     }
     h1{ margin:0 0 10px 0; font-size: 34px; letter-spacing:-.4px; }
     .badge{
-      display:inline-block;
-      padding:6px 10px;
-      border-radius:10px;
-      background:#ffedd5;
-      color:#9a3412;
-      font-weight:900;
-      margin-left:8px;
-      font-size: 14px;
-      vertical-align: middle;
+      display:inline-block; padding:6px 10px; border-radius:10px;
+      background:#ffedd5; color:#9a3412; font-weight:900; margin-left:8px; font-size: 14px;
     }
-    .sub{
-      margin: 8px 0 0 0;
-      color:var(--muted);
-      line-height:1.5;
-      font-size: 16px;
-    }
+    .sub{ margin: 8px 0 0 0; color:var(--muted); line-height:1.5; font-size: 16px; }
 
-    .zones{
-      margin-top:16px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-    }
+    .zones{ margin-top:16px; display:flex; flex-wrap:wrap; gap:10px; }
     .chip{
-      flex:1 1 auto;
-      min-width: 160px;
-      border-radius: 999px;
-      border:1px solid rgba(41,92,153,.25);
-      background:#f6fbff;
-      padding: 12px 14px;
-      text-align:center;
-      font-weight:900;
-      color:var(--primary);
-      cursor:pointer;
-      user-select:none;
+      flex:1 1 auto; min-width: 160px;
+      border-radius: 999px; border:1px solid rgba(41,92,153,.25);
+      background:#f6fbff; padding: 12px 14px; text-align:center;
+      font-weight:900; color:var(--primary); cursor:pointer; user-select:none;
     }
-    .chip.selected{
-      background: var(--primary);
-      color:#fff;
-      border-color: var(--primary);
-    }
+    .chip.selected{ background: var(--primary); color:#fff; border-color: var(--primary); }
 
     .zone-note{
-      margin-top: 12px;
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding: 12px 14px;
-      color: var(--muted);
-      line-height:1.5;
+      margin-top: 12px; background:#fff; border:1px solid var(--border);
+      border-radius:14px; padding: 12px 14px; color: var(--muted); line-height:1.5;
     }
     .zone-desc{
-      margin-top: 12px;
-      background:#fff;
-      border:1px dashed rgba(41,92,153,.30);
-      border-radius:14px;
-      padding: 12px 14px;
-      color:#26435f;
-      line-height:1.45;
+      margin-top: 12px; background:#fff; border:1px dashed rgba(41,92,153,.30);
+      border-radius:14px; padding: 12px 14px; color:#26435f; line-height:1.45;
     }
 
-    .actions{
-      margin-top:16px;
-      display:flex;
-      flex-direction:column;
-      gap:12px;
-    }
+    .actions{ margin-top:16px; display:flex; flex-direction:column; gap:12px; }
     .btn{
-      display:block;
-      width:100%;
-      text-align:center;
-      text-decoration:none;
-      font-weight:900;
-      border-radius: 14px;
-      padding: 16px 14px;
-      border:1px solid transparent;
-      font-size:18px;
+      display:block; width:100%; text-align:center; text-decoration:none;
+      font-weight:900; border-radius: 14px; padding: 16px 14px;
+      border:1px solid transparent; font-size:18px;
     }
     .btn-primary{ background:var(--primary); color:#fff; }
     .btn-primary:hover{ background:var(--accent); }
     .btn-success{ background:#3a9b4a; color:#fff; }
     .btn-success:hover{ filter:brightness(.95); }
     .btn-soft{
-      background:#e8f1fb;
-      color:#1b3a57;
-      border-color: rgba(41,92,153,.18);
-      font-weight:900;
+      background:#e8f1fb; color:#1b3a57;
+      border-color: rgba(41,92,153,.18); font-weight:900;
     }
 
     .flow{
-      margin-top:16px;
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius: var(--radius);
+      margin-top:16px; background:#fff;
+      border:1px solid var(--border); border-radius: var(--radius);
       padding:14px;
     }
     .flow h3{ margin:0 0 12px 0; }
-    .steps{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-    }
-    .step{
-      flex:1 1 0;
-      min-width:0;
-      text-align:center;
-      color: var(--muted);
-      font-size: 13px;
-    }
+    .steps{ display:flex; justify-content:space-between; gap:10px; }
+    .step{ flex:1 1 0; min-width:0; text-align:center; color: var(--muted); font-size: 13px; }
     .dot{
-      width:36px;
-      height:36px;
-      border-radius:999px;
-      margin: 0 auto 8px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-weight:900;
-      border:2px solid rgba(41,92,153,.20);
-      background:#fff;
-      color: var(--primary);
+      width:36px; height:36px; border-radius:999px; margin: 0 auto 8px;
+      display:flex; align-items:center; justify-content:center;
+      font-weight:900; border:2px solid rgba(41,92,153,.20); background:#fff; color: var(--primary);
     }
-    .step.active .dot{
-      background:var(--primary);
-      color:#fff;
-      border-color: var(--primary);
-    }
+    .step.active .dot{ background:var(--primary); color:#fff; border-color: var(--primary); }
 
-    .cards{
-      margin-top:16px;
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:12px;
-    }
     .card{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius: var(--radius);
-      padding:16px;
+      margin-top:16px; background:#fff;
+      border:1px solid var(--border); border-radius: var(--radius);
       box-shadow: 0 10px 24px rgba(15,35,60,.06);
+      padding:16px;
     }
     .card h3{ margin:0 0 8px 0; }
     .card p{ margin:0; color:var(--muted); line-height:1.5; }
     .mini-list{ margin:10px 0 0 18px; color:var(--muted); }
     .mini-list li{ margin:6px 0; }
 
-    .cta-row{
-      margin-top:12px;
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-    }
+    .cta-row{ margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
     .btn-outline{
-      display:inline-block;
-      padding:12px 14px;
-      border-radius: 12px;
-      border:1px solid rgba(0,0,0,.18);
-      text-decoration:none;
-      font-weight:900;
-      background:#fff;
+      display:inline-block; padding:12px 14px; border-radius: 12px;
+      border:1px solid rgba(0,0,0,.18); text-decoration:none; font-weight:900; background:#fff;
     }
 
-    .footer{
-      margin-top:18px;
-      text-align:center;
-      color: var(--muted);
-      font-size: 13px;
-    }
+    .footer{ margin-top:18px; text-align:center; color: var(--muted); font-size: 13px; }
 
     @media (max-width: 520px){
       h1{ font-size: 30px; }
-      .logo-box img{ height: 42px; }
+      .logo-box img{ height: 46px; }
       .chip{ min-width: 140px; }
     }
   </style>
@@ -271,12 +135,13 @@
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="brand">
-        <div class="logo-box">
-          <img src="Logotipo de TasaGo horizontal.png" alt="TasaGo">
-        </div>
+      <div class="logo-box">
+        <img src="logo-tasago.png" alt="TasaGo">
       </div>
-      <a class="help-link" href="preguntas frecuentes.html">Ayuda</a>
+      <div class="nav">
+        <a href="servicios.html">Planes</a>
+        <a href="faq.html">Ayuda</a>
+      </div>
     </div>
   </div>
 
@@ -300,6 +165,7 @@
       </div>
 
       <div class="actions">
+        <!-- CORRECTO: Cotizar => servicios.html -->
         <a class="btn btn-primary" href="servicios.html">Cotizar</a>
         <a class="btn btn-success" href="pagar.html">Pagar</a>
         <a class="btn btn-soft" href="subir_antecedentes.html">Subir antecedentes</a>
@@ -316,33 +182,21 @@
       </div>
     </section>
 
-    <div class="cards">
-      <div class="card">
-        <h3>Servicio claro y defendible</h3>
-        <p>Te pedimos solo lo necesario y te avisamos faltantes. Informe PDF con respaldo, folio y firma simple.</p>
-        <ul class="mini-list">
-          <li>Checklist inteligente de faltantes</li>
-          <li>Comparables y ajustes explicados (Pro)</li>
-          <li>Visita técnica con fotos (Visita + Informe)</li>
-        </ul>
-        <div class="cta-row">
-          <a class="btn-outline" href="preguntas frecuentes.html">Ver preguntas frecuentes</a>
-          <a class="btn-outline" href="mas_servicios.html">¿Buscas asesoría adicional?</a>
-        </div>
-      </div>
-
-      <div class="card">
-        <h3>¿Buscas asesoría adicional?</h3>
-        <p>Corretaje, regularización DOM, recepción final, estudio de cabida (PRC/OGUC), arriendo, subdivisión y más.</p>
-        <div class="cta-row">
-          <a class="btn-outline" href="mas_servicios.html">Ver más servicios</a>
-        </div>
+    <div class="card">
+      <h3>Servicio claro y defendible</h3>
+      <p>Checklist inteligente de faltantes. Informe PDF con respaldo, folio y firma simple.</p>
+      <ul class="mini-list">
+        <li>Express: rápido para decisión inicial</li>
+        <li>Pro: defendible + 1 revisión incluida</li>
+        <li>Visita: máximo respaldo (zona/traslado)</li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn-outline" href="faq.html">Ver ayuda</a>
+        <a class="btn-outline" href="mas_servicios.html">¿Buscas asesoría adicional?</a>
       </div>
     </div>
 
-    <div class="footer">
-      © Tasago · Tasación digital RM
-    </div>
+    <div class="footer">© Tasago · Tasación digital RM</div>
   </div>
 
   <script>
@@ -351,10 +205,8 @@
       B: "Zona B: Ñuñoa, Santiago Centro, Macul, La Cisterna, La Florida.",
       C: "Zona C: San Miguel y comunas periféricas (traslado)."
     };
-
     const chips = document.querySelectorAll(".chip");
     const zoneDesc = document.getElementById("zoneDesc");
-
     chips.forEach(ch => {
       ch.addEventListener("click", () => {
         chips.forEach(c => c.classList.remove("selected"));
