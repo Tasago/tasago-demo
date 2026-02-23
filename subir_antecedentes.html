@@ -8,7 +8,7 @@
   <style>
     :root{ --primary:#295c99; --accent:#1d4e89; --bg:#f4f7fb; --text:#1c2a3a; --muted:#5b6b7b; --border:rgba(0,0,0,.10); --shadow:0 8px 24px rgba(15,35,60,.08); --radius:16px; --disabled:#eef2f7; }
     *{ box-sizing:border-box; }
-    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
+    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family:Arial,sans-serif; }
 
     .topbar{ position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid var(--border); }
     .topbar-inner{ max-width:920px; margin:0 auto; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
@@ -25,15 +25,24 @@
     .grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
     .full{ grid-column:1 / -1; }
     label{ display:block; font-weight:900; margin-bottom:6px; }
-    input,select,textarea{ width:100%; padding:12px; border-radius:12px; border:1px solid rgba(0,0,0,.14); font-size:15px; }
+    input,select,textarea{ width:100%; padding:12px; border-radius:12px; border:1px solid rgba(0,0,0,.14); font-size:15px; background:#fff; }
     textarea{ min-height:90px; resize:vertical; }
     .hint{ margin-top:10px; background:#f6fbff; border:1px dashed rgba(41,92,153,.30); border-radius:14px; padding:12px 14px; color:#26435f; line-height:1.45; }
     .disabled{ background:var(--disabled); color:#7a8794; }
 
-    .btn{ display:block; width:100%; text-align:center; text-decoration:none; font-weight:900; border-radius:14px; padding:16px 14px; font-size:18px; margin-top:12px; cursor:pointer; background:var(--primary); color:#fff; }
+    .btn{ display:block; width:100%; text-align:center; text-decoration:none; font-weight:900; border-radius:14px; padding:16px 14px; font-size:18px; margin-top:12px; cursor:pointer; background:var(--primary); color:#fff; border:1px solid transparent; }
     .btn:hover{ background:var(--accent); }
 
+    .wa-float{
+      position: fixed; right: 16px; bottom: 16px; z-index: 9999;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 12px 14px; border-radius: 999px; background: #25D366; color: #fff;
+      text-decoration: none; font-weight: 900; box-shadow: 0 10px 24px rgba(0,0,0,.18);
+    }
+    .wa-float:active{ transform: translateY(1px); }
+    .wa-float .wa-dot{ width:10px; height:10px; border-radius:999px; background: rgba(255,255,255,.85); }
     @media (max-width:640px){ .grid{ grid-template-columns:1fr; } .logo-box img{ height:44px; } }
+    @media (max-width:420px){ .wa-float{ right:12px; bottom:12px; padding:12px 12px; } .wa-float .wa-text{ display:none; } }
   </style>
 </head>
 <body>
@@ -151,9 +160,7 @@
       B: ["Ñuñoa","Santiago","Macul","La Cisterna","La Florida","Peñalolén","Independencia","Recoleta"],
       C: ["Colina","Lampa","Tiltil","San Miguel","Maipú","Pudahuel","Quilicura","Renca","Estación Central","Puente Alto","La Granja","San Ramón","Cerrillos"]
     };
-
-    const RM_ALL = Array.from(new Set([ ...ZONAS.A, ...ZONAS.B, ...ZONAS.C ]))
-      .sort((a,b)=>a.localeCompare(b,"es"));
+    const RM_ALL = Array.from(new Set([ ...ZONAS.A, ...ZONAS.B, ...ZONAS.C ])).sort((a,b)=>a.localeCompare(b,"es"));
 
     function fillSelect(selectEl, options, placeholder="Selecciona…") {
       selectEl.innerHTML = "";
@@ -163,20 +170,17 @@
       ph.disabled = true;
       ph.selected = true;
       selectEl.appendChild(ph);
-
       options.forEach(v => {
         const o = document.createElement("option");
         o.value = v;
         o.textContent = v;
         selectEl.appendChild(o);
       });
-
       const other = document.createElement("option");
       other.value = "Otra / No estoy seguro";
       other.textContent = "Otra / No estoy seguro";
       selectEl.appendChild(other);
     }
-
     function guessZoneByComuna(c) {
       const x = (c||"").trim().toLowerCase();
       if (!x) return null;
@@ -199,15 +203,10 @@
     fillSelect(comuna, RM_ALL, "Selecciona comuna (RM)");
 
     function refreshZona(){
-      const isVisita = plan.value === "visita";
-      if (!isVisita){
-        zona.value = "No aplica";
-        return;
-      }
+      if (plan.value !== "visita"){ zona.value = "No aplica"; return; }
       const z = guessZoneByComuna(comuna.value);
       zona.value = z ? `Zona ${z} (${z==="A"?"Base":z==="B"?"+0,3 UF":"+0,5 UF"})` : "Selecciona comuna para asignar zona";
     }
-
     plan.addEventListener("change", refreshZona);
     comuna.addEventListener("change", refreshZona);
 
@@ -239,8 +238,12 @@
         ts: new Date().toISOString()
       };
       localStorage.setItem("tasago_case", JSON.stringify(data));
-      location.href = "pagar.html";
+      location.href = "pagar.html?plan=" + encodeURIComponent(plan.value);
     });
   </script>
+
+  <a class="wa-float" href="https://wa.me/56992724280" target="_blank" rel="noopener">
+    <span class="wa-dot"></span><span class="wa-text">WhatsApp</span>
+  </a>
 </body>
 </html>
