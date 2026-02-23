@@ -22,6 +22,7 @@
     }
     *{ box-sizing:border-box; }
     html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
+
     .topbar{ position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid var(--border); }
     .topbar-inner{ max-width:920px; margin:0 auto; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
     .logo-box{ background:#fff; border:1px solid var(--border); border-radius:14px; padding:10px 12px; box-shadow:0 6px 18px rgba(15,35,60,.06); }
@@ -33,16 +34,30 @@
     .card{ background:#fff; border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px; }
     h1{ margin:0 0 6px 0; font-size:28px; }
     .sub{ margin:0 0 14px 0; color:var(--muted); line-height:1.5; }
-    label{ display:block; font-weight:900; margin:10px 0 6px; }
-    input, select{ width:100%; padding:12px; border-radius:12px; border:1px solid rgba(0,0,0,.14); font-size:15px; }
-    .disabled{ background:var(--disabled); color:#7a8794; }
-    .hint{ margin-top:10px; background:#f6fbff; border:1px dashed rgba(41,92,153,.30); border-radius:14px; padding:12px 14px; color:#26435f; line-height:1.45; }
+
+    .note{ margin-top:12px; background:#fff; border:1px dashed rgba(41,92,153,.30); border-radius:14px; padding:12px 14px; color:#26435f; line-height:1.45; }
 
     .btn{ display:block; width:100%; text-align:center; text-decoration:none; font-weight:900; border-radius:14px; padding:16px 14px; font-size:18px; margin-top:12px; }
     .btn-primary{ background:var(--primary); color:#fff; }
     .btn-primary:hover{ background:var(--accent); }
     .btn-success{ background:#3a9b4a; color:#fff; }
     .btn-soft{ background:#e8f1fb; color:#1b3a57; border:1px solid rgba(41,92,153,.18); }
+
+    .cards{ margin-top:14px; display:grid; grid-template-columns:1fr; gap:12px; }
+    .mini-card{ background:#fff; border:1px solid var(--border); border-radius:var(--radius); box-shadow:0 10px 24px rgba(15,35,60,.06); padding:16px; }
+    .mini-card h3{ margin:0 0 8px 0; }
+    .mini-card p{ margin:0; color:var(--muted); line-height:1.5; }
+    .mini-list{ margin:10px 0 0 18px; color:var(--muted); }
+    .mini-list li{ margin:6px 0; }
+    .cta-row{ margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
+    .btn-outline{ display:inline-block; padding:12px 14px; border-radius:12px; border:1px solid rgba(0,0,0,.18); text-decoration:none; font-weight:900; background:#fff; }
+
+    .footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:13px; }
+
+    @media (max-width:520px){
+      .logo-box img{ height:44px; }
+      h1{ font-size:26px; }
+    }
   </style>
 </head>
 
@@ -50,10 +65,10 @@
   <div class="topbar">
     <div class="topbar-inner">
       <div class="logo-box">
-        <img src="Logotipo de TasaGo horizontal.png" alt="TasaGo">
+        <img src="tasago-logo.png" alt="TasaGo">
       </div>
       <div class="nav">
-        <a href="servicios.html">Planes</a>
+        <a href="servicios.html">Cotizar</a>
         <a href="preguntas frecuentes.html">Ayuda</a>
       </div>
     </div>
@@ -61,71 +76,43 @@
 
   <div class="wrap">
     <div class="card">
-      <h1>Tasación en RM en 48h</h1>
+      <h1>Tasación en RM en 48h <span style="background:#ffedd5;color:#9a3412;padding:6px 10px;border-radius:10px;font-weight:900;font-size:14px;vertical-align:middle;">Urgente 24h</span></h1>
       <p class="sub">Pagas online. Subes antecedentes. Recibes PDF profesional con folio y firma simple.</p>
 
-      <label for="plan">Plan</label>
-      <select id="plan">
-        <option value="express">Express 24h ($900)</option>
-        <option value="pro">Pro PDF (1.5 UF)</option>
-        <option value="visita">Visita + Informe (desde 2.5 UF)</option>
-      </select>
-
-      <label for="comuna">Comuna</label>
-      <input id="comuna" placeholder="Ej: Ñuñoa, Las Condes, Providencia">
-
-      <label for="zona">Zona (solo aplica a Visita + Informe)</label>
-      <input id="zona" class="disabled" value="No aplica" disabled>
-
-      <div class="hint">
-        Zonas aplican solo para <b>Visita + Informe</b> (traslado). Express y Pro <b>no aplican</b>.
+      <div class="note">
+        Nota: La <b>zona</b> se usa solo para <b>Visita + Informe</b> (traslado). <b>Express</b> y <b>Pro</b> no aplican.
       </div>
 
-      <!-- BOTÓN AZUL: debe decir Cotizar -->
       <a class="btn btn-primary" href="servicios.html">Cotizar</a>
       <a class="btn btn-success" href="pagar.html">Pagar</a>
       <a class="btn btn-soft" href="subir_antecedentes.html">Subir antecedentes</a>
     </div>
+
+    <div class="cards">
+      <div class="mini-card">
+        <h3>Servicio claro y defendible</h3>
+        <p>Te pedimos solo lo necesario y te avisamos faltantes. Informe PDF con respaldo, folio y firma simple.</p>
+        <ul class="mini-list">
+          <li>Checklist inteligente de faltantes</li>
+          <li>Comparables y ajustes explicados (Pro)</li>
+          <li>Visita técnica con fotos (Visita + Informe)</li>
+        </ul>
+        <div class="cta-row">
+          <a class="btn-outline" href="preguntas frecuentes.html">Preguntas frecuentes</a>
+          <a class="btn-outline" href="mas_servicios.html">¿Buscas asesoría adicional?</a>
+        </div>
+      </div>
+
+      <div class="mini-card">
+        <h3>¿Buscas asesoría adicional?</h3>
+        <p>Corretaje, regularización DOM, recepción final, estudio de cabida (PRC/OGUC), arriendo, subdivisión y más.</p>
+        <div class="cta-row">
+          <a class="btn-outline" href="mas_servicios.html">Ver más servicios</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">© Tasago · Tasación digital RM</div>
   </div>
-
-  <script>
-    const plan = document.getElementById("plan");
-    const comuna = document.getElementById("comuna");
-    const zona = document.getElementById("zona");
-
-    // Define tus comunas por zona (editable)
-    const ZONAS = {
-      A: ["Las Condes","Vitacura","Lo Barnechea","Providencia"],
-      B: ["Ñuñoa","Santiago","Macul","La Cisterna","La Florida","Peñalolén","Independencia","Recoleta"],
-      C: ["Colina","Lampa","Tiltil","San Miguel","Maipú","Pudahuel","Quilicura","Renca","Estación Central","Puente Alto"]
-    };
-
-    function guessZoneByComuna(c) {
-      const x = (c||"").trim().toLowerCase();
-      if (!x) return null;
-      for (const z of ["A","B","C"]) {
-        if ((ZONAS[z]||[]).some(n => n.toLowerCase() === x)) return z;
-      }
-      return null;
-    }
-
-    function refreshZona(){
-      const isVisita = plan.value === "visita";
-      if (!isVisita){
-        zona.value = "No aplica";
-        zona.disabled = true;
-        zona.classList.add("disabled");
-        return;
-      }
-      const z = guessZoneByComuna(comuna.value);
-      zona.disabled = true;
-      zona.classList.add("disabled");
-      zona.value = z ? `Zona ${z} (${z==="A"?"Base":z==="B"?"+0,3 UF":"+0,5 UF"})` : "Selecciona comuna para asignar zona";
-    }
-
-    plan.addEventListener("change", refreshZona);
-    comuna.addEventListener("input", refreshZona);
-    refreshZona();
-  </script>
 </body>
 </html>
