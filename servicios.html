@@ -8,7 +8,7 @@
   <style>
     :root{ --primary:#295c99; --accent:#1d4e89; --bg:#f4f7fb; --text:#1c2a3a; --muted:#5b6b7b; --border:rgba(0,0,0,.10); --shadow:0 8px 24px rgba(15,35,60,.08); --radius:16px; }
     *{ box-sizing:border-box; }
-    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
+    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family:Arial,sans-serif; }
 
     .topbar{ position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid var(--border); }
     .topbar-inner{ max-width:920px; margin:0 auto; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
@@ -20,7 +20,6 @@
     .wrap{ max-width:920px; margin:0 auto; padding:18px 14px 40px; }
     h1{ margin:0 0 6px 0; font-size:28px; }
     .sub{ margin:0 0 14px 0; color:var(--muted); line-height:1.5; }
-
     .note{ background:#fff; border:1px dashed rgba(41,92,153,.30); border-radius:14px; padding:12px 14px; color:#26435f; line-height:1.45; margin:12px 0 16px; }
 
     .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
@@ -28,12 +27,20 @@
     .price{ font-size:22px; font-weight:900; margin:8px 0 10px; }
     ul{ margin:0 0 14px 18px; color:var(--muted); }
     li{ margin:7px 0; }
-
     .btn{ display:block; text-align:center; text-decoration:none; font-weight:900; border-radius:14px; padding:14px 12px; background:var(--primary); color:#fff; }
     .btn:hover{ background:var(--accent); }
 
     .footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:13px; }
-    @media (max-width:520px){ .logo-box img{ height:44px; } }
+
+    .wa-float{
+      position: fixed; right: 16px; bottom: 16px; z-index: 9999;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 12px 14px; border-radius: 999px; background: #25D366; color: #fff;
+      text-decoration: none; font-weight: 900; box-shadow: 0 10px 24px rgba(0,0,0,.18);
+    }
+    .wa-float:active{ transform: translateY(1px); }
+    .wa-float .wa-dot{ width:10px; height:10px; border-radius:999px; background: rgba(255,255,255,.85); }
+    @media (max-width:420px){ .wa-float{ right:12px; bottom:12px; padding:12px 12px; } .wa-float .wa-text{ display:none; } }
   </style>
 </head>
 <body>
@@ -42,7 +49,7 @@
       <div class="logo-box"><img src="tasago-logo.png" alt="TasaGo"></div>
       <div class="nav">
         <a href="index.html">Inicio</a>
-        <a href="preguntas frecuentes.html">Ayuda</a>
+        <a href="preguntas_frecuentes.html">Ayuda</a>
       </div>
     </div>
   </div>
@@ -51,7 +58,7 @@
     <h1>Planes y precios</h1>
     <p class="sub">Elige tu nivel de detalle. Pro se recomienda cuando necesitas un informe defendible.</p>
 
-    <div class="note"><b>Zona aplica solo para Visita + Informe</b> (traslado). <b>Express</b> y <b>Pro</b> no aplican.</div>
+    <div class="note"><b>Zona aplica solo para Visita + Informe</b> (traslado). Express y Pro no aplican.</div>
 
     <div class="grid">
       <div class="card">
@@ -90,5 +97,9 @@
 
     <div class="footer">© Tasago · Tasación digital RM</div>
   </div>
+
+  <a class="wa-float" href="https://wa.me/56992724280" target="_blank" rel="noopener">
+    <span class="wa-dot"></span><span class="wa-text">WhatsApp</span>
+  </a>
 </body>
 </html>
