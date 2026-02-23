@@ -3,76 +3,46 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>TasaGo — Planes</title>
+  <title>TasaGo — Planes y precios</title>
   <meta name="theme-color" content="#295c99">
-
   <style>
-    :root{
-      --primary:#295c99; --accent:#1d4e89; --bg:#f4f7fb; --text:#1c2a3a; --muted:#5b6b7b;
-      --border:rgba(0,0,0,.10); --shadow: 0 8px 24px rgba(15, 35, 60, .08); --radius:16px;
-    }
+    :root{ --primary:#295c99; --accent:#1d4e89; --bg:#f4f7fb; --text:#1c2a3a; --muted:#5b6b7b; --border:rgba(0,0,0,.10); --shadow:0 8px 24px rgba(15,35,60,.08); --radius:16px; }
     *{ box-sizing:border-box; }
     html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
 
-    .topbar{ position: sticky; top:0; z-index:10; background:#fff; border-bottom: 1px solid var(--border); }
-    .topbar-inner{
-      width:100%; max-width:920px; margin:0 auto; padding:12px 14px;
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-    }
-    .logo-box{
-      background:#fff; border:1px solid var(--border); border-radius:14px;
-      padding:10px 12px; box-shadow: 0 6px 18px rgba(15,35,60,.06);
-      display:flex; align-items:center; justify-content:center;
-    }
-    .logo-box img{ height:48px; width:auto; display:block; }
+    .topbar{ position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid var(--border); }
+    .topbar-inner{ max-width:920px; margin:0 auto; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .logo-box{ background:#fff; border:1px solid var(--border); border-radius:14px; padding:10px 12px; box-shadow:0 6px 18px rgba(15,35,60,.06); }
+    .logo-box img{ height:46px; width:auto; display:block; }
     .nav{ display:flex; gap:10px; flex-wrap:wrap; }
-    .nav a{
-      text-decoration:none; font-weight:900; color:var(--primary);
-      padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#fff;
-    }
-    .nav a:hover{ border-color: rgba(41,92,153,.35); }
+    .nav a{ text-decoration:none; font-weight:900; color:var(--primary); padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#fff; }
 
-    .wrap{ width:100%; max-width:920px; margin:0 auto; padding:18px 14px 40px; }
-    h1{ margin:0 0 6px 0; font-size: 28px; }
+    .wrap{ max-width:920px; margin:0 auto; padding:18px 14px 40px; }
+    h1{ margin:0 0 6px 0; font-size:28px; }
     .sub{ margin:0 0 14px 0; color:var(--muted); line-height:1.5; }
 
-    .note{
-      background:#fff; border:1px dashed rgba(41,92,153,.30); border-radius:14px;
-      padding:12px 14px; color:#26435f; line-height:1.45; margin: 12px 0 16px;
-    }
+    .note{ background:#fff; border:1px dashed rgba(41,92,153,.30); border-radius:14px; padding:12px 14px; color:#26435f; line-height:1.45; margin:12px 0 16px; }
 
-    .grid{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap:14px;
-    }
-    .card{
-      background:#fff; border:1px solid var(--border); border-radius: var(--radius);
-      box-shadow: var(--shadow); padding:16px;
-    }
-    .price{ font-size: 22px; font-weight: 900; margin: 8px 0 10px; }
-    ul{ margin: 0 0 14px 18px; color: var(--muted); }
-    li{ margin: 7px 0; }
+    .grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; }
+    .card{ background:#fff; border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px; }
+    .price{ font-size:22px; font-weight:900; margin:8px 0 10px; }
+    ul{ margin:0 0 14px 18px; color:var(--muted); }
+    li{ margin:7px 0; }
 
-    .btn{
-      display:block; width:100%; text-align:center; text-decoration:none;
-      font-weight:900; border-radius: 14px; padding: 14px 12px;
-      border:1px solid transparent; background: var(--primary); color:#fff;
-    }
-    .btn:hover{ background: var(--accent); }
+    .btn{ display:block; text-align:center; text-decoration:none; font-weight:900; border-radius:14px; padding:14px 12px; background:var(--primary); color:#fff; }
+    .btn:hover{ background:var(--accent); }
 
     .footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:13px; }
+    @media (max-width:520px){ .logo-box img{ height:44px; } }
   </style>
 </head>
-
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="logo-box"><img src="logo-tasago.png" alt="TasaGo"></div>
+      <div class="logo-box"><img src="tasago-logo.png" alt="TasaGo"></div>
       <div class="nav">
         <a href="index.html">Inicio</a>
-        <a href="faq.html">Ayuda</a>
-        <a href="mas_servicios.html">Más servicios</a>
+        <a href="preguntas frecuentes.html">Ayuda</a>
       </div>
     </div>
   </div>
@@ -81,9 +51,7 @@
     <h1>Planes y precios</h1>
     <p class="sub">Elige tu nivel de detalle. Pro se recomienda cuando necesitas un informe defendible.</p>
 
-    <div class="note">
-      <b>Zonas aplican solo para Visita + Informe</b> (traslado). <b>Express</b> y <b>Pro</b> no cambian por zona.
-    </div>
+    <div class="note"><b>Zona aplica solo para Visita + Informe</b> (traslado). <b>Express</b> y <b>Pro</b> no aplican.</div>
 
     <div class="grid">
       <div class="card">
@@ -99,7 +67,7 @@
 
       <div class="card">
         <h2 style="margin:0;">Pro PDF</h2>
-        <div class="price">1.5 UF <span style="font-size:14px; font-weight:700; opacity:.8;">(3–4 días)</span></div>
+        <div class="price">1.5 UF <span style="font-size:14px;font-weight:700;opacity:.8;">(3–4 días)</span></div>
         <ul>
           <li>6–10 comparables + ajustes explicados</li>
           <li>PDF profesional con anexos (fotos/plano)</li>
@@ -110,7 +78,7 @@
 
       <div class="card">
         <h2 style="margin:0;">Visita + Informe</h2>
-        <div class="price">Desde 2.5 UF <span style="font-size:14px; font-weight:700; opacity:.8;">(4–5 días)</span></div>
+        <div class="price">Desde 2.5 UF <span style="font-size:14px;font-weight:700;opacity:.8;">(4–5 días)</span></div>
         <ul>
           <li>Visita técnica + fotos propias</li>
           <li>Informe tipo Pro + capítulo inspección</li>
