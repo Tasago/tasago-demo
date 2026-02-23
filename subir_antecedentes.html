@@ -17,6 +17,7 @@
     .logo-box img{height:48px;width:auto;display:block;}
     .nav{display:flex;gap:10px;flex-wrap:wrap;}
     .nav a{text-decoration:none;font-weight:900;color:var(--primary);padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:#fff;}
+    .nav a:hover{border-color:rgba(41,92,153,.35);}
 
     .wrap{max-width:920px;margin:0 auto;padding:18px 14px 40px;}
     .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;}
@@ -29,10 +30,12 @@
       width:100%;padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,.14);
       background:#fff;font-size:15px;outline:none;
     }
+    input[readonly]{background:#f8fafc;}
     textarea{min-height:90px;resize:vertical;}
     .full{grid-column:1/-1;}
 
     .hint{margin-top:10px;background:#f6fbff;border:1px dashed rgba(41,92,153,.30);border-radius:14px;padding:12px 14px;color:#26435f;line-height:1.45;}
+    .hint strong{color:#12314d;}
 
     .btn{
       display:block;width:100%;text-align:center;text-decoration:none;font-weight:900;
@@ -60,7 +63,7 @@
   <div class="wrap">
     <div class="card">
       <h1>Subir antecedentes</h1>
-      <p class="sub">Escribe y selecciona desde listas automáticas (comunas y año). Luego continúas a pago.</p>
+      <p class="sub">Comuna y año se autocompletan. La <b>zona se calcula automáticamente</b> y solo aplica para <b>Visita + Informe</b>.</p>
 
       <form id="form">
         <div class="grid">
@@ -77,352 +80,32 @@
             <label for="comuna">Comuna</label>
             <input id="comuna" name="comuna" list="comunas" placeholder="Escribe para buscar (ej: Ñuñoa)" required>
             <datalist id="comunas">
-              <!-- Todas las comunas de Chile (lista larga). Si quieres solo RM, te lo reduzco. -->
-              <option value="Algarrobo"></option>
-              <option value="Alhué"></option>
-              <option value="Alto Biobío"></option>
-              <option value="Alto del Carmen"></option>
-              <option value="Alto Hospicio"></option>
-              <option value="Ancud"></option>
-              <option value="Andacollo"></option>
-              <option value="Angol"></option>
-              <option value="Antofagasta"></option>
-              <option value="Antuco"></option>
-              <option value="Arauco"></option>
-              <option value="Arica"></option>
-              <option value="Aysén"></option>
-              <option value="Buin"></option>
-              <option value="Bulnes"></option>
-              <option value="Cabildo"></option>
-              <option value="Cabo de Hornos"></option>
-              <option value="Cachapoal"></option>
-              <option value="Calama"></option>
-              <option value="Calbuco"></option>
-              <option value="Caldera"></option>
-              <option value="Calera de Tango"></option>
-              <option value="Calle Larga"></option>
-              <option value="Camarones"></option>
-              <option value="Camiña"></option>
-              <option value="Canela"></option>
-              <option value="Cañete"></option>
-              <option value="Carahue"></option>
-              <option value="Cartagena"></option>
-              <option value="Casablanca"></option>
-              <option value="Castro"></option>
-              <option value="Catemu"></option>
-              <option value="Cauquenes"></option>
-              <option value="Cerrillos"></option>
-              <option value="Cerro Navia"></option>
-              <option value="Chaitén"></option>
-              <option value="Chanco"></option>
-              <option value="Chañaral"></option>
-              <option value="Chépica"></option>
-              <option value="Chiguayante"></option>
-              <option value="Chile Chico"></option>
-              <option value="Chillán"></option>
-              <option value="Chillán Viejo"></option>
-              <option value="Chimbarongo"></option>
-              <option value="Cholchol"></option>
-              <option value="Chonchi"></option>
-              <option value="Cisnes"></option>
-              <option value="Cobquecura"></option>
-              <option value="Cochamó"></option>
-              <option value="Cochrane"></option>
-              <option value="Codegua"></option>
-              <option value="Coelemu"></option>
-              <option value="Coihueco"></option>
-              <option value="Coinco"></option>
-              <option value="Colbún"></option>
-              <option value="Colchane"></option>
-              <option value="Colina"></option>
-              <option value="Collipulli"></option>
-              <option value="Coltauco"></option>
-              <option value="Combarbalá"></option>
-              <option value="Concepción"></option>
-              <option value="Conchalí"></option>
-              <option value="Concón"></option>
-              <option value="Constitución"></option>
-              <option value="Contulmo"></option>
-              <option value="Copiapó"></option>
-              <option value="Coquimbo"></option>
-              <option value="Coronel"></option>
-              <option value="Corral"></option>
-              <option value="Coyhaique"></option>
-              <option value="Cunco"></option>
-              <option value="Curacautín"></option>
-              <option value="Curacaví"></option>
-              <option value="Curaco de Vélez"></option>
-              <option value="Curanilahue"></option>
-              <option value="Curarrehue"></option>
-              <option value="Curepto"></option>
-              <option value="Curicó"></option>
-              <option value="Dalcahue"></option>
-              <option value="Diego de Almagro"></option>
-              <option value="Doñihue"></option>
-              <option value="El Bosque"></option>
-              <option value="El Carmen"></option>
-              <option value="El Monte"></option>
-              <option value="El Quisco"></option>
-              <option value="El Tabo"></option>
-              <option value="Empedrado"></option>
-              <option value="Ercilla"></option>
-              <option value="Estación Central"></option>
-              <option value="Florida"></option>
-              <option value="Freire"></option>
-              <option value="Freirina"></option>
-              <option value="Fresia"></option>
-              <option value="Frutillar"></option>
-              <option value="Futaleufú"></option>
-              <option value="Futrono"></option>
-              <option value="Galvarino"></option>
-              <option value="General Lagos"></option>
-              <option value="Gorbea"></option>
-              <option value="Graneros"></option>
-              <option value="Guaitecas"></option>
-              <option value="Hijuelas"></option>
-              <option value="Hualaihué"></option>
-              <option value="Hualañé"></option>
-              <option value="Hualpén"></option>
-              <option value="Hualqui"></option>
-              <option value="Huara"></option>
-              <option value="Huasco"></option>
-              <option value="Huechuraba"></option>
-              <option value="Illapel"></option>
-              <option value="Independencia"></option>
-              <option value="Iquique"></option>
-              <option value="Isla de Maipo"></option>
-              <option value="Isla de Pascua"></option>
-              <option value="Juan Fernández"></option>
-              <option value="La Calera"></option>
-              <option value="La Cisterna"></option>
-              <option value="La Cruz"></option>
-              <option value="La Estrella"></option>
-              <option value="La Florida"></option>
-              <option value="La Granja"></option>
-              <option value="La Higuera"></option>
-              <option value="La Ligua"></option>
-              <option value="La Pintana"></option>
-              <option value="La Reina"></option>
-              <option value="La Serena"></option>
-              <option value="La Unión"></option>
-              <option value="Lago Ranco"></option>
-              <option value="Lago Verde"></option>
-              <option value="Laguna Blanca"></option>
-              <option value="Laja"></option>
-              <option value="Lampa"></option>
-              <option value="Lanco"></option>
-              <option value="Las Cabras"></option>
-              <option value="Las Condes"></option>
-              <option value="Lautaro"></option>
-              <option value="Lebu"></option>
-              <option value="Licantén"></option>
-              <option value="Limache"></option>
-              <option value="Linares"></option>
-              <option value="Litueche"></option>
-              <option value="Llanquihue"></option>
-              <option value="Lo Barnechea"></option>
-              <option value="Lo Espejo"></option>
-              <option value="Lo Prado"></option>
-              <option value="Lolol"></option>
-              <option value="Loncoche"></option>
-              <option value="Longaví"></option>
-              <option value="Lonquimay"></option>
-              <option value="Los Álamos"></option>
-              <option value="Los Andes"></option>
-              <option value="Los Ángeles"></option>
-              <option value="Los Lagos"></option>
-              <option value="Los Muermos"></option>
-              <option value="Los Sauces"></option>
-              <option value="Los Vilos"></option>
-              <option value="Lota"></option>
-              <option value="Lumaco"></option>
-              <option value="Machalí"></option>
-              <option value="Macul"></option>
-              <option value="Máfil"></option>
-              <option value="Maipú"></option>
-              <option value="Malloa"></option>
-              <option value="Marchihue"></option>
-              <option value="María Elena"></option>
-              <option value="María Pinto"></option>
-              <option value="Mariquina"></option>
-              <option value="Maule"></option>
-              <option value="Maullín"></option>
-              <option value="Mejillones"></option>
-              <option value="Melipeuco"></option>
-              <option value="Melipilla"></option>
-              <option value="Molina"></option>
-              <option value="Monte Patria"></option>
-              <option value="Mostazal"></option>
-              <option value="Mulchén"></option>
-              <option value="Nacimiento"></option>
-              <option value="Nancagua"></option>
-              <option value="Natales"></option>
-              <option value="Navidad"></option>
-              <option value="Negrete"></option>
-              <option value="Ninhue"></option>
-              <option value="Ñiquén"></option>
-              <option value="Nogales"></option>
-              <option value="Nueva Imperial"></option>
-              <option value="Ñuñoa"></option>
-              <option value="O'Higgins"></option>
-              <option value="Olivar"></option>
-              <option value=" Ollagüe"></option>
-              <option value="Osorno"></option>
-              <option value="Ovalle"></option>
-              <option value="Padre Hurtado"></option>
-              <option value="Padre Las Casas"></option>
-              <option value="Paiguano"></option>
-              <option value="Paihuano"></option>
-              <option value="Paine"></option>
-              <option value="Palena"></option>
-              <option value="Palmilla"></option>
-              <option value="Panguipulli"></option>
-              <option value="Panquehue"></option>
-              <option value="Papudo"></option>
-              <option value="Paredones"></option>
-              <option value="Parral"></option>
-              <option value="Pedro Aguirre Cerda"></option>
-              <option value="Pelarco"></option>
-              <option value="Pelluhue"></option>
-              <option value="Pemuco"></option>
-              <option value="Peñaflor"></option>
-              <option value="Peñalolén"></option>
-              <option value="Pencahue"></option>
-              <option value="Penco"></option>
-              <option value="Peralillo"></option>
-              <option value="Perquenco"></option>
-              <option value="Petorca"></option>
-              <option value="Peumo"></option>
-              <option value="Pica"></option>
-              <option value="Pichidegua"></option>
-              <option value="Pichilemu"></option>
-              <option value="Pinto"></option>
-              <option value="Pirque"></option>
-              <option value="Pitrufquén"></option>
-              <option value="Placilla"></option>
-              <option value="Portezuelo"></option>
-              <option value="Porvenir"></option>
-              <option value="Pozo Almonte"></option>
-              <option value="Primavera"></option>
-              <option value="Providencia"></option>
-              <option value="Puchuncaví"></option>
-              <option value="Pucón"></option>
-              <option value="Pudahuel"></option>
-              <option value="Puente Alto"></option>
-              <option value="Puerto Montt"></option>
-              <option value="Puerto Natales"></option>
-              <option value="Puerto Octay"></option>
-              <option value="Puerto Varas"></option>
-              <option value="Pumanque"></option>
-              <option value="Punitaqui"></option>
-              <option value="Punta Arenas"></option>
-              <option value="Puqueldón"></option>
-              <option value="Purén"></option>
-              <option value="Purranque"></option>
-              <option value="Putaendo"></option>
-              <option value="Putre"></option>
-              <option value="Puyehue"></option>
-              <option value="Queilén"></option>
-              <option value="Quellón"></option>
-              <option value="Quemchi"></option>
-              <option value="Quilaco"></option>
-              <option value="Quilicura"></option>
-              <option value="Quilleco"></option>
-              <option value="Quillón"></option>
-              <option value="Quillota"></option>
-              <option value="Quilpué"></option>
-              <option value="Quinchao"></option>
-              <option value="Quinta de Tilcoco"></option>
-              <option value="Quinta Normal"></option>
-              <option value="Quintero"></option>
-              <option value="Quirihue"></option>
-              <option value="Rancagua"></option>
-              <option value="Ránquil"></option>
-              <option value="Rauco"></option>
-              <option value="Recoleta"></option>
-              <option value="Renaico"></option>
-              <option value="Renca"></option>
-              <option value="Rengo"></option>
-              <option value="Requínoa"></option>
-              <option value="Retiro"></option>
-              <option value="Rinconada"></option>
-              <option value="Río Bueno"></option>
-              <option value="Río Claro"></option>
-              <option value="Río Hurtado"></option>
-              <option value="Río Ibáñez"></option>
-              <option value="Río Negro"></option>
-              <option value="Río Verde"></option>
-              <option value="Romeral"></option>
-              <option value="Saavedra"></option>
-              <option value="Sagrada Familia"></option>
-              <option value="Salamanca"></option>
-              <option value="San Antonio"></option>
-              <option value="San Bernardo"></option>
-              <option value="San Carlos"></option>
-              <option value="San Clemente"></option>
-              <option value="San Esteban"></option>
-              <option value="San Fabián"></option>
-              <option value="San Felipe"></option>
-              <option value="San Fernando"></option>
-              <option value="San Gregorio"></option>
-              <option value="San Ignacio"></option>
-              <option value="San Javier"></option>
-              <option value="San Joaquín"></option>
-              <option value="San José de Maipo"></option>
-              <option value="San Juan de la Costa"></option>
-              <option value="San Miguel"></option>
-              <option value="San Nicolás"></option>
-              <option value="San Pablo"></option>
-              <option value="San Pedro"></option>
-              <option value="San Pedro de Atacama"></option>
-              <option value="San Pedro de la Paz"></option>
-              <option value="San Rafael"></option>
-              <option value="San Ramón"></option>
-              <option value="San Rosendo"></option>
-              <option value="San Vicente"></option>
-              <option value="Santa Bárbara"></option>
-              <option value="Santa Cruz"></option>
-              <option value="Santa Juana"></option>
-              <option value="Santa María"></option>
-              <option value="Santiago"></option>
-              <option value="Santo Domingo"></option>
-              <option value="Sierra Gorda"></option>
-              <option value="Talagante"></option>
-              <option value="Talca"></option>
-              <option value="Talcahuano"></option>
-              <option value="Taltal"></option>
-              <option value="Temuco"></option>
-              <option value="Teno"></option>
-              <option value="Teodoro Schmidt"></option>
-              <option value="Tierra Amarilla"></option>
-              <option value="Tiltil"></option>
-              <option value="Timaukel"></option>
-              <option value="Tirúa"></option>
-              <option value="Tocopilla"></option>
-              <option value="Toltén"></option>
-              <option value="Tomé"></option>
-              <option value="Torres del Paine"></option>
-              <option value="Tortel"></option>
-              <option value="Traiguén"></option>
-              <option value="Treguaco"></option>
-              <option value="Tucapel"></option>
-              <option value="Valdivia"></option>
-              <option value="Vallenar"></option>
-              <option value="Valparaíso"></option>
-              <option value="Vichuquén"></option>
-              <option value="Victoria"></option>
-              <option value="Vicuña"></option>
-              <option value="Vilcún"></option>
-              <option value="Villa Alegre"></option>
-              <option value="Villa Alemana"></option>
-              <option value="Villarrica"></option>
-              <option value="Viña del Mar"></option>
-              <option value="Vitacura"></option>
-              <option value="Yerbas Buenas"></option>
-              <option value="Yumbel"></option>
-              <option value="Yungay"></option>
-              <option value="Zapallar"></option>
+              <!-- Lista amplia (puedes reducir a RM si quieres) -->
+              <option value="Cerrillos"></option><option value="Cerro Navia"></option><option value="Conchalí"></option>
+              <option value="El Bosque"></option><option value="Estación Central"></option><option value="Huechuraba"></option>
+              <option value="Independencia"></option><option value="La Cisterna"></option><option value="La Florida"></option>
+              <option value="La Granja"></option><option value="La Pintana"></option><option value="La Reina"></option>
+              <option value="Las Condes"></option><option value="Lo Barnechea"></option><option value="Lo Espejo"></option>
+              <option value="Lo Prado"></option><option value="Macul"></option><option value="Maipú"></option>
+              <option value="Ñuñoa"></option><option value="Pedro Aguirre Cerda"></option><option value="Peñalolén"></option>
+              <option value="Providencia"></option><option value="Pudahuel"></option><option value="Puente Alto"></option>
+              <option value="Quilicura"></option><option value="Quinta Normal"></option><option value="Recoleta"></option>
+              <option value="Renca"></option><option value="San Bernardo"></option><option value="San Joaquín"></option>
+              <option value="San José de Maipo"></option><option value="San Miguel"></option><option value="San Ramón"></option>
+              <option value="Santiago"></option><option value="Vitacura"></option>
+              <!-- Provincias RM frecuentes -->
+              <option value="Colina"></option><option value="Lampa"></option><option value="Tiltil"></option>
+              <option value="Buin"></option><option value="Paine"></option><option value="Calera de Tango"></option>
+              <option value="Pirque"></option><option value="Talagante"></option><option value="El Monte"></option>
+              <option value="Isla de Maipo"></option><option value="Peñaflor"></option><option value="Padre Hurtado"></option>
+              <option value="Melipilla"></option><option value="Curacaví"></option><option value="María Pinto"></option>
+              <option value="San Pedro"></option><option value="Alhué"></option>
             </datalist>
+          </div>
+
+          <div>
+            <label for="zona">Zona (automática)</label>
+            <input id="zona" name="zona" type="text" value="—" readonly>
           </div>
 
           <div class="full">
@@ -492,8 +175,12 @@
           </div>
         </div>
 
+        <div class="hint" id="zonaHint">
+          Zonas aplican solo para <strong>Visita + Informe</strong> (traslado). Express y Pro no cambian por zona.
+        </div>
+
         <button class="btn" type="submit">Guardar y continuar</button>
-        <div class="hint">Luego pasas a <b>Pagar</b>. En el MVP el pago puede ser simulado.</div>
+        <div class="hint">Luego pasas a <strong>Pagar</strong>. En el MVP el pago puede ser simulado.</div>
       </form>
     </div>
   </div>
@@ -513,11 +200,46 @@
       dl.appendChild(opt);
     }
 
+    // --- ZONAS AUTOMÁTICAS (RM) ---
+    const ZONA_A = new Set(["Las Condes","Vitacura","Lo Barnechea","Providencia"]);
+    const ZONA_B = new Set(["Ñuñoa","Santiago","Macul","La Florida","La Cisterna","San Miguel","Peñalolén","La Reina","Estación Central","Independencia","Recoleta","Quinta Normal","Maipú","San Joaquín"]);
+    const ZONA_C = new Set(["Puente Alto","San Bernardo","Pudahuel","Renca","Cerro Navia","Lo Prado","Lo Espejo","Pedro Aguirre Cerda","La Pintana","El Bosque","Huechuraba","Quilicura","Colina","Lampa","Buin","Paine","Padre Hurtado","Peñaflor","Talagante","El Monte","Isla de Maipo","Calera de Tango","Pirque","San José de Maipo","Melipilla","Curacaví","María Pinto","San Pedro","Alhué","Tiltil"]);
+
+    function getZonaByComuna(comuna){
+      const c = (comuna||"").trim();
+      if (!c) return {zona:"—", recargo:"", detalle:"—"};
+      if (ZONA_A.has(c)) return {zona:"A", recargo:"Base", detalle:"Zona A (base)"};
+      if (ZONA_B.has(c)) return {zona:"B", recargo:"+0,3 UF", detalle:"Zona B (+0,3 UF)"};
+      if (ZONA_C.has(c)) return {zona:"C", recargo:"+0,5 UF", detalle:"Zona C (+0,5 UF)"};
+      return {zona:"Fuera RM", recargo:"A definir", detalle:"Fuera RM (traslado a definir)"};
+    }
+
+    const comunaInput = document.getElementById("comuna");
+    const zonaInput = document.getElementById("zona");
+    const zonaHint = document.getElementById("zonaHint");
+
+    function updateZonaUI(){
+      const plan = planSelect.value;
+      const z = getZonaByComuna(comunaInput.value);
+      zonaInput.value = z.detalle;
+
+      if (plan === "visita") {
+        zonaHint.innerHTML = `Visita + Informe: <strong>${z.detalle}</strong>. Recargo: <strong>${z.recargo}</strong> (por traslado).`;
+      } else {
+        zonaHint.innerHTML = `Zonas aplican solo para <strong>Visita + Informe</strong> (traslado). Express y Pro no cambian por zona.`;
+      }
+    }
+
+    comunaInput.addEventListener("input", updateZonaUI);
+    planSelect.addEventListener("change", updateZonaUI);
+    updateZonaUI();
+
     document.getElementById("form").addEventListener("submit", (e) => {
       e.preventDefault();
       const data = {
         plan: planSelect.value,
-        comuna: document.getElementById("comuna").value.trim(),
+        comuna: comunaInput.value.trim(),
+        zona: zonaInput.value,
         direccion: document.getElementById("direccion").value.trim(),
         tipo: document.getElementById("tipo").value,
         anio: document.getElementById("anio").value,
