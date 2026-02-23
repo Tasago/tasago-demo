@@ -5,200 +5,127 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TasaGo — Tasación digital RM</title>
 
+  <link rel="manifest" href="manifiesto.json">
   <meta name="theme-color" content="#295c99">
+
   <style>
     :root{
-      --primary:#295c99; --accent:#1d4e89; --bg:#f4f7fb; --text:#1c2a3a; --muted:#5b6b7b;
-      --card:#fff; --border:rgba(0,0,0,.10); --shadow:0 8px 24px rgba(15,35,60,.08); --radius:16px;
+      --primary:#295c99;
+      --accent:#1d4e89;
+      --bg:#f4f7fb;
+      --text:#1c2a3a;
+      --muted:#5b6b7b;
+      --border:rgba(0,0,0,.10);
+      --shadow: 0 8px 24px rgba(15, 35, 60, .08);
+      --radius:16px;
+      --disabled:#eef2f7;
     }
-    *{box-sizing:border-box;}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;}
-    a{color:inherit;}
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
+    .topbar{ position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid var(--border); }
+    .topbar-inner{ max-width:920px; margin:0 auto; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .logo-box{ background:#fff; border:1px solid var(--border); border-radius:14px; padding:10px 12px; box-shadow:0 6px 18px rgba(15,35,60,.06); }
+    .logo-box img{ height:46px; width:auto; display:block; }
+    .nav{ display:flex; gap:10px; flex-wrap:wrap; }
+    .nav a{ text-decoration:none; font-weight:900; color:var(--primary); padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#fff; }
 
-    .topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--border);}
-    .topbar-inner{max-width:920px;margin:0 auto;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
-    .logo-box{background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px 12px;box-shadow:0 6px 18px rgba(15,35,60,.06);display:flex;align-items:center;justify-content:center;}
-    .logo-box img{height:48px;width:auto;display:block;}
-    .nav{display:flex;gap:10px;flex-wrap:wrap;}
-    .nav a{text-decoration:none;font-weight:900;color:var(--primary);padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:#fff;}
-    .nav a:hover{border-color:rgba(41,92,153,.35);}
+    .wrap{ max-width:920px; margin:0 auto; padding:18px 14px 40px; }
+    .card{ background:#fff; border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px; }
+    h1{ margin:0 0 6px 0; font-size:28px; }
+    .sub{ margin:0 0 14px 0; color:var(--muted); line-height:1.5; }
+    label{ display:block; font-weight:900; margin:10px 0 6px; }
+    input, select{ width:100%; padding:12px; border-radius:12px; border:1px solid rgba(0,0,0,.14); font-size:15px; }
+    .disabled{ background:var(--disabled); color:#7a8794; }
+    .hint{ margin-top:10px; background:#f6fbff; border:1px dashed rgba(41,92,153,.30); border-radius:14px; padding:12px 14px; color:#26435f; line-height:1.45; }
 
-    .wrap{max-width:920px;margin:0 auto;padding:18px 14px 40px;}
-    .hero{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;}
-    h1{margin:0 0 10px 0;font-size:34px;letter-spacing:-.4px;}
-    .badge{display:inline-block;padding:6px 10px;border-radius:10px;background:#ffedd5;color:#9a3412;font-weight:900;margin-left:8px;font-size:14px;vertical-align:middle;}
-    .sub{margin:8px 0 0 0;color:var(--muted);line-height:1.5;font-size:16px;}
-
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px;}
-    label{display:block;font-weight:900;margin-bottom:6px;}
-    input,select{
-      width:100%;padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,.14);
-      background:#fff;font-size:15px;outline:none;
-    }
-    input[readonly]{background:#f8fafc;}
-    .full{grid-column:1/-1;}
-
-    .note{margin-top:12px;background:#fff;border:1px dashed rgba(41,92,153,.30);border-radius:14px;padding:12px 14px;color:#26435f;line-height:1.45;}
-    .actions{margin-top:14px;display:flex;flex-direction:column;gap:12px;}
-    .btn{display:block;width:100%;text-align:center;text-decoration:none;font-weight:900;border-radius:14px;padding:16px 14px;border:1px solid transparent;font-size:18px;}
-    .btn-primary{background:var(--primary);color:#fff;}
-    .btn-primary:hover{background:var(--accent);}
-    .btn-success{background:#3a9b4a;color:#fff;}
-    .btn-success:hover{filter:brightness(.95);}
-    .btn-soft{background:#e8f1fb;color:#1b3a57;border-color:rgba(41,92,153,.18);}
-
-    .flow{margin-top:16px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:14px;}
-    .flow h3{margin:0 0 12px 0;}
-    .steps{display:flex;justify-content:space-between;gap:10px;}
-    .step{flex:1 1 0;min-width:0;text-align:center;color:var(--muted);font-size:13px;}
-    .dot{width:36px;height:36px;border-radius:999px;margin:0 auto 8px;display:flex;align-items:center;justify-content:center;font-weight:900;border:2px solid rgba(41,92,153,.20);background:#fff;color:var(--primary);}
-    .step.active .dot{background:var(--primary);color:#fff;border-color:var(--primary);}
-
-    .card{margin-top:16px;background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 10px 24px rgba(15,35,60,.06);padding:16px;}
-    .card h3{margin:0 0 8px 0;}
-    .card p{margin:0;color:var(--muted);line-height:1.5;}
-    .mini-list{margin:10px 0 0 18px;color:var(--muted);}
-    .mini-list li{margin:6px 0;}
-    .cta-row{margin-top:12px;display:flex;gap:10px;flex-wrap:wrap;}
-    .btn-outline{display:inline-block;padding:12px 14px;border-radius:12px;border:1px solid rgba(0,0,0,.18);text-decoration:none;font-weight:900;background:#fff;}
-
-    .footer{margin-top:18px;text-align:center;color:var(--muted);font-size:13px;}
-    @media(max-width:640px){.grid{grid-template-columns:1fr;} h1{font-size:30px;} .logo-box img{height:46px;}}
+    .btn{ display:block; width:100%; text-align:center; text-decoration:none; font-weight:900; border-radius:14px; padding:16px 14px; font-size:18px; margin-top:12px; }
+    .btn-primary{ background:var(--primary); color:#fff; }
+    .btn-primary:hover{ background:var(--accent); }
+    .btn-success{ background:#3a9b4a; color:#fff; }
+    .btn-soft{ background:#e8f1fb; color:#1b3a57; border:1px solid rgba(41,92,153,.18); }
   </style>
 </head>
 
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="logo-box"><img src="logo-tasago.png" alt="TasaGo"></div>
+      <div class="logo-box">
+        <img src="Logotipo de TasaGo horizontal.png" alt="TasaGo">
+      </div>
       <div class="nav">
         <a href="servicios.html">Planes</a>
-        <a href="faq.html">Ayuda</a>
+        <a href="preguntas frecuentes.html">Ayuda</a>
       </div>
     </div>
   </div>
 
   <div class="wrap">
-    <section class="hero">
-      <h1>Tasación en RM en 48h <span class="badge">Urgente 24h</span></h1>
+    <div class="card">
+      <h1>Tasación en RM en 48h</h1>
       <p class="sub">Pagas online. Subes antecedentes. Recibes PDF profesional con folio y firma simple.</p>
 
-      <div class="grid">
-        <div>
-          <label for="plan">Plan</label>
-          <select id="plan">
-            <option value="express">Express 24h ($900)</option>
-            <option value="pro">Pro PDF (1.5 UF)</option>
-            <option value="visita">Visita + Informe (desde 2.5 UF)</option>
-          </select>
-        </div>
+      <label for="plan">Plan</label>
+      <select id="plan">
+        <option value="express">Express 24h ($900)</option>
+        <option value="pro">Pro PDF (1.5 UF)</option>
+        <option value="visita">Visita + Informe (desde 2.5 UF)</option>
+      </select>
 
-        <div>
-          <label for="comuna">Comuna</label>
-          <input id="comuna" list="comunas" placeholder="Escribe para buscar (ej: Ñuñoa)">
-          <datalist id="comunas">
-            <option value="Cerrillos"></option><option value="Cerro Navia"></option><option value="Conchalí"></option>
-            <option value="El Bosque"></option><option value="Estación Central"></option><option value="Huechuraba"></option>
-            <option value="Independencia"></option><option value="La Cisterna"></option><option value="La Florida"></option>
-            <option value="La Granja"></option><option value="La Pintana"></option><option value="La Reina"></option>
-            <option value="Las Condes"></option><option value="Lo Barnechea"></option><option value="Lo Espejo"></option>
-            <option value="Lo Prado"></option><option value="Macul"></option><option value="Maipú"></option>
-            <option value="Ñuñoa"></option><option value="Pedro Aguirre Cerda"></option><option value="Peñalolén"></option>
-            <option value="Providencia"></option><option value="Pudahuel"></option><option value="Puente Alto"></option>
-            <option value="Quilicura"></option><option value="Quinta Normal"></option><option value="Recoleta"></option>
-            <option value="Renca"></option><option value="San Bernardo"></option><option value="San Joaquín"></option>
-            <option value="San José de Maipo"></option><option value="San Miguel"></option><option value="San Ramón"></option>
-            <option value="Santiago"></option><option value="Vitacura"></option>
-            <option value="Colina"></option><option value="Lampa"></option><option value="Tiltil"></option>
-            <option value="Buin"></option><option value="Paine"></option><option value="Calera de Tango"></option>
-            <option value="Pirque"></option><option value="Talagante"></option><option value="El Monte"></option>
-            <option value="Isla de Maipo"></option><option value="Peñaflor"></option><option value="Padre Hurtado"></option>
-            <option value="Melipilla"></option><option value="Curacaví"></option><option value="María Pinto"></option>
-            <option value="San Pedro"></option><option value="Alhué"></option>
-          </datalist>
-        </div>
+      <label for="comuna">Comuna</label>
+      <input id="comuna" placeholder="Ej: Ñuñoa, Las Condes, Providencia">
 
-        <div>
-          <label for="zona">Zona (automática)</label>
-          <input id="zona" value="—" readonly>
-        </div>
+      <label for="zona">Zona (solo aplica a Visita + Informe)</label>
+      <input id="zona" class="disabled" value="No aplica" disabled>
 
-        <div class="full note" id="zonaHint">
-          Zonas aplican solo para <b>Visita + Informe</b> (traslado). Express y Pro no cambian por zona.
-        </div>
+      <div class="hint">
+        Zonas aplican solo para <b>Visita + Informe</b> (traslado). Express y Pro <b>no aplican</b>.
       </div>
 
-      <div class="actions">
-        <a class="btn btn-primary" href="servicios.html">Ver planes</a>
-        <a class="btn btn-success" href="pagar.html">Pagar</a>
-        <a class="btn btn-soft" id="btnSubir" href="subir_antecedentes.html">Subir antecedentes</a>
-      </div>
-    </section>
-
-    <section class="flow">
-      <h3>Estado del proceso</h3>
-      <div class="steps">
-        <div class="step active"><div class="dot">1</div>Cotiza</div>
-        <div class="step"><div class="dot">2</div>Paga</div>
-        <div class="step"><div class="dot">3</div>Sube</div>
-        <div class="step"><div class="dot">4</div>Recibe PDF</div>
-      </div>
-    </section>
-
-    <div class="card">
-      <h3>Servicio claro y defendible</h3>
-      <p>Checklist inteligente de faltantes. Informe PDF con respaldo, folio y firma simple.</p>
-      <ul class="mini-list">
-        <li>Express: rápido para decisión inicial</li>
-        <li>Pro: defendible + 1 revisión incluida</li>
-        <li>Visita: máximo respaldo (zona/traslado)</li>
-      </ul>
-      <div class="cta-row">
-        <a class="btn-outline" href="faq.html">Ver ayuda</a>
-        <a class="btn-outline" href="mas_servicios.html">¿Buscas asesoría adicional?</a>
-      </div>
+      <!-- BOTÓN AZUL: debe decir Cotizar -->
+      <a class="btn btn-primary" href="servicios.html">Cotizar</a>
+      <a class="btn btn-success" href="pagar.html">Pagar</a>
+      <a class="btn btn-soft" href="subir_antecedentes.html">Subir antecedentes</a>
     </div>
-
-    <div class="footer">© Tasago · Tasación digital RM</div>
   </div>
 
   <script>
-    const ZONA_A = new Set(["Las Condes","Vitacura","Lo Barnechea","Providencia"]);
-    const ZONA_B = new Set(["Ñuñoa","Santiago","Macul","La Florida","La Cisterna","San Miguel","Peñalolén","La Reina","Estación Central","Independencia","Recoleta","Quinta Normal","Maipú","San Joaquín"]);
-    const ZONA_C = new Set(["Puente Alto","San Bernardo","Pudahuel","Renca","Cerro Navia","Lo Prado","Lo Espejo","Pedro Aguirre Cerda","La Pintana","El Bosque","Huechuraba","Quilicura","Colina","Lampa","Buin","Paine","Padre Hurtado","Peñaflor","Talagante","El Monte","Isla de Maipo","Calera de Tango","Pirque","San José de Maipo","Melipilla","Curacaví","María Pinto","San Pedro","Alhué","Tiltil"]);
+    const plan = document.getElementById("plan");
+    const comuna = document.getElementById("comuna");
+    const zona = document.getElementById("zona");
 
-    const comunaInput = document.getElementById("comuna");
-    const planSelect = document.getElementById("plan");
-    const zonaInput = document.getElementById("zona");
-    const zonaHint = document.getElementById("zonaHint");
-    const btnSubir = document.getElementById("btnSubir");
+    // Define tus comunas por zona (editable)
+    const ZONAS = {
+      A: ["Las Condes","Vitacura","Lo Barnechea","Providencia"],
+      B: ["Ñuñoa","Santiago","Macul","La Cisterna","La Florida","Peñalolén","Independencia","Recoleta"],
+      C: ["Colina","Lampa","Tiltil","San Miguel","Maipú","Pudahuel","Quilicura","Renca","Estación Central","Puente Alto"]
+    };
 
-    function getZonaByComuna(comuna){
-      const c = (comuna||"").trim();
-      if (!c) return {detalle:"—", recargo:""};
-      if (ZONA_A.has(c)) return {detalle:"Zona A (base)", recargo:"Base"};
-      if (ZONA_B.has(c)) return {detalle:"Zona B (+0,3 UF)", recargo:"+0,3 UF"};
-      if (ZONA_C.has(c)) return {detalle:"Zona C (+0,5 UF)", recargo:"+0,5 UF"};
-      return {detalle:"Fuera RM (traslado a definir)", recargo:"A definir"};
-    }
-
-    function updateUI(){
-      const z = getZonaByComuna(comunaInput.value);
-      zonaInput.value = z.detalle;
-
-      if (planSelect.value === "visita"){
-        zonaHint.innerHTML = `Visita + Informe: <b>${z.detalle}</b>. Recargo: <b>${z.recargo}</b> (por traslado).`;
-      } else {
-        zonaHint.innerHTML = `Zonas aplican solo para <b>Visita + Informe</b> (traslado). Express y Pro no cambian por zona.`;
+    function guessZoneByComuna(c) {
+      const x = (c||"").trim().toLowerCase();
+      if (!x) return null;
+      for (const z of ["A","B","C"]) {
+        if ((ZONAS[z]||[]).some(n => n.toLowerCase() === x)) return z;
       }
-
-      // Subir antecedentes con plan preseleccionado
-      btnSubir.href = `subir_antecedentes.html?plan=${encodeURIComponent(planSelect.value)}`;
+      return null;
     }
 
-    comunaInput.addEventListener("input", updateUI);
-    planSelect.addEventListener("change", updateUI);
-    updateUI();
+    function refreshZona(){
+      const isVisita = plan.value === "visita";
+      if (!isVisita){
+        zona.value = "No aplica";
+        zona.disabled = true;
+        zona.classList.add("disabled");
+        return;
+      }
+      const z = guessZoneByComuna(comuna.value);
+      zona.disabled = true;
+      zona.classList.add("disabled");
+      zona.value = z ? `Zona ${z} (${z==="A"?"Base":z==="B"?"+0,3 UF":"+0,5 UF"})` : "Selecciona comuna para asignar zona";
+    }
+
+    plan.addEventListener("change", refreshZona);
+    comuna.addEventListener("input", refreshZona);
+    refreshZona();
   </script>
 </body>
 </html>
