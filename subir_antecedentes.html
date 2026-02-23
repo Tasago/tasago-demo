@@ -5,87 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TasaGo — Subir antecedentes</title>
   <meta name="theme-color" content="#295c99">
-
   <style>
-    :root{
-      --primary:#295c99;
-      --accent:#1d4e89;
-      --bg:#f4f7fb;
-      --text:#1c2a3a;
-      --muted:#5b6b7b;
-      --border:rgba(0,0,0,.10);
-      --shadow: 0 8px 24px rgba(15, 35, 60, .08);
-      --radius:16px;
-      --disabled:#eef2f7;
-    }
+    :root{ --primary:#295c99; --accent:#1d4e89; --bg:#f4f7fb; --text:#1c2a3a; --muted:#5b6b7b; --border:rgba(0,0,0,.10); --shadow:0 8px 24px rgba(15,35,60,.08); --radius:16px; --disabled:#eef2f7; }
     *{ box-sizing:border-box; }
     html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
 
-    .topbar{ position: sticky; top:0; z-index:10; background:#fff; border-bottom: 1px solid var(--border); }
-    .topbar-inner{ width:100%; max-width:920px; margin:0 auto; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
-    .logo-box{ background:#fff; border:1px solid var(--border); border-radius:14px; padding:10px 12px; box-shadow: 0 6px 18px rgba(15, 35, 60, .06); }
+    .topbar{ position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid var(--border); }
+    .topbar-inner{ max-width:920px; margin:0 auto; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .logo-box{ background:#fff; border:1px solid var(--border); border-radius:14px; padding:10px 12px; box-shadow:0 6px 18px rgba(15,35,60,.06); }
     .logo-box img{ height:46px; width:auto; display:block; }
     .nav a{ text-decoration:none; font-weight:900; color:var(--primary); padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#fff; }
 
-    .wrap{ width:100%; max-width:920px; margin:0 auto; padding:18px 14px 40px; }
-    .card{ background:#fff; border:1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding:16px; }
-    h1{ margin:0 0 6px 0; font-size: 26px; }
+    .wrap{ max-width:920px; margin:0 auto; padding:18px 14px 40px; }
+    .card{ background:#fff; border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px; }
+    h1{ margin:0 0 6px 0; font-size:26px; }
     .sub{ margin:0 0 14px 0; color:var(--muted); line-height:1.5; }
 
     form{ margin-top:14px; }
-    .grid{ display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:12px; }
-    .full{ grid-column: 1 / -1; }
-
+    .grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .full{ grid-column:1 / -1; }
     label{ display:block; font-weight:900; margin-bottom:6px; }
-    input, select, textarea{
-      width:100%;
-      padding:12px;
-      border-radius:12px;
-      border:1px solid rgba(0,0,0,.14);
-      background:#fff;
-      outline:none;
-      font-size: 15px;
-    }
-    textarea{ min-height: 90px; resize:vertical; }
+    input,select,textarea{ width:100%; padding:12px; border-radius:12px; border:1px solid rgba(0,0,0,.14); font-size:15px; }
+    textarea{ min-height:90px; resize:vertical; }
+    .hint{ margin-top:10px; background:#f6fbff; border:1px dashed rgba(41,92,153,.30); border-radius:14px; padding:12px 14px; color:#26435f; line-height:1.45; }
+    .disabled{ background:var(--disabled); color:#7a8794; }
 
-    .hint{
-      margin-top:10px;
-      background:#f6fbff;
-      border:1px dashed rgba(41,92,153,.30);
-      border-radius:14px;
-      padding:12px 14px;
-      color:#26435f;
-      line-height:1.45;
-    }
-    .disabled{
-      background:var(--disabled);
-      color:#7a8794;
-    }
+    .btn{ display:block; width:100%; text-align:center; text-decoration:none; font-weight:900; border-radius:14px; padding:16px 14px; font-size:18px; margin-top:12px; cursor:pointer; background:var(--primary); color:#fff; }
+    .btn:hover{ background:var(--accent); }
 
-    .btn{
-      display:block; width:100%; text-align:center; text-decoration:none; font-weight:900;
-      border-radius: 14px; padding: 16px 14px; border:1px solid transparent;
-      font-size:18px; margin-top: 12px; cursor:pointer;
-      background: var(--primary); color:#fff;
-    }
-    .btn:hover{ background: var(--accent); }
-
-    @media (max-width:640px){
-      .grid{ grid-template-columns: 1fr; }
-      .logo-box img{ height:44px; }
-    }
+    @media (max-width:640px){ .grid{ grid-template-columns:1fr; } .logo-box img{ height:44px; } }
   </style>
 </head>
-
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="logo-box">
-        <img src="Logotipo de TasaGo horizontal.png" alt="TasaGo">
-      </div>
-      <div class="nav">
-        <a href="index.html">Inicio</a>
-      </div>
+      <div class="logo-box"><img src="tasago-logo.png" alt="TasaGo"></div>
+      <div class="nav"><a href="index.html">Inicio</a></div>
     </div>
   </div>
 
@@ -96,7 +51,6 @@
 
       <form id="form">
         <div class="grid">
-
           <div>
             <label for="plan">Plan</label>
             <select id="plan" name="plan" required>
@@ -183,20 +137,15 @@
             <input id="docs" name="docs" type="file" accept="application/pdf,image/*" multiple>
             <div class="hint">Ideal: escritura/rol, contribuciones, certificados relevantes.</div>
           </div>
-
         </div>
 
         <button class="btn" type="submit">Guardar y continuar</button>
-
-        <div class="hint">
-          MVP: guardamos antecedentes y continuamos a pago. Luego conectamos la generación de informe automático.
-        </div>
+        <div class="hint">MVP: guardamos antecedentes y continuamos a pago.</div>
       </form>
     </div>
   </div>
 
   <script>
-    // === Edita estas listas según tu estrategia ===
     const ZONAS = {
       A: ["Las Condes","Vitacura","Lo Barnechea","Providencia"],
       B: ["Ñuñoa","Santiago","Macul","La Cisterna","La Florida","Peñalolén","Independencia","Recoleta"],
