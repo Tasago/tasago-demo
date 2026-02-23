@@ -4,24 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TasaGo — Tasación digital RM</title>
-
   <link rel="manifest" href="manifiesto.json">
   <meta name="theme-color" content="#295c99">
 
   <style>
-    :root{
-      --primary:#295c99;
-      --accent:#1d4e89;
-      --bg:#f4f7fb;
-      --text:#1c2a3a;
-      --muted:#5b6b7b;
-      --border:rgba(0,0,0,.10);
-      --shadow: 0 8px 24px rgba(15, 35, 60, .08);
-      --radius:16px;
-      --disabled:#eef2f7;
-    }
+    :root{ --primary:#295c99; --accent:#1d4e89; --bg:#f4f7fb; --text:#1c2a3a; --muted:#5b6b7b; --border:rgba(0,0,0,.10); --shadow:0 8px 24px rgba(15,35,60,.08); --radius:16px; }
     *{ box-sizing:border-box; }
-    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
+    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family:Arial,sans-serif; }
 
     .topbar{ position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid var(--border); }
     .topbar-inner{ max-width:920px; margin:0 auto; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
@@ -32,55 +21,60 @@
 
     .wrap{ max-width:920px; margin:0 auto; padding:18px 14px 40px; }
     .card{ background:#fff; border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px; }
+
     h1{ margin:0 0 6px 0; font-size:28px; }
+    .badge{ display:inline-block; margin-left:8px; padding:6px 10px; border-radius:10px; background:#ffedd5; color:#9a3412; font-weight:900; font-size:14px; vertical-align:middle; }
     .sub{ margin:0 0 14px 0; color:var(--muted); line-height:1.5; }
 
-    .note{ margin-top:12px; background:#fff; border:1px dashed rgba(41,92,153,.30); border-radius:14px; padding:12px 14px; color:#26435f; line-height:1.45; }
+    .note{ margin-top:12px; background:#f6fbff; border:1px dashed rgba(41,92,153,.30); border-radius:14px; padding:12px 14px; color:#26435f; line-height:1.45; }
 
-    .btn{ display:block; width:100%; text-align:center; text-decoration:none; font-weight:900; border-radius:14px; padding:16px 14px; font-size:18px; margin-top:12px; }
+    .btn{ display:block; width:100%; text-align:center; text-decoration:none; font-weight:900; border-radius:14px; padding:16px 14px; font-size:18px; margin-top:12px; border:1px solid transparent; }
     .btn-primary{ background:var(--primary); color:#fff; }
     .btn-primary:hover{ background:var(--accent); }
     .btn-success{ background:#3a9b4a; color:#fff; }
     .btn-soft{ background:#e8f1fb; color:#1b3a57; border:1px solid rgba(41,92,153,.18); }
 
-    .cards{ margin-top:14px; display:grid; grid-template-columns:1fr; gap:12px; }
-    .mini-card{ background:#fff; border:1px solid var(--border); border-radius:var(--radius); box-shadow:0 10px 24px rgba(15,35,60,.06); padding:16px; }
-    .mini-card h3{ margin:0 0 8px 0; }
-    .mini-card p{ margin:0; color:var(--muted); line-height:1.5; }
-    .mini-list{ margin:10px 0 0 18px; color:var(--muted); }
-    .mini-list li{ margin:6px 0; }
+    .grid{ margin-top:14px; display:grid; grid-template-columns:1fr; gap:12px; }
+    .mini{ background:#fff; border:1px solid var(--border); border-radius:var(--radius); box-shadow:0 10px 24px rgba(15,35,60,.06); padding:16px; }
+    .mini h3{ margin:0 0 8px 0; }
+    .mini p{ margin:0; color:var(--muted); line-height:1.5; }
+    .mini ul{ margin:10px 0 0 18px; color:var(--muted); }
+    .mini li{ margin:6px 0; }
     .cta-row{ margin-top:12px; display:flex; gap:10px; flex-wrap:wrap; }
     .btn-outline{ display:inline-block; padding:12px 14px; border-radius:12px; border:1px solid rgba(0,0,0,.18); text-decoration:none; font-weight:900; background:#fff; }
 
     .footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:13px; }
 
-    @media (max-width:520px){
-      .logo-box img{ height:44px; }
-      h1{ font-size:26px; }
+    /* WhatsApp floating button */
+    .wa-float{
+      position: fixed; right: 16px; bottom: 16px; z-index: 9999;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 12px 14px; border-radius: 999px; background: #25D366; color: #fff;
+      text-decoration: none; font-weight: 900; box-shadow: 0 10px 24px rgba(0,0,0,.18);
     }
+    .wa-float:active{ transform: translateY(1px); }
+    .wa-float .wa-dot{ width:10px; height:10px; border-radius:999px; background: rgba(255,255,255,.85); }
+    @media (max-width:420px){ .wa-float{ right:12px; bottom:12px; padding:12px 12px; } .wa-float .wa-text{ display:none; } }
   </style>
 </head>
-
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="logo-box">
-        <img src="tasago-logo.png" alt="TasaGo">
-      </div>
+      <div class="logo-box"><img src="tasago-logo.png" alt="TasaGo"></div>
       <div class="nav">
         <a href="servicios.html">Cotizar</a>
-        <a href="preguntas frecuentes.html">Ayuda</a>
+        <a href="preguntas_frecuentes.html">Ayuda</a>
       </div>
     </div>
   </div>
 
   <div class="wrap">
     <div class="card">
-      <h1>Tasación en RM en 48h <span style="background:#ffedd5;color:#9a3412;padding:6px 10px;border-radius:10px;font-weight:900;font-size:14px;vertical-align:middle;">Urgente 24h</span></h1>
+      <h1>Tasación en RM en 48h <span class="badge">Urgente 24h</span></h1>
       <p class="sub">Pagas online. Subes antecedentes. Recibes PDF profesional con folio y firma simple.</p>
 
       <div class="note">
-        Nota: La <b>zona</b> se usa solo para <b>Visita + Informe</b> (traslado). <b>Express</b> y <b>Pro</b> no aplican.
+        Nota: la <b>zona</b> se usa solo para <b>Visita + Informe</b> (traslado). Express y Pro <b>no aplican</b>.
       </div>
 
       <a class="btn btn-primary" href="servicios.html">Cotizar</a>
@@ -88,22 +82,22 @@
       <a class="btn btn-soft" href="subir_antecedentes.html">Subir antecedentes</a>
     </div>
 
-    <div class="cards">
-      <div class="mini-card">
+    <div class="grid">
+      <div class="mini">
         <h3>Servicio claro y defendible</h3>
-        <p>Te pedimos solo lo necesario y te avisamos faltantes. Informe PDF con respaldo, folio y firma simple.</p>
-        <ul class="mini-list">
+        <p>Te pedimos lo necesario y te avisamos faltantes. Informe PDF con respaldo, folio y firma simple.</p>
+        <ul>
           <li>Checklist inteligente de faltantes</li>
           <li>Comparables y ajustes explicados (Pro)</li>
           <li>Visita técnica con fotos (Visita + Informe)</li>
         </ul>
         <div class="cta-row">
-          <a class="btn-outline" href="preguntas frecuentes.html">Preguntas frecuentes</a>
+          <a class="btn-outline" href="preguntas_frecuentes.html">Preguntas frecuentes</a>
           <a class="btn-outline" href="mas_servicios.html">¿Buscas asesoría adicional?</a>
         </div>
       </div>
 
-      <div class="mini-card">
+      <div class="mini">
         <h3>¿Buscas asesoría adicional?</h3>
         <p>Corretaje, regularización DOM, recepción final, estudio de cabida (PRC/OGUC), arriendo, subdivisión y más.</p>
         <div class="cta-row">
@@ -114,5 +108,9 @@
 
     <div class="footer">© Tasago · Tasación digital RM</div>
   </div>
+
+  <a class="wa-float" href="https://wa.me/56992724280" target="_blank" rel="noopener">
+    <span class="wa-dot"></span><span class="wa-text">WhatsApp</span>
+  </a>
 </body>
 </html>
