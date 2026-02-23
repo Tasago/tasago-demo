@@ -7,55 +7,85 @@
   <meta name="theme-color" content="#295c99">
 
   <style>
-    :root{--primary:#295c99;--accent:#1d4e89;--bg:#f4f7fb;--text:#1c2a3a;--muted:#5b6b7b;--border:rgba(0,0,0,.10);--shadow:0 8px 24px rgba(15,35,60,.08);--radius:16px;}
-    *{box-sizing:border-box;}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Arial,sans-serif;}
-
-    .topbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--border);}
-    .topbar-inner{max-width:920px;margin:0 auto;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
-    .logo-box{background:#fff;border:1px solid var(--border);border-radius:14px;padding:10px 12px;box-shadow:0 6px 18px rgba(15,35,60,.06);display:flex;align-items:center;justify-content:center;}
-    .logo-box img{height:48px;width:auto;display:block;}
-    .nav{display:flex;gap:10px;flex-wrap:wrap;}
-    .nav a{text-decoration:none;font-weight:900;color:var(--primary);padding:10px 12px;border-radius:12px;border:1px solid var(--border);background:#fff;}
-    .nav a:hover{border-color:rgba(41,92,153,.35);}
-
-    .wrap{max-width:920px;margin:0 auto;padding:18px 14px 40px;}
-    .card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px;}
-    h1{margin:0 0 6px 0;font-size:26px;}
-    .sub{margin:0 0 14px 0;color:var(--muted);line-height:1.5;}
-
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px;}
-    label{display:block;font-weight:900;margin-bottom:6px;}
-    input,select,textarea{
-      width:100%;padding:12px;border-radius:12px;border:1px solid rgba(0,0,0,.14);
-      background:#fff;font-size:15px;outline:none;
+    :root{
+      --primary:#295c99;
+      --accent:#1d4e89;
+      --bg:#f4f7fb;
+      --text:#1c2a3a;
+      --muted:#5b6b7b;
+      --border:rgba(0,0,0,.10);
+      --shadow: 0 8px 24px rgba(15, 35, 60, .08);
+      --radius:16px;
+      --disabled:#eef2f7;
     }
-    input[readonly]{background:#f8fafc;}
-    textarea{min-height:90px;resize:vertical;}
-    .full{grid-column:1/-1;}
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
 
-    .hint{margin-top:10px;background:#f6fbff;border:1px dashed rgba(41,92,153,.30);border-radius:14px;padding:12px 14px;color:#26435f;line-height:1.45;}
-    .hint strong{color:#12314d;}
+    .topbar{ position: sticky; top:0; z-index:10; background:#fff; border-bottom: 1px solid var(--border); }
+    .topbar-inner{ width:100%; max-width:920px; margin:0 auto; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .logo-box{ background:#fff; border:1px solid var(--border); border-radius:14px; padding:10px 12px; box-shadow: 0 6px 18px rgba(15, 35, 60, .06); }
+    .logo-box img{ height:46px; width:auto; display:block; }
+    .nav a{ text-decoration:none; font-weight:900; color:var(--primary); padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#fff; }
+
+    .wrap{ width:100%; max-width:920px; margin:0 auto; padding:18px 14px 40px; }
+    .card{ background:#fff; border:1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding:16px; }
+    h1{ margin:0 0 6px 0; font-size: 26px; }
+    .sub{ margin:0 0 14px 0; color:var(--muted); line-height:1.5; }
+
+    form{ margin-top:14px; }
+    .grid{ display:grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap:12px; }
+    .full{ grid-column: 1 / -1; }
+
+    label{ display:block; font-weight:900; margin-bottom:6px; }
+    input, select, textarea{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid rgba(0,0,0,.14);
+      background:#fff;
+      outline:none;
+      font-size: 15px;
+    }
+    textarea{ min-height: 90px; resize:vertical; }
+
+    .hint{
+      margin-top:10px;
+      background:#f6fbff;
+      border:1px dashed rgba(41,92,153,.30);
+      border-radius:14px;
+      padding:12px 14px;
+      color:#26435f;
+      line-height:1.45;
+    }
+
+    .disabled{
+      background:var(--disabled);
+      color:#7a8794;
+    }
 
     .btn{
-      display:block;width:100%;text-align:center;text-decoration:none;font-weight:900;
-      border-radius:14px;padding:16px 14px;border:1px solid transparent;font-size:18px;
-      margin-top:12px;cursor:pointer;background:var(--primary);color:#fff;
+      display:block; width:100%; text-align:center; text-decoration:none; font-weight:900;
+      border-radius: 14px; padding: 16px 14px; border:1px solid transparent;
+      font-size:18px; margin-top: 12px; cursor:pointer;
+      background: var(--primary); color:#fff;
     }
-    .btn:hover{background:var(--accent);}
+    .btn:hover{ background: var(--accent); }
 
-    @media(max-width:640px){.grid{grid-template-columns:1fr;}.logo-box img{height:46px;}}
+    @media (max-width:640px){
+      .grid{ grid-template-columns: 1fr; }
+      .logo-box img{ height:44px; }
+    }
   </style>
 </head>
 
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="logo-box"><img src="logo-tasago.png" alt="TasaGo"></div>
+      <div class="logo-box">
+        <img src="Logotipo de TasaGo horizontal.png" alt="TasaGo">
+      </div>
       <div class="nav">
         <a href="index.html">Inicio</a>
-        <a href="servicios.html">Planes</a>
-        <a href="faq.html">Ayuda</a>
       </div>
     </div>
   </div>
@@ -63,49 +93,35 @@
   <div class="wrap">
     <div class="card">
       <h1>Subir antecedentes</h1>
-      <p class="sub">Comuna y año se autocompletan. La <b>zona se calcula automáticamente</b> y solo aplica para <b>Visita + Informe</b>.</p>
+      <p class="sub">Completa lo esencial. Zona solo aplica si eliges <b>Visita + Informe</b>.</p>
 
       <form id="form">
         <div class="grid">
+
           <div>
             <label for="plan">Plan</label>
-            <select id="plan" name="plan">
+            <select id="plan" name="plan" required>
               <option value="express">Express 24h ($900)</option>
               <option value="pro">Pro PDF (1.5 UF)</option>
               <option value="visita">Visita + Informe (desde 2.5 UF)</option>
             </select>
           </div>
 
-          <div>
-            <label for="comuna">Comuna</label>
-            <input id="comuna" name="comuna" list="comunas" placeholder="Escribe para buscar (ej: Ñuñoa)" required>
-            <datalist id="comunas">
-              <!-- Lista amplia (puedes reducir a RM si quieres) -->
-              <option value="Cerrillos"></option><option value="Cerro Navia"></option><option value="Conchalí"></option>
-              <option value="El Bosque"></option><option value="Estación Central"></option><option value="Huechuraba"></option>
-              <option value="Independencia"></option><option value="La Cisterna"></option><option value="La Florida"></option>
-              <option value="La Granja"></option><option value="La Pintana"></option><option value="La Reina"></option>
-              <option value="Las Condes"></option><option value="Lo Barnechea"></option><option value="Lo Espejo"></option>
-              <option value="Lo Prado"></option><option value="Macul"></option><option value="Maipú"></option>
-              <option value="Ñuñoa"></option><option value="Pedro Aguirre Cerda"></option><option value="Peñalolén"></option>
-              <option value="Providencia"></option><option value="Pudahuel"></option><option value="Puente Alto"></option>
-              <option value="Quilicura"></option><option value="Quinta Normal"></option><option value="Recoleta"></option>
-              <option value="Renca"></option><option value="San Bernardo"></option><option value="San Joaquín"></option>
-              <option value="San José de Maipo"></option><option value="San Miguel"></option><option value="San Ramón"></option>
-              <option value="Santiago"></option><option value="Vitacura"></option>
-              <!-- Provincias RM frecuentes -->
-              <option value="Colina"></option><option value="Lampa"></option><option value="Tiltil"></option>
-              <option value="Buin"></option><option value="Paine"></option><option value="Calera de Tango"></option>
-              <option value="Pirque"></option><option value="Talagante"></option><option value="El Monte"></option>
-              <option value="Isla de Maipo"></option><option value="Peñaflor"></option><option value="Padre Hurtado"></option>
-              <option value="Melipilla"></option><option value="Curacaví"></option><option value="María Pinto"></option>
-              <option value="San Pedro"></option><option value="Alhué"></option>
-            </datalist>
+          <div class="full">
+            <label for="comunaSearch">Buscar comuna (RM)</label>
+            <input id="comunaSearch" type="text" placeholder="Escribe para filtrar… (ej: Ñuñoa)">
           </div>
 
-          <div>
+          <div class="full">
+            <label for="comuna">Comuna</label>
+            <select id="comuna" name="comuna" required></select>
+            <div class="hint">Express y Pro: zona <b>No aplica</b>. Visita: zona se asigna por comuna.</div>
+          </div>
+
+          <!-- Zona: se muestra como campo deshabilitado con No aplica o Zona X -->
+          <div class="full">
             <label for="zona">Zona (automática)</label>
-            <input id="zona" name="zona" type="text" value="—" readonly>
+            <input id="zona" class="disabled" value="No aplica" disabled>
           </div>
 
           <div class="full">
@@ -120,13 +136,14 @@
               <option>Casa</option>
               <option>Terreno</option>
               <option>Local/Oficina</option>
+              <option>Bodega/Estacionamiento</option>
             </select>
           </div>
 
           <div>
-            <label for="anio">Año construcción</label>
-            <input id="anio" name="anio" list="anios" placeholder="Ej: 2004" inputmode="numeric">
-            <datalist id="anios"></datalist>
+            <label for="anio">Año de construcción</label>
+            <input id="anio" name="anio" type="number" placeholder="Ej: 2008" min="1900" max="2030">
+            <div class="hint">Si no sabes el año exacto, aproxima (ej: 2005–2010).</div>
           </div>
 
           <div>
@@ -155,7 +172,7 @@
 
           <div class="full">
             <label for="comentarios">Comentarios</label>
-            <textarea id="comentarios" name="comentarios" placeholder="Ej: estacionamiento, bodega, remodelación, piso, vista, etc."></textarea>
+            <textarea id="comentarios" name="comentarios" placeholder="Ej: incluye bodega, estacionamiento, remodelación, vista, piso, etc."></textarea>
           </div>
 
           <div class="full">
@@ -171,82 +188,120 @@
           <div class="full">
             <label for="docs">Documentos (opcional)</label>
             <input id="docs" name="docs" type="file" accept="application/pdf,image/*" multiple>
-            <div class="hint">Ideal: escritura/rol, contribuciones, certificados. Si no los tienes, igual podemos avanzar (según plan).</div>
+            <div class="hint">Ideal: escritura/rol, contribuciones, certificados relevantes.</div>
           </div>
-        </div>
 
-        <div class="hint" id="zonaHint">
-          Zonas aplican solo para <strong>Visita + Informe</strong> (traslado). Express y Pro no cambian por zona.
         </div>
 
         <button class="btn" type="submit">Guardar y continuar</button>
-        <div class="hint">Luego pasas a <strong>Pagar</strong>. En el MVP el pago puede ser simulado.</div>
+
+        <div class="hint">
+          MVP: guardamos antecedentes y continuamos a pago. Luego conectamos la generación de informe automático.
+        </div>
       </form>
     </div>
   </div>
 
   <script>
-    // Preselección de plan desde querystring ?plan=
-    const params = new URLSearchParams(location.search);
-    const qp = (params.get("plan") || "").toLowerCase();
-    const planSelect = document.getElementById("plan");
-    if (["express","pro","visita"].includes(qp)) planSelect.value = qp;
+    // === Edita estas listas según tu estrategia ===
+    const ZONAS = {
+      A: ["Las Condes","Vitacura","Lo Barnechea","Providencia"],
+      B: ["Ñuñoa","Santiago","Macul","La Cisterna","La Florida","Peñalolén","Independencia","Recoleta"],
+      C: ["Colina","Lampa","Tiltil","San Miguel","Maipú","Pudahuel","Quilicura","Renca","Estación Central","Puente Alto","La Granja","San Ramón","Cerrillos"]
+    };
+    const RM_ALL = Array.from(new Set([ ...ZONAS.A, ...ZONAS.B, ...ZONAS.C ])).sort((a,b)=>a.localeCompare(b,"es"));
 
-    // Datalist años (1950-2026)
-    const dl = document.getElementById("anios");
-    for (let y = 2026; y >= 1950; y--) {
-      const opt = document.createElement("option");
-      opt.value = String(y);
-      dl.appendChild(opt);
+    function fillSelect(selectEl, options, placeholder="Selecciona…") {
+      selectEl.innerHTML = "";
+      const ph = document.createElement("option");
+      ph.value = "";
+      ph.textContent = placeholder;
+      ph.disabled = true;
+      ph.selected = true;
+      selectEl.appendChild(ph);
+
+      options.forEach(v => {
+        const o = document.createElement("option");
+        o.value = v;
+        o.textContent = v;
+        selectEl.appendChild(o);
+      });
+
+      const other = document.createElement("option");
+      other.value = "Otra / No estoy seguro";
+      other.textContent = "Otra / No estoy seguro";
+      selectEl.appendChild(other);
     }
 
-    // --- ZONAS AUTOMÁTICAS (RM) ---
-    const ZONA_A = new Set(["Las Condes","Vitacura","Lo Barnechea","Providencia"]);
-    const ZONA_B = new Set(["Ñuñoa","Santiago","Macul","La Florida","La Cisterna","San Miguel","Peñalolén","La Reina","Estación Central","Independencia","Recoleta","Quinta Normal","Maipú","San Joaquín"]);
-    const ZONA_C = new Set(["Puente Alto","San Bernardo","Pudahuel","Renca","Cerro Navia","Lo Prado","Lo Espejo","Pedro Aguirre Cerda","La Pintana","El Bosque","Huechuraba","Quilicura","Colina","Lampa","Buin","Paine","Padre Hurtado","Peñaflor","Talagante","El Monte","Isla de Maipo","Calera de Tango","Pirque","San José de Maipo","Melipilla","Curacaví","María Pinto","San Pedro","Alhué","Tiltil"]);
-
-    function getZonaByComuna(comuna){
-      const c = (comuna||"").trim();
-      if (!c) return {zona:"—", recargo:"", detalle:"—"};
-      if (ZONA_A.has(c)) return {zona:"A", recargo:"Base", detalle:"Zona A (base)"};
-      if (ZONA_B.has(c)) return {zona:"B", recargo:"+0,3 UF", detalle:"Zona B (+0,3 UF)"};
-      if (ZONA_C.has(c)) return {zona:"C", recargo:"+0,5 UF", detalle:"Zona C (+0,5 UF)"};
-      return {zona:"Fuera RM", recargo:"A definir", detalle:"Fuera RM (traslado a definir)"};
-    }
-
-    const comunaInput = document.getElementById("comuna");
-    const zonaInput = document.getElementById("zona");
-    const zonaHint = document.getElementById("zonaHint");
-
-    function updateZonaUI(){
-      const plan = planSelect.value;
-      const z = getZonaByComuna(comunaInput.value);
-      zonaInput.value = z.detalle;
-
-      if (plan === "visita") {
-        zonaHint.innerHTML = `Visita + Informe: <strong>${z.detalle}</strong>. Recargo: <strong>${z.recargo}</strong> (por traslado).`;
-      } else {
-        zonaHint.innerHTML = `Zonas aplican solo para <strong>Visita + Informe</strong> (traslado). Express y Pro no cambian por zona.`;
+    function filterSelect(selectEl, query) {
+      const q = (query || "").trim().toLowerCase();
+      for (const opt of selectEl.options) {
+        if (!opt.value) continue;
+        const txt = opt.textContent.toLowerCase();
+        opt.hidden = q && !txt.includes(q);
       }
     }
 
-    comunaInput.addEventListener("input", updateZonaUI);
-    planSelect.addEventListener("change", updateZonaUI);
-    updateZonaUI();
+    function guessZoneByComuna(c) {
+      const x = (c||"").trim().toLowerCase();
+      if (!x) return null;
+      for (const z of ["A","B","C"]) {
+        if ((ZONAS[z]||[]).some(n => n.toLowerCase() === x)) return z;
+      }
+      return null;
+    }
+
+    const params = new URLSearchParams(location.search);
+    const qpPlan = (params.get("plan") || "").toLowerCase();
+
+    const plan = document.getElementById("plan");
+    const comunaSearch = document.getElementById("comunaSearch");
+    const comuna = document.getElementById("comuna");
+    const zona = document.getElementById("zona");
+    const anio = document.getElementById("anio");
+
+    if (["express","pro","visita"].includes(qpPlan)) plan.value = qpPlan;
+
+    fillSelect(comuna, RM_ALL, "Selecciona comuna (RM)");
+
+    function refreshZona(){
+      const isVisita = plan.value === "visita";
+      if (!isVisita){
+        zona.value = "No aplica";
+        return;
+      }
+      const z = guessZoneByComuna(comuna.value);
+      zona.value = z ? `Zona ${z} (${z==="A"?"Base":z==="B"?"+0,3 UF":"+0,5 UF"})` : "Selecciona comuna para asignar zona";
+    }
+
+    plan.addEventListener("change", refreshZona);
+    comuna.addEventListener("change", refreshZona);
+    comunaSearch.addEventListener("input", ()=> filterSelect(comuna, comunaSearch.value));
+
+    anio.addEventListener("blur", () => {
+      if (!anio.value) return;
+      const v = parseInt(anio.value, 10);
+      if (Number.isNaN(v) || v < 1900 || v > 2030) {
+        alert("Revisa el año de construcción (1900–2030). Si no sabes, deja vacío o aproxima.");
+        anio.focus();
+      }
+    });
+
+    refreshZona();
 
     document.getElementById("form").addEventListener("submit", (e) => {
       e.preventDefault();
       const data = {
-        plan: planSelect.value,
-        comuna: comunaInput.value.trim(),
-        zona: zonaInput.value,
+        plan: plan.value,
+        comuna: comuna.value || "",
+        zona: (plan.value === "visita") ? zona.value : "No aplica",
         direccion: document.getElementById("direccion").value.trim(),
         tipo: document.getElementById("tipo").value,
-        anio: document.getElementById("anio").value,
+        anio: anio.value || "",
         estado: document.getElementById("estado").value,
-        superficie: document.getElementById("superficie").value,
-        dorms: document.getElementById("dorms").value,
-        banos: document.getElementById("banos").value,
+        superficie: document.getElementById("superficie").value || "",
+        dorms: document.getElementById("dorms").value || "",
+        banos: document.getElementById("banos").value || "",
         comentarios: document.getElementById("comentarios").value.trim(),
         ts: new Date().toISOString()
       };
