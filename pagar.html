@@ -5,102 +5,54 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>TasaGo — Pagar</title>
   <meta name="theme-color" content="#295c99">
-
   <style>
-    :root{
-      --primary:#295c99;
-      --accent:#1d4e89;
-      --bg:#f4f7fb;
-      --text:#1c2a3a;
-      --muted:#5b6b7b;
-      --border:rgba(0,0,0,.10);
-      --shadow:0 8px 24px rgba(15,35,60,.08);
-      --radius:16px;
-    }
+    :root{ --primary:#295c99; --accent:#1d4e89; --bg:#f4f7fb; --text:#1c2a3a; --muted:#5b6b7b; --border:rgba(0,0,0,.10); --shadow:0 8px 24px rgba(15,35,60,.08); --radius:16px; }
     *{ box-sizing:border-box; }
-    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
+    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family:Arial,sans-serif; }
 
     .topbar{ position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid var(--border); }
-    .topbar-inner{
-      width:100%; max-width:920px; margin:0 auto; padding:12px 14px;
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-    }
-    .logo-box{
-      background:#fff; border:1px solid var(--border); border-radius:14px; padding:10px 12px;
-      box-shadow:0 6px 18px rgba(15,35,60,.06);
-    }
+    .topbar-inner{ max-width:920px; margin:0 auto; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    .logo-box{ background:#fff; border:1px solid var(--border); border-radius:14px; padding:10px 12px; box-shadow:0 6px 18px rgba(15,35,60,.06); }
     .logo-box img{ height:46px; width:auto; display:block; }
     .nav{ display:flex; gap:10px; flex-wrap:wrap; }
-    .nav a{
-      text-decoration:none; font-weight:900; color:var(--primary);
-      padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#fff;
-    }
+    .nav a{ text-decoration:none; font-weight:900; color:var(--primary); padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#fff; }
 
-    .wrap{ width:100%; max-width:920px; margin:0 auto; padding:18px 14px 40px; }
-    .card{
-      background:#fff; border:1px solid var(--border); border-radius:var(--radius);
-      box-shadow:var(--shadow); padding:16px;
-    }
+    .wrap{ max-width:920px; margin:0 auto; padding:18px 14px 40px; }
+    .card{ background:#fff; border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px; }
     h1{ margin:0 0 6px 0; font-size:26px; }
     .sub{ margin:0 0 14px 0; color:var(--muted); line-height:1.5; }
 
     label{ display:block; font-weight:900; margin:10px 0 6px; }
-    select{
-      width:100%; padding:12px; border-radius:12px; border:1px solid rgba(0,0,0,.14);
-      background:#fff; font-size:15px;
-    }
+    select{ width:100%; padding:12px; border-radius:12px; border:1px solid rgba(0,0,0,.14); background:#fff; font-size:15px; }
 
-    .note{
-      margin-top:12px;
-      background:#f6fbff;
-      border:1px dashed rgba(41,92,153,.30);
-      border-radius:14px;
-      padding:12px 14px;
-      color:#26435f;
-      line-height:1.45;
-    }
-
-    .price-box{
-      margin-top:12px;
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:14px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:12px;
-      background:#fff;
-    }
+    .price-box{ margin-top:12px; border:1px solid var(--border); border-radius:14px; padding:14px; display:flex; justify-content:space-between; align-items:center; gap:12px; }
     .price-title{ font-weight:900; }
     .price-value{ font-weight:900; font-size:20px; }
 
-    .btn{
-      display:block; width:100%; text-align:center; text-decoration:none; font-weight:900;
-      border-radius:14px; padding:16px 14px; font-size:18px; margin-top:12px;
-      border:1px solid transparent;
-    }
+    .note{ margin-top:12px; background:#f6fbff; border:1px dashed rgba(41,92,153,.30); border-radius:14px; padding:12px 14px; color:#26435f; line-height:1.45; }
+
+    .btn{ display:block; width:100%; text-align:center; text-decoration:none; font-weight:900; border-radius:14px; padding:16px 14px; font-size:18px; margin-top:12px; border:1px solid transparent; }
     .btn-primary{ background:var(--primary); color:#fff; }
     .btn-primary:hover{ background:var(--accent); }
     .btn-soft{ background:#e8f1fb; color:#1b3a57; border:1px solid rgba(41,92,153,.18); }
 
-    .whatsapp-btn{
-      display:block; width:100%; text-align:center; text-decoration:none; font-weight:900;
-      border-radius:14px; padding:14px 12px;
-      background:#25D366; color:#fff;
-      margin: 12px 0 0;
-    }
-    .whatsapp-btn:hover{ filter:brightness(.95); }
-
     .footer{ margin-top:18px; text-align:center; color:var(--muted); font-size:13px; }
+
+    .wa-float{
+      position: fixed; right: 16px; bottom: 16px; z-index: 9999;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 12px 14px; border-radius: 999px; background: #25D366; color: #fff;
+      text-decoration: none; font-weight: 900; box-shadow: 0 10px 24px rgba(0,0,0,.18);
+    }
+    .wa-float:active{ transform: translateY(1px); }
+    .wa-float .wa-dot{ width:10px; height:10px; border-radius:999px; background: rgba(255,255,255,.85); }
+    @media (max-width:420px){ .wa-float{ right:12px; bottom:12px; padding:12px 12px; } .wa-float .wa-text{ display:none; } }
   </style>
 </head>
-
 <body>
   <div class="topbar">
     <div class="topbar-inner">
-      <div class="logo-box">
-        <img src="tasago-logo.png" alt="TasaGo">
-      </div>
+      <div class="logo-box"><img src="tasago-logo.png" alt="TasaGo"></div>
       <div class="nav">
         <a href="index.html">Inicio</a>
         <a href="servicios.html">Planes</a>
@@ -124,7 +76,7 @@
       <div class="price-box">
         <div>
           <div class="price-title" id="priceTitle">Express 24h</div>
-          <div style="color:var(--muted); font-size:13px;" id="priceDesc">Entrega en 24h hábiles</div>
+          <div style="color:var(--muted);font-size:13px;" id="priceDesc">Entrega en 24h hábiles</div>
         </div>
         <div class="price-value" id="priceValue">$900</div>
       </div>
@@ -135,17 +87,12 @@
 
       <a class="btn btn-primary" id="payBtn" href="#">Pagar con Mercado Pago (Demo)</a>
       <a class="btn btn-soft" href="subir_antecedentes.html">Subir antecedentes</a>
-
-      <a class="whatsapp-btn" href="https://wa.me/56992724280" target="_blank" rel="noopener">
-        Hablar por WhatsApp
-      </a>
     </div>
 
     <div class="footer">© Tasago · Pago</div>
   </div>
 
   <script>
-    // Preselección por querystring ?plan=express|pro|visita
     const params = new URLSearchParams(location.search);
     const qpPlan = (params.get("plan") || "").toLowerCase();
 
@@ -157,11 +104,10 @@
 
     const PLAN_INFO = {
       express: { title:"Express 24h", desc:"Entrega en 24h hábiles", price:"$900" },
-      pro:     { title:"Pro PDF",     desc:"Entrega 3–4 días hábiles", price:"1.5 UF" },
+      pro:     { title:"Pro PDF", desc:"Entrega 3–4 días hábiles", price:"1.5 UF" },
       visita:  { title:"Visita + Informe", desc:"Entrega 4–5 días (según zona)", price:"Desde 2.5 UF" }
     };
 
-    // Si existe caso guardado, preferir ese plan
     try{
       const saved = JSON.parse(localStorage.getItem("tasago_case") || "null");
       if (saved?.plan) planEl.value = saved.plan;
@@ -175,11 +121,9 @@
       priceDesc.textContent = p.desc;
       priceValue.textContent = p.price;
 
-      // MVP demo: guardamos plan "pagado" en localStorage
       payBtn.onclick = (e) => {
         e.preventDefault();
-        const paid = { plan: planEl.value, paid: true, paid_at: new Date().toISOString() };
-        localStorage.setItem("tasago_payment", JSON.stringify(paid));
+        localStorage.setItem("tasago_payment", JSON.stringify({ plan: planEl.value, paid:true, paid_at:new Date().toISOString() }));
         alert("Pago simulado OK. Ahora sube antecedentes para generar el informe.");
         location.href = "subir_antecedentes.html?plan=" + encodeURIComponent(planEl.value);
       };
@@ -188,5 +132,9 @@
     planEl.addEventListener("change", refresh);
     refresh();
   </script>
+
+  <a class="wa-float" href="https://wa.me/56992724280" target="_blank" rel="noopener">
+    <span class="wa-dot"></span><span class="wa-text">WhatsApp</span>
+  </a>
 </body>
 </html>
