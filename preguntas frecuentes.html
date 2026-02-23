@@ -8,21 +8,34 @@
   <style>
     :root{ --primary:#295c99; --accent:#1d4e89; --bg:#f4f7fb; --text:#1c2a3a; --muted:#5b6b7b; --border:rgba(0,0,0,.10); --shadow:0 8px 24px rgba(15,35,60,.08); --radius:16px; }
     *{ box-sizing:border-box; }
-    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family: Arial, sans-serif; }
+    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family:Arial,sans-serif; }
+
     .topbar{ position:sticky; top:0; z-index:10; background:#fff; border-bottom:1px solid var(--border); }
     .topbar-inner{ max-width:920px; margin:0 auto; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; gap:12px; }
     .logo-box{ background:#fff; border:1px solid var(--border); border-radius:14px; padding:10px 12px; box-shadow:0 6px 18px rgba(15,35,60,.06); }
     .logo-box img{ height:46px; width:auto; display:block; }
     .nav{ display:flex; gap:10px; flex-wrap:wrap; }
     .nav a{ text-decoration:none; font-weight:900; color:var(--primary); padding:10px 12px; border-radius:12px; border:1px solid var(--border); background:#fff; }
+
     .wrap{ max-width:920px; margin:0 auto; padding:18px 14px 40px; }
     .card{ background:#fff; border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px; }
     h1{ margin:0 0 10px 0; font-size:28px; }
     .sub{ margin:0 0 14px 0; color:var(--muted); line-height:1.5; }
+
     details{ background:#fff; border:1px solid rgba(0,0,0,.10); border-radius:14px; padding:12px 14px; margin:10px 0; }
     summary{ cursor:pointer; font-weight:900; }
     p{ margin:10px 0 0 0; color:var(--muted); line-height:1.5; }
     .note{ margin-top:12px; background:#f6fbff; border:1px dashed rgba(41,92,153,.30); border-radius:14px; padding:12px 14px; color:#26435f; line-height:1.45; }
+
+    .wa-float{
+      position: fixed; right: 16px; bottom: 16px; z-index: 9999;
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      padding: 12px 14px; border-radius: 999px; background: #25D366; color: #fff;
+      text-decoration: none; font-weight: 900; box-shadow: 0 10px 24px rgba(0,0,0,.18);
+    }
+    .wa-float:active{ transform: translateY(1px); }
+    .wa-float .wa-dot{ width:10px; height:10px; border-radius:999px; background: rgba(255,255,255,.85); }
+    @media (max-width:420px){ .wa-float{ right:12px; bottom:12px; padding:12px 12px; } .wa-float .wa-text{ display:none; } }
   </style>
 </head>
 <body>
@@ -61,10 +74,12 @@
         <p>Dirección, comuna, año/estado (si aplica), fotos y plano (si tienes). Documentos como rol/escritura ayudan, pero no siempre son obligatorios.</p>
       </details>
 
-      <div class="note">
-        Si no tienes algún documento, igual puedes avanzar: te indicaremos faltantes según el plan.
-      </div>
+      <div class="note">Si no tienes algún documento, igual puedes avanzar: te indicaremos faltantes según el plan.</div>
     </div>
   </div>
+
+  <a class="wa-float" href="https://wa.me/56992724280" target="_blank" rel="noopener">
+    <span class="wa-dot"></span><span class="wa-text">WhatsApp</span>
+  </a>
 </body>
 </html>
