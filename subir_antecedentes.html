@@ -57,7 +57,6 @@
       color:#26435f;
       line-height:1.45;
     }
-
     .disabled{
       background:var(--disabled);
       color:#7a8794;
@@ -93,7 +92,7 @@
   <div class="wrap">
     <div class="card">
       <h1>Subir antecedentes</h1>
-      <p class="sub">Completa lo esencial. Zona solo aplica si eliges <b>Visita + Informe</b>.</p>
+      <p class="sub">Completa lo esencial. La zona solo aplica si eliges <b>Visita + Informe</b>.</p>
 
       <form id="form">
         <div class="grid">
@@ -108,17 +107,11 @@
           </div>
 
           <div class="full">
-            <label for="comunaSearch">Buscar comuna (RM)</label>
-            <input id="comunaSearch" type="text" placeholder="Escribe para filtrar… (ej: Ñuñoa)">
-          </div>
-
-          <div class="full">
             <label for="comuna">Comuna</label>
             <select id="comuna" name="comuna" required></select>
             <div class="hint">Express y Pro: zona <b>No aplica</b>. Visita: zona se asigna por comuna.</div>
           </div>
 
-          <!-- Zona: se muestra como campo deshabilitado con No aplica o Zona X -->
           <div class="full">
             <label for="zona">Zona (automática)</label>
             <input id="zona" class="disabled" value="No aplica" disabled>
@@ -209,7 +202,9 @@
       B: ["Ñuñoa","Santiago","Macul","La Cisterna","La Florida","Peñalolén","Independencia","Recoleta"],
       C: ["Colina","Lampa","Tiltil","San Miguel","Maipú","Pudahuel","Quilicura","Renca","Estación Central","Puente Alto","La Granja","San Ramón","Cerrillos"]
     };
-    const RM_ALL = Array.from(new Set([ ...ZONAS.A, ...ZONAS.B, ...ZONAS.C ])).sort((a,b)=>a.localeCompare(b,"es"));
+
+    const RM_ALL = Array.from(new Set([ ...ZONAS.A, ...ZONAS.B, ...ZONAS.C ]))
+      .sort((a,b)=>a.localeCompare(b,"es"));
 
     function fillSelect(selectEl, options, placeholder="Selecciona…") {
       selectEl.innerHTML = "";
@@ -233,15 +228,6 @@
       selectEl.appendChild(other);
     }
 
-    function filterSelect(selectEl, query) {
-      const q = (query || "").trim().toLowerCase();
-      for (const opt of selectEl.options) {
-        if (!opt.value) continue;
-        const txt = opt.textContent.toLowerCase();
-        opt.hidden = q && !txt.includes(q);
-      }
-    }
-
     function guessZoneByComuna(c) {
       const x = (c||"").trim().toLowerCase();
       if (!x) return null;
@@ -255,7 +241,6 @@
     const qpPlan = (params.get("plan") || "").toLowerCase();
 
     const plan = document.getElementById("plan");
-    const comunaSearch = document.getElementById("comunaSearch");
     const comuna = document.getElementById("comuna");
     const zona = document.getElementById("zona");
     const anio = document.getElementById("anio");
@@ -276,7 +261,6 @@
 
     plan.addEventListener("change", refreshZona);
     comuna.addEventListener("change", refreshZona);
-    comunaSearch.addEventListener("input", ()=> filterSelect(comuna, comunaSearch.value));
 
     anio.addEventListener("blur", () => {
       if (!anio.value) return;
