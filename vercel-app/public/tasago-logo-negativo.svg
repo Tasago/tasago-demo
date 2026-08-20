@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 132" role="img" aria-labelledby="title">
+  <title id="title">TasaGo</title>
+  <path fill="#fff" d="M13 17 39 41v61h85l25 24H13z"/>
+  <path fill="#69B43A" d="m50 78 54-54H85V12h43v43h-13V35L61 89z"/>
+  <text x="170" y="91" font-family="Aptos, Arial, sans-serif" font-size="76" font-weight="500" fill="#fff">Tasa<tspan fill="#69B43A">Go</tspan></text>
+</svg>

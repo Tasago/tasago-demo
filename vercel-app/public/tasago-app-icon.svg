@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title">
+  <title id="title">Ícono TasaGo App</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#152B4A"/><stop offset="1" stop-color="#0B1426"/></linearGradient>
+    <linearGradient id="g" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#2E7D32"/><stop offset="1" stop-color="#69B43A"/></linearGradient>
+  </defs>
+  <rect x="24" y="24" width="464" height="464" rx="104" fill="url(#bg)"/>
+  <path fill="#fff" d="M112 118 179 179v158h176l55 53H112z"/>
+  <path fill="url(#g)" d="m203 273 126-126h-46v-31h99v99h-31v-47L225 314z"/>
+</svg>
