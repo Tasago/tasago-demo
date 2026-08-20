@@ -6,8 +6,8 @@ const publicUrl = process.env.VERCEL_PROJECT_PRODUCTION_URL
   : "https://tasago.cl";
 export const metadata: Metadata = {
   metadataBase: new URL(publicUrl),
-  title: "TasaGo — Tasaciones inmobiliarias simples y trazables",
-  description: "Solicita, documenta, paga y sigue una tasación inmobiliaria Express o Profesional desde una sola aplicación.",
+  title: "TasaGo — Tranquilidad para decidir bien",
+  description: "Tasaciones inmobiliarias con experiencia, metodología y respaldo profesional. Express 100% digital o con visita especializada.",
   manifest: "/manifest.webmanifest",
   icons: {
     icon: [{ url: "/favicon-32.png", sizes: "32x32", type: "image/png" }, { url: "/tasago-app-icon.svg", type: "image/svg+xml" }],
@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_CL",
     siteName: "TasaGo",
-    title: "TasaGo — El valor de tu propiedad, respaldado para decidir",
-    description: "Un expediente continuo para solicitar, documentar, pagar y recibir tu tasación inmobiliaria.",
+    title: "TasaGo — Tranquilidad para decidir bien",
+    description: "No vendemos una cifra. Entregamos seguridad profesional para decisiones inmobiliarias importantes.",
     images: [{ url: "/og.png", width: 1744, height: 915, alt: "TasaGo — Tasación inmobiliaria digital" }],
   },
-  twitter: { card: "summary_large_image", title: "TasaGo — El valor de tu propiedad, respaldado para decidir", description: "Solicita, documenta, paga y recibe tu tasación desde una sola aplicación.", images: ["/og.png"] },
+  twitter: { card: "summary_large_image", title: "TasaGo — Tranquilidad para decidir bien", description: "Tasaciones inmobiliarias con experiencia y respaldo profesional.", images: ["/og.png"] },
 };
 export const viewport:Viewport={
   width:"device-width",
@@ -33,4 +33,3 @@ export const viewport:Viewport={
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return <html lang="es"><body>{children}</body></html>;
 }
-
