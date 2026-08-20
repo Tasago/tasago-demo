@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 132" role="img" aria-labelledby="title">
+  <title id="title">TasaGo</title>
+  <defs><linearGradient id="n" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0B1426"/><stop offset="1" stop-color="#152B4A"/></linearGradient><linearGradient id="g" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#2E7D32"/><stop offset="1" stop-color="#5AA832"/></linearGradient></defs>
+  <path fill="url(#n)" d="M13 17 39 41v61h85l25 24H13z"/>
+  <path fill="url(#g)" d="m50 78 54-54H85V12h43v43h-13V35L61 89z"/>
+  <text x="170" y="91" font-family="Aptos, Arial, sans-serif" font-size="76" font-weight="500" fill="#0B1426">Tasa<tspan fill="#2E7D32">Go</tspan></text>
+</svg>
