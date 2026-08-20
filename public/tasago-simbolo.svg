@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" role="img" aria-labelledby="title">
+  <title id="title">Símbolo TasaGo</title>
+  <defs><linearGradient id="n" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#06152f"/><stop offset="1" stop-color="#0b2146"/></linearGradient><linearGradient id="g" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#357d10"/><stop offset="1" stop-color="#5cae24"/></linearGradient></defs>
+  <path fill="url(#n)" d="M18 22 53 54v83h93l28 27H18z"/>
+  <path fill="url(#g)" d="m65 105 66-66h-24V23h52v52h-16V50l-66 67z"/>
+</svg>
